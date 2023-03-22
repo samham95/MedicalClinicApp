@@ -23,7 +23,7 @@
     </style>
 </head>
 <body style="Bold">
-<h1>Please sign in here. If you are a new patient, please fill out the <a href="WebForm2.aspx">new patient form here.</a>
+<h1>Please sign in here. If you are a new patient, please fill out the <a href="NewPatient.aspx">new patient form here.</a>
 </h1>
     <br />
     <form id="form1" runat="server">
