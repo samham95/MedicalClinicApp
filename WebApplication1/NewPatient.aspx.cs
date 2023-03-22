@@ -18,6 +18,7 @@ namespace WebApplication1
 
             if (!IsPostBack)
             {
+
                 // Create a list to hold the time slots
                 List<string> timeSlots = new List<string>();
 
@@ -33,6 +34,27 @@ namespace WebApplication1
                 // Bind the list to the dropdown list
                 ddlTimeRequested.DataSource = timeSlots;
                 ddlTimeRequested.DataBind();
+
+                // populate office locations
+                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+                string query = "SELECT officeAddress from office";
+                MySqlConnection connection = new MySqlConnection(connString);
+                MySqlCommand command = new MySqlCommand(query, connection);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                List<string> officelocs = new List<string>();
+                officelocs.Add("");
+                while (reader.Read())
+                {
+                    officelocs.Add(reader["officeAddress"].ToString());
+
+                }
+                DropDownList1.DataSource = officelocs;
+                DropDownList1.DataBind();
+                reader.Close();
+                connection.Close();
+                DropDownList1.SelectedIndex = 0;
+
             }
         }
 
@@ -53,7 +75,6 @@ namespace WebApplication1
             cmd.Parameters.AddWithValue("@selectedPCP", pcp_name);
             object result = cmd.ExecuteScalar();
             int doctorID = Convert.ToInt32(result);
-            doctorID = 1000; // remove
 
 
             try
@@ -74,12 +95,10 @@ namespace WebApplication1
 
                 command.ExecuteNonQuery();
 
-                //Redirect with email key
-                string email_in = email.Text;
-
-
-                // Get PatientID
+ 
+                // Get PatientID & officeID
                 string query_pid = "SELECT patientID FROM patients WHERE fname=@fname AND lname=@lname AND Minitial=@Minitial AND email=@email AND phone_num=@phone_num";
+                string query_oid = "SELECT officeID FROM office WHERE officeAddress = @OfficeAddress";
 
                 MySqlCommand cmmd = new MySqlCommand(query_pid, connection);
                 cmmd.Parameters.AddWithValue("@fname", fname.Text);
@@ -92,12 +111,17 @@ namespace WebApplication1
                 string patientID = reader["patientID"].ToString();
                 reader.Close();
 
+                MySqlCommand cmd_oid = new MySqlCommand(query_oid, connection);
+                cmd_oid.Parameters.AddWithValue("@OfficeAddress", DropDownList1.SelectedValue);
+                Object reader2 = cmd_oid.ExecuteScalar();
+                int officeID = Convert.ToInt32(reader2);
+
                 //insert appointment with PCP
                 string insert_app = "INSERT INTO appointment (doctorID, patientID, officeID, appointmentDate) VALUES (@doctorID, @patientID,@officeID,@date)";
                 MySqlCommand cmd2 = new MySqlCommand(insert_app, connection);
                 cmd2.Parameters.AddWithValue("@doctorID", doctorID);
                 cmd2.Parameters.AddWithValue("@patientID", patientID);
-                cmd2.Parameters.AddWithValue("@officeID", Convert.ToInt32(DropDownList1.SelectedValue));
+                cmd2.Parameters.AddWithValue("@officeID", officeID);
                 cmd2.Parameters.AddWithValue("@date", date_requested.Text);
                 cmd2.ExecuteNonQuery();
                 connection.Close();
@@ -117,14 +141,13 @@ namespace WebApplication1
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedOffice = Convert.ToInt32(DropDownList1.SelectedValue);
-            
+            string officeAddress = DropDownList1.SelectedValue;
             // Query the database to get the primary care physicians for the selected office
             string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT DISTINCT CONCAT(fname, ' ', lname) AS fullname FROM doctor JOIN schedule ON doctor.doctorID = schedule.doctor WHERE (Monday = @officeID OR Tuesday = @officeID OR Wednesday = @officeID OR Thursday = @officeID OR Friday = @officeID)";
+            string query = "SELECT DISTINCT CONCAT(doctor.fname, ' ', doctor.lname) AS fullname FROM doctor,office,schedule WHERE doctor.doctorID=schedule.doctor AND office.officeAddress = @OfficeAddress AND (Monday = officeID OR Tuesday = officeID OR Wednesday = officeID OR Thursday = officeID OR Friday = officeID)";
             MySqlConnection connection = new MySqlConnection(connString);
             MySqlCommand command = new MySqlCommand(query, connection);
-            command.Parameters.AddWithValue("@officeID", selectedOffice);
+            command.Parameters.AddWithValue("@officeAddress", officeAddress);
             connection.Open();
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -133,22 +156,27 @@ namespace WebApplication1
             reader.Read();
             if (reader.HasRows)
             {
-                Response.Redirect("HomePage.aspx");
+                PCPs.Add(reader["fullname"].ToString());
+                // Loop through the records and add the primary care physician names to the list
+                while (reader.Read())
+                {
+                    string pcp_name = reader["fullname"].ToString();
+                    PCPs.Add(pcp_name);
+                }
+
+                // Bind the primary care physician names to the dropdown list
+                primary.Items.Clear();
+                primary.DataSource = PCPs;
+                primary.DataBind();
             }
-            // Loop through the records and add the primary care physician names to the list
-            while (reader.Read())
-            {
-                string pcp_name = reader["fullname"].ToString();
-                PCPs.Add(pcp_name);
-            }
+            else { primary.Items.Clear(); }
             reader.Close();
             connection.Close();
-
-            // Bind the primary care physician names to the dropdown list
-            List<string> test = new List<string>{ "John Ham", "Lester Name" };
-            primary.DataSource = test;
-            primary.DataBind();
         }
 
+        protected void primary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -130,7 +130,7 @@ namespace WebApplication1
 
 
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
+        {  
             if (e.CommandName == "ApproveAppointment2")
             {
                 int appointmentID = Convert.ToInt32(GridView2.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);

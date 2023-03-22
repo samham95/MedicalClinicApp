@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NewPatient.aspx.cs" Inherits="WebApplication1.WebForm2" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NewPatient.aspx.cs" Inherits="WebApplication1.WebForm2" %>
 
 <!DOCTYPE html>
 
@@ -74,7 +74,7 @@
       <a href="#">About Us</a>
       <a href="#">Contact Us</a>
       <a href="PatientLogin.aspx">Patient Login</a>
-      <a href="#">Provider Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
     </div>
 	
@@ -152,8 +152,8 @@
 				<label for="officelabel">
                 <br />
                 Select a primary office location <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="officeAddress" DataValueField="officeID" Width="140px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList>
-			    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:medicalclinicdbConnectionString %>" ProviderName="<%$ ConnectionStrings:medicalclinicdbConnectionString.ProviderName %>" SelectCommand="SELECT officeAddress, officeID FROM office;"></asp:SqlDataSource>
+                <asp:DropDownList ID="DropDownList1" runat="server" Width="140px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
+                </asp:DropDownList>
 			    <br />
                 <br />
 			</div>
@@ -177,7 +177,7 @@
                 <br />
                 </label>
                 </div>
-           
+
             <div class="form-group">
 				<label for="referral">
                 <br />
