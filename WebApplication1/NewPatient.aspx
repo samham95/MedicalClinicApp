@@ -75,7 +75,7 @@
       <a href="#">Contact Us</a>
       <a href="PatientLogin.aspx">Patient Login</a>
       <a href="#">Provider Login</a>
-      <a href="WebForm1.aspx">Home</a>
+      <a href="HomePage.aspx">Home</a>
     </div>
 	
     <h1>Schedule your appointment today</h1>
@@ -149,11 +149,20 @@
 			</div>
 
             <div class="form-group">
+				<label for="officelabel">
+                <br />
+                Select a primary office location <span class="required">*</span></label>&nbsp;
+                <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="officeAddress" DataValueField="officeID" Width="140px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList>
+			    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:medicalclinicdbConnectionString %>" ProviderName="<%$ ConnectionStrings:medicalclinicdbConnectionString.ProviderName %>" SelectCommand="SELECT officeAddress, officeID FROM office;"></asp:SqlDataSource>
+			    <br />
+                <br />
+			</div>
+
+            <div class="form-group">
 				<label for="Pcplabel">
                 <br />
                 Select a Primary Care Physician <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="primary" runat="server" DataSourceID="SqlDataSource1" DataTextField="PCP" DataValueField="PCP" Width="140px"></asp:DropDownList>
-			    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:medicalclinicdbConnectionString %>" ProviderName="<%$ ConnectionStrings:medicalclinicdbConnectionString.ProviderName %>" SelectCommand="SELECT CONCAT(fname, ' ', lname, ' ') as PCP FROM doctor;"></asp:SqlDataSource>
+                <asp:DropDownList ID="primary" runat="server" Width="140px" ></asp:DropDownList>
 			    <br />
                 <br />
 			</div>
@@ -213,8 +222,7 @@
                     $('#<%=SUBMIT.ClientID %>').on('click', function () {
                         // Check if required fields are filled out
                         if ($('#<%=fname.ClientID %>').val() === '' || $('#<%=lname.ClientID %>').val() === '' || $('#<%=email.ClientID %>').val() === ''
-                            || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === '' || ($('#<%=pcp.ClientID %>').val() === '') && $('#<%=spec.ClientID %>').val() === ''
-                            || $('#<%=date_requested.ClientID %>').val() === '' || $('#<%=dob.ClientID %>').val() === '' || ($('#<%=ins.ClientID %>').val() === '') && $('#<%=no_ins.ClientID %>').val() === ''{
+                            || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === ''){
                             // Display dialog box
                             alert('Please fill out all required fields.');
                             return false; // Cancel form submission

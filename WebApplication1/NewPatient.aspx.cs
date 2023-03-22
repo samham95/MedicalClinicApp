@@ -42,27 +42,24 @@ namespace WebApplication1
 
             string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connString);
-            string pcp_name = pcp.Text;
+            string pcp_name = primary.SelectedValue;
+            bool hasReferral = CheckBox5.Checked;
+
+            connection.Open();
+
+            // Get doctorID for selceted PCP for new patient
+            string query = "SELECT doctorID FROM doctor WHERE CONCAT(fname, ' ', lname) = @selectedPCP";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.Parameters.AddWithValue("@selectedPCP", pcp_name);
+            object result = cmd.ExecuteScalar();
+            int doctorID = Convert.ToInt32(result);
+            doctorID = 1000; // remove
+
 
             try
             {
-                connection.Open();
-
-                // Get doctorID for selceted PCP for new patient
-                string[] names = pcp_name.Split(' ');
-                string fname_pcp = names[0];
-                string lname_pcp = names[1];
-
-                string query = "SELECT doctorID FROM doctor WHERE lname=@pcp_2 and fname=@pcp_1";
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@pcp_1", lname_pcp);
-                cmd.Parameters.AddWithValue("@pcp_2", fname_pcp);
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-                reader.Read();
-                string doctorID = reader["doctorID"].ToString();
-                reader.Close();
-                string sql = "INSERT INTO patients (fname, Mintial, lname, dob, phone_num, email, Address, doctorID) VALUES (@fname, @lname, @Minitial, @dob, @phone_num, @email, @Address)";
+                // Inset new patient data
+                string sql = "INSERT INTO patients (fname, Minitial, lname, dob, phone_num, email, Address, doctorID, referral) VALUES (@fname, @Minitial, @lname, @dob, @phone_num, @email, @Address, @doctorID, @referral)";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 command.Parameters.AddWithValue("@fname", fname.Text);
@@ -73,24 +70,85 @@ namespace WebApplication1
                 command.Parameters.AddWithValue("@email", email.Text);
                 command.Parameters.AddWithValue("@Address", address.Text);
                 command.Parameters.AddWithValue("@doctorID", doctorID);
-                command.Parameters.AddWithValue("@Address", address.Text);
+                command.Parameters.AddWithValue("@referral", hasReferral);
 
                 command.ExecuteNonQuery();
 
-                connection.Close();
+                //Redirect with email key
                 string email_in = email.Text;
-                Response.Redirect("success.aspx?email=" + email_in);
+
+
+                // Get PatientID
+                string query_pid = "SELECT patientID FROM patients WHERE fname=@fname AND lname=@lname AND Minitial=@Minitial AND email=@email AND phone_num=@phone_num";
+
+                MySqlCommand cmmd = new MySqlCommand(query_pid, connection);
+                cmmd.Parameters.AddWithValue("@fname", fname.Text);
+                cmmd.Parameters.AddWithValue("@Minitial", mi.Text);
+                cmmd.Parameters.AddWithValue("@lname", lname.Text);
+                cmmd.Parameters.AddWithValue("@phone_num", phone_num.Text);
+                cmmd.Parameters.AddWithValue("@email", email.Text);
+                MySqlDataReader reader = cmmd.ExecuteReader();
+                reader.Read();
+                string patientID = reader["patientID"].ToString();
+                reader.Close();
+
+                //insert appointment with PCP
+                string insert_app = "INSERT INTO appointment (doctorID, patientID, officeID, appointmentDate) VALUES (@doctorID, @patientID,@officeID,@date)";
+                MySqlCommand cmd2 = new MySqlCommand(insert_app, connection);
+                cmd2.Parameters.AddWithValue("@doctorID", doctorID);
+                cmd2.Parameters.AddWithValue("@patientID", patientID);
+                cmd2.Parameters.AddWithValue("@officeID", Convert.ToInt32(DropDownList1.SelectedValue));
+                cmd2.Parameters.AddWithValue("@date", date_requested.Text);
+                cmd2.ExecuteNonQuery();
+                connection.Close();
+
+                //Redirect
+                Response.Redirect("success.aspx?patientID=" + patientID);
+
             }
             catch (Exception ex)
             {
-                //Response.Redirect("unsuccessful.aspx");
-               Response.Write("Error: " + ex.ToString() + pcp_name);
+               //Response.Redirect("unsuccessful.aspx");
+               Response.Write("Error: " + ex.Message + '\n' + result);
             }
+
+            connection.Close();
         }
 
-        protected void mySQL_azure_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int selectedOffice = Convert.ToInt32(DropDownList1.SelectedValue);
+            
+            // Query the database to get the primary care physicians for the selected office
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+            string query = "SELECT DISTINCT CONCAT(fname, ' ', lname) AS fullname FROM doctor JOIN schedule ON doctor.doctorID = schedule.doctor WHERE (Monday = @officeID OR Tuesday = @officeID OR Wednesday = @officeID OR Thursday = @officeID OR Friday = @officeID)";
+            MySqlConnection connection = new MySqlConnection(connString);
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@officeID", selectedOffice);
+            connection.Open();
+            MySqlDataReader reader = command.ExecuteReader();
 
+            // Create a list to hold the primary care physician names for the selected office
+            List<string> PCPs = new List<string>();
+            reader.Read();
+            if (reader.HasRows)
+            {
+                Response.Redirect("HomePage.aspx");
+            }
+            // Loop through the records and add the primary care physician names to the list
+            while (reader.Read())
+            {
+                string pcp_name = reader["fullname"].ToString();
+                PCPs.Add(pcp_name);
+            }
+            reader.Close();
+            connection.Close();
+
+            // Bind the primary care physician names to the dropdown list
+            List<string> test = new List<string>{ "John Ham", "Lester Name" };
+            primary.DataSource = test;
+            primary.DataBind();
         }
+
     }
 }

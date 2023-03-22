@@ -105,7 +105,7 @@
     <div class="container">
       <h1>Dr. Uma's Medical Clinic </h1>
       <p>Your health matters!<p>
-      <a class="btn" href="WebForm2.aspx">New patients click here to schedule your appointment today</a>
+      <a class="btn" href="NewPatient.aspx">New patients click here to schedule your appointment today</a>
     </div>
   </div>
 

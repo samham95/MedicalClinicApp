@@ -170,6 +170,13 @@
     <Compile Include="PatientLogin.aspx.designer.cs">
       <DependentUpon>PatientLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ProviderView.aspx.cs">
+      <DependentUpon>ProviderView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProviderView.aspx.designer.cs">
+      <DependentUpon>ProviderView.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -188,6 +195,7 @@
     <Content Include="success.aspx" />
     <Content Include="unsuccessful.aspx" />
     <Content Include="PatientLogin.aspx" />
+    <Content Include="ProviderView.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

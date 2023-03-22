@@ -29,9 +29,12 @@ namespace WebApplication1
 
             MySqlDataReader reader = command.ExecuteReader();
             reader.Read();
+
             if (reader.HasRows)
+
             {
-                Response.Write("Successful login");
+                int doctorID = (int)reader["doctorID"];
+                Response.Redirect("ProviderView.aspx?doctorID="+doctorID);
             }
 
             else
