@@ -6,6 +6,23 @@
 <head runat="server">
     <title>SUCCESS</title>
     <style>     
+        .navbar {
+        background-color: #333;
+        overflow: hidden;
+                height: 48px;
+            }
+      .navbar a {
+        float: right;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+      .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+      }
         .required {
         color: red;
          }
@@ -17,6 +34,15 @@
     </style>
 </head>
 <body style="Bold">
+    	<div class="navbar">
+      <a href="#">About Us</a>
+      <a href="#">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+    </div>
+    <br />
+
     Response Saved Successfully! An email confirmation was sent with your new patientID code. Use that to complete the account set up below. We will reach out to you shortly with confirmation of your appointment.
     <br />
     <br />
@@ -27,7 +53,7 @@
      
     <table>
         <tr>
-            <td align="center" colspan="2">Sign Up for Your New Account</td>
+            <td align="left" colspan="2">Sign Up for Your New Account</td>
         </tr>
         <tr>
             <td align="right">
@@ -104,7 +130,7 @@
             </td>
         </tr>
         <tr>
-            <td align="center" colspan="2" style="color:Red;">
+            <td align="left" colspan="2" style="color:Red;">
                 <asp:Literal ID="ErrorMessage" runat="server" Text="Passwords must match"></asp:Literal>
             </td>
         </tr>

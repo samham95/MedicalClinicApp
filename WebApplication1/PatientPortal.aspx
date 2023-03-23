@@ -1,10 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProviderView.aspx.cs" Inherits="WebApplication1.WebForm6" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PatientPortal.aspx.cs" Inherits="WebApplication1.WebForm7" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head runat="server">
-    <style>      
+<head runat="server">
+    <title>Patient Portal</title>
+        <style>      
         .navbar {
         background-color: #333;
         overflow: hidden;
@@ -22,10 +23,8 @@
         background-color: #ddd;
         color: black;
       }</style>
-
-    <title>Provider View</title>
 </head>
-<body>
+<body style="Bold">
     <div class="navbar">
       <a href="#">About Us</a>
       <a href="#">Contact Us</a>
@@ -37,6 +36,10 @@
    <h1 id="welcomeHeader" runat="server"> </h1>
     <br />
     <br />
+    <p><asp:HyperLink ID="HyperLink1" runat="server">Please click here to edit your personal information</asp:HyperLink></p>
+    <br />
+    <br />
+    <br />
 
     <form id="form1" runat="server">
         <div>
@@ -45,32 +48,22 @@
                 OnRowCommand="GridView1_RowCommand">
                 <Columns>
                     <asp:BoundField DataField="appointmentID" HeaderText="AppointmentID" />
-                    <asp:BoundField DataField="PatientName" HeaderText="Patient Name" />
+                    <asp:BoundField DataField="DoctorName" HeaderText="Doctor" />
+                    <asp:BoundField DataField="Spec" HeaderText="PCP or Specialist" />
                     <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" />
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
-                    <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:ButtonField Text="APPROVE" CommandName="ApproveAppointment" HeaderText="Approval" />
-                    <asp:ButtonField Text="DENY" CommandName="DenyAppointment" HeaderText="Denial" />
+                    <asp:BoundField DataField="Time" HeaderText="Time" />
+                    <asp:BoundField DataField="Confirm" HeaderText="Confirmed" />
+                    <asp:ButtonField Text="EDIT" CommandName="EditAppointment" HeaderText="EDIT" />
+                    <asp:ButtonField Text="CONFIRM" CommandName="ConfirmAppointment" HeaderText="Confirmation" />
+                </Columns>
+            </asp:GridView>
+        </div>
+        <br />
+        <br />
 
-                </Columns>
-            </asp:GridView>
-        </div>
-        <div>
-            <h1>Referral Review</h1>
-            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID2"
-                OnRowCommand="GridView2_RowCommand">
-                <Columns>
-                    <asp:BoundField DataField="appointmentID2" HeaderText="AppointmentID" />
-                    <asp:BoundField DataField="PatientName2" HeaderText="Patient Name" />
-                    <asp:BoundField DataField="Specialist" HeaderText="Specialty" />
-                    <asp:BoundField DataField="Referral" HeaderText="Referral Status" />
-                    <asp:BoundField DataField="Doctor" HeaderText="Doctor" />
-                    <asp:ButtonField Text="APPROVE" CommandName="ApproveAppointment2" HeaderText="Approval" />
-                    <asp:ButtonField Text="DENY" CommandName="DenyAppointment2" HeaderText="Denial" />
-                </Columns>
-            </asp:GridView>
-        </div>
+
     </form>
 </body>
 </html>

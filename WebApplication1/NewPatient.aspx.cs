@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Globalization;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 
@@ -36,7 +37,7 @@ namespace WebApplication1
                 ddlTimeRequested.DataBind();
 
                 // populate office locations
-                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
                 string query = "SELECT officeAddress from office";
                 MySqlConnection connection = new MySqlConnection(connString);
                 MySqlCommand command = new MySqlCommand(query, connection);
@@ -62,7 +63,7 @@ namespace WebApplication1
 
         {
 
-            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connString);
             string pcp_name = primary.SelectedValue;
             bool hasReferral = CheckBox5.Checked;
@@ -117,13 +118,33 @@ namespace WebApplication1
                 int officeID = Convert.ToInt32(reader2);
 
                 //insert appointment with PCP
-                string insert_app = "INSERT INTO appointment (doctorID, patientID, officeID, appointmentDate) VALUES (@doctorID, @patientID,@officeID,@date)";
+                string time_selected = ddlTimeRequested.SelectedValue.ToString();
+                DateTime dateTime = DateTime.ParseExact(time_selected, "h:mm tt", CultureInfo.InvariantCulture);
+                string time = dateTime.ToString("hh:mm");
+
+                string insert_app = "INSERT INTO appointment (doctorID, patientID, officeID, appointmentDate, appointmentTime) VALUES (@doctorID, @patientID,@officeID,@date,@time)";
                 MySqlCommand cmd2 = new MySqlCommand(insert_app, connection);
                 cmd2.Parameters.AddWithValue("@doctorID", doctorID);
                 cmd2.Parameters.AddWithValue("@patientID", patientID);
                 cmd2.Parameters.AddWithValue("@officeID", officeID);
                 cmd2.Parameters.AddWithValue("@date", date_requested.Text);
+                cmd2.Parameters.AddWithValue("@time", time);
+
                 cmd2.ExecuteNonQuery();
+
+
+                // insert emergency contact details
+                
+                string insert_EC = "INSERT INTO emergency_contact_patient(fullname, Relation, phone_num, email, patientID) values (@fname, @relation, @phone, @email, @patientID)";
+                MySqlCommand cmd3 = new MySqlCommand(insert_EC, connection);
+                cmd3.Parameters.AddWithValue("@fname", emergency_contact.Text);
+                cmd3.Parameters.AddWithValue("@relation", ECRelation.Text);
+                cmd3.Parameters.AddWithValue("@phone", ECphone.Text);
+                cmd3.Parameters.AddWithValue("@email", ECemail.Text);
+                cmd3.Parameters.AddWithValue("@patientID", patientID);
+
+                cmd3.ExecuteNonQuery();
+
                 connection.Close();
 
                 //Redirect
@@ -132,8 +153,12 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-               //Response.Redirect("unsuccessful.aspx");
-               Response.Write("Error: " + ex.Message + '\n' + result);
+                string time_selected = ddlTimeRequested.SelectedValue.ToString();
+                DateTime dateTime = DateTime.ParseExact(time_selected, "h:mm tt", CultureInfo.InvariantCulture);
+                string time = dateTime.ToString("hh:mm");
+
+                //Response.Redirect("unsuccessful.aspx");
+                Response.Write("Error: " + ex.Message + '\n' +time);
             }
 
             connection.Close();
@@ -143,7 +168,7 @@ namespace WebApplication1
         {
             string officeAddress = DropDownList1.SelectedValue;
             // Query the database to get the primary care physicians for the selected office
-            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             string query = "SELECT DISTINCT CONCAT(doctor.fname, ' ', doctor.lname) AS fullname FROM doctor,office,schedule WHERE doctor.doctorID=schedule.doctor AND office.officeAddress = @OfficeAddress AND (Monday = officeID OR Tuesday = officeID OR Wednesday = officeID OR Thursday = officeID OR Friday = officeID)";
             MySqlConnection connection = new MySqlConnection(connString);
             MySqlCommand command = new MySqlCommand(query, connection);
@@ -175,6 +200,11 @@ namespace WebApplication1
         }
 
         protected void primary_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ECemail_TextChanged(object sender, EventArgs e)
         {
 
         }

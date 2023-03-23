@@ -17,7 +17,7 @@ namespace WebApplication1
             // Get the patientID from the url
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
             // Get email for new patient
-            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connString);
             connection.Open();
             string query = $"SELECT email FROM Patients WHERE patientID = '{patientID}'";
@@ -42,7 +42,7 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection conn = new MySqlConnection(connString);
 
             try
@@ -58,7 +58,7 @@ namespace WebApplication1
                 conn.Open();
                 command.ExecuteNonQuery();
                 conn.Close();
-                Response.Redirect("HomePage.aspx?patientID="+PatientID.Text);
+                Response.Redirect("PatientPortal.aspx?patientID="+PatientID.Text);
             }
             catch (Exception ex)
             {

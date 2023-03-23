@@ -120,12 +120,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppointmentDataAccessLayer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="PatEdit.aspx.cs">
+      <DependentUpon>PatEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PatEdit.aspx.designer.cs">
+      <DependentUpon>PatEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProviderLogin.aspx.cs">
@@ -177,6 +185,13 @@
     <Compile Include="ProviderView.aspx.designer.cs">
       <DependentUpon>ProviderView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="PatientPortal.aspx.cs">
+      <DependentUpon>PatientPortal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PatientPortal.aspx.designer.cs">
+      <DependentUpon>PatientPortal.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -187,6 +202,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="PatEdit.aspx" />
     <Content Include="ProviderLogin.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -196,6 +212,7 @@
     <Content Include="unsuccessful.aspx" />
     <Content Include="PatientLogin.aspx" />
     <Content Include="ProviderView.aspx" />
+    <Content Include="PatientPortal.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
