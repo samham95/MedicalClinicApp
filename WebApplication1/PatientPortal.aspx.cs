@@ -39,7 +39,7 @@ namespace WebApplication1
 
             // Retrieve data from database into appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, PATIENT_CONFIRM as Confirm, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @patientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID";
+            string query = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, PATIENT_CONFIRM as Confirm, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @patientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate DESC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -51,6 +51,26 @@ namespace WebApplication1
                         adapter.Fill(dt);
                         GridView1.DataSource = dt;
                         GridView1.DataBind();
+                    }
+                    connection.Close();
+                }
+            }
+
+            DataTable dt2 = new DataTable();
+
+            // Retrieve data from database into previous appointment grid
+            string query2 = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointmentTime as Time, appointmentDate as Date, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @PatientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < current_date() ORDER BY appointmentDate DESC";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(query2, connection))
+                {
+                    command.Parameters.AddWithValue("@PatientID", patientID);
+                    connection.Open();
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt2);
+                        GridView2.DataSource = dt2;
+                        GridView2.DataBind();
                     }
                     connection.Close();
                 }
@@ -117,6 +137,27 @@ namespace WebApplication1
                 int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
                 Response.Redirect("PatientEditApp.aspx?appointmentID=" + appointmentID);
             }
+        }
+        protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+            string query = "SELECT reportID FROM appointment WHERE appointmentID = @AID";
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection connect = new MySqlConnection(connString);
+            connect.Open();
+            MySqlCommand cmd = new MySqlCommand(query, connect);
+            cmd.Parameters.AddWithValue("@AID", appointmentID);
+            object result = cmd.ExecuteScalar();
+            int ReportID = Convert.ToInt32(result);
+            connect.Close();
+            if (e.CommandName == "VIEW")
+            {
+                Response.Redirect("ReportView.aspx?ReportID=" + ReportID);
+            }
+        }
+
+        protected void ImageButton1_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+        {
         }
     }
 }

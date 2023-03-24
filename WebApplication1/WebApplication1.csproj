@@ -58,6 +58,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -120,6 +121,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminLogin.aspx.cs">
+      <DependentUpon>AdminLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminLogin.aspx.designer.cs">
+      <DependentUpon>AdminLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminView.aspx.cs">
+      <DependentUpon>AdminView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminView.aspx.designer.cs">
+      <DependentUpon>AdminView.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AppointmentDataAccessLayer.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -136,12 +151,12 @@
       <DependentUpon>PatEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProviderLogin.aspx.cs">
-      <DependentUpon>ProviderLogin.aspx</DependentUpon>
+    <Compile Include="DoctorLogin.aspx.cs">
+      <DependentUpon>DoctorLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ProviderLogin.aspx.designer.cs">
-      <DependentUpon>ProviderLogin.aspx</DependentUpon>
+    <Compile Include="DoctorLogin.aspx.designer.cs">
+      <DependentUpon>DoctorLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
@@ -156,6 +171,13 @@
     </Compile>
     <Compile Include="NewPatient.aspx.designer.cs">
       <DependentUpon>NewPatient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProviderLogin.aspx.cs">
+      <DependentUpon>ProviderLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProviderLogin.aspx.designer.cs">
+      <DependentUpon>ProviderLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="success.aspx.cs">
       <DependentUpon>success.aspx</DependentUpon>
@@ -192,8 +214,17 @@
     <Compile Include="PatientPortal.aspx.designer.cs">
       <DependentUpon>PatientPortal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NurseLogin.aspx.cs">
+      <DependentUpon>NurseLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NurseLogin.aspx.designer.cs">
+      <DependentUpon>NurseLogin.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminLogin.aspx" />
+    <Content Include="AdminView.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -203,6 +234,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="PatEdit.aspx" />
+    <Content Include="DoctorLogin.aspx" />
     <Content Include="ProviderLogin.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -213,6 +245,8 @@
     <Content Include="PatientLogin.aspx" />
     <Content Include="ProviderView.aspx" />
     <Content Include="PatientPortal.aspx" />
+    <Content Include="NurseLogin.aspx" />
+    <None Include="Properties\PublishProfiles\MedicalClinic3380 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

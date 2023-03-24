@@ -20,7 +20,7 @@ namespace WebApplication1
             // Start timer to execute appointment deletion
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             AppointmentDataAccessLayer appointmentDataAccessLayer = new AppointmentDataAccessLayer(connectionString);
-            int interval = 12 * 60 * 60 * 1000; // 24 hours in milliseconds
+            int interval =  1000; // time in milliseconds
             System.Threading.Timer timer = new System.Threading.Timer((obj) => {appointmentDataAccessLayer.DeleteAppointments();}, null, 0, interval);
         }
     }

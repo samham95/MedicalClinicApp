@@ -122,7 +122,7 @@
 </div>
 <div class="main">
   <div class="container">
-    <img src="https://www.usbets.com/wp-content/uploads/2021/04/texas-california-florida-new-york-signs.jpg.webp" alt="tower" height="300" width="450">
+    <img src="https://www.usbets.com/wp-content/uploads/2021/04/texas-california-florida-new-york-signs.jpg.webp" alt="tower" height="400" width="650">
     <h2>Here at your convenience</h2>
     <p>With offices in Texas, California, Florida, and New York, we are wherever you need us to be!</p>
    </div>
