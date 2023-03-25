@@ -32,20 +32,24 @@
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
     </div>
-    <br />
-   <h1 id="welcomeHeader" runat="server"> </h1>
-    <br />
-    <p><asp:HyperLink ID="HyperLink1" runat="server">Please click here to edit your personal information</asp:HyperLink></p>
 
     <form id="form1" runat="server">
     <br />
+        <asp:Button ID="Button1" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button1_Click" Text="Edit Personal Information" Height="51px" Width="302px" Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" />
+       <asp:Button ID="Button3" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button3_Click" Text="Schedule Specialist Appointment" Height="51px" Width="353px" Font-Bold="True" Font-Overline="False" Font-Size="Medium" />
+       <asp:Button ID="Button2" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button2_Click" Text="Schedule PCP Follow-Up" Height="51px" Width="262px" BorderColor="Black" Font-Bold="True" Font-Size="Medium" />
+       <asp:Button ID="Button4" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button2_Click" Text="Billing" Height="51px" Width="256px" BorderColor="Black" Font-Bold="True" Font-Size="Medium" style="margin-left: 0px" />
     <br />
 
         <div>
+   <h1 id="welcomeHeader" runat="server"> 
+       &nbsp;</h1>
+            <p runat="server"> 
+                &nbsp;</p>
             <h1>Upcoming Appointments</h1>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID"
-                OnRowCommand="GridView1_RowCommand" CellPadding="4" ForeColor="#333333" GridLines="None">
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                OnRowCommand="GridView1_RowCommand" CellPadding="3" ForeColor="Black" GridLines="Vertical" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="appointmentID" HeaderText="AppointmentID" />
                     <asp:BoundField DataField="DoctorName" HeaderText="Doctor" />
@@ -58,16 +62,14 @@
                     <asp:ButtonField Text="EDIT" CommandName="EditAppointment" HeaderText="EDIT" />
                     <asp:ButtonField Text="CONFIRM" CommandName="ConfirmAppointment" HeaderText="Confirmation" />
                 </Columns>
-                <EditRowStyle BackColor="#999999" />
-                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#808080" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
         <br />
@@ -75,8 +77,8 @@
         <div>
             <h1>Previous Appointments</h1>
             <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID"
-                OnRowCommand="GridView2_RowCommand" CellPadding="4" ForeColor="#333333" GridLines="None">
-                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                OnRowCommand="GridView2_RowCommand" CellPadding="3" ForeColor="Black" GridLines="Vertical" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="appointmentID" HeaderText="AppointmentID" />
                     <asp:BoundField DataField="DoctorName" HeaderText="Doctor" />
@@ -86,20 +88,20 @@
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:ButtonField Text="VIEW" CommandName="ViewReport" HeaderText="REPORT" />
                 </Columns>
-                <EditRowStyle BackColor="#999999" />
-                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
-                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
-                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
-                <SortedAscendingCellStyle BackColor="#E9E7E2" />
-                <SortedAscendingHeaderStyle BackColor="#506C8C" />
-                <SortedDescendingCellStyle BackColor="#FFFDF8" />
-                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#808080" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
 
 
     </form>
-</body>
+    <br />
+
+    </body>
 </html>

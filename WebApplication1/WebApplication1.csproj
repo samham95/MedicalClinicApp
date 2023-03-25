@@ -143,6 +143,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="NewAppointment.aspx.cs">
+      <DependentUpon>NewAppointment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewAppointment.aspx.designer.cs">
+      <DependentUpon>NewAppointment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PatEdit.aspx.cs">
       <DependentUpon>PatEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -221,6 +228,13 @@
     <Compile Include="NurseLogin.aspx.designer.cs">
       <DependentUpon>NurseLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NewAppSuccess.aspx.cs">
+      <DependentUpon>NewAppSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewAppSuccess.aspx.designer.cs">
+      <DependentUpon>NewAppSuccess.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLogin.aspx" />
@@ -233,6 +247,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="NewAppointment.aspx" />
     <Content Include="PatEdit.aspx" />
     <Content Include="DoctorLogin.aspx" />
     <Content Include="ProviderLogin.aspx" />
@@ -246,6 +261,7 @@
     <Content Include="ProviderView.aspx" />
     <Content Include="PatientPortal.aspx" />
     <Content Include="NurseLogin.aspx" />
+    <Content Include="NewAppSuccess.aspx" />
     <None Include="Properties\PublishProfiles\MedicalClinic3380 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

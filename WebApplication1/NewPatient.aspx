@@ -67,6 +67,7 @@
       .required {
         color: red;
       }
+
     </style>
 </head>
 <body>
@@ -78,8 +79,8 @@
       <a href="HomePage.aspx">Home</a>
     </div>
 	
-    <h1>Schedule your appointment today</h1>
-	<p>Please fill out where indicated</p>
+    <h1 style = "text-align: center">Schedule your appointment today</h1>
+	<p style = "text-align: center">Please fill out where indicated</p>
 
 	<div class="form-container">
 		<form id="form2" runat="server">
@@ -158,19 +159,6 @@
 
 			<fieldset>
 			<legend>Appointment Details</legend>
-			<div class="form-group">
-				<label for="time-requested">
-                <br />
-                Time Requested <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="ddlTimeRequested" runat="server" Width="140px"></asp:DropDownList>
-			    <br />
-                <br />
-			</div>
-
-			<div class="form-group">
-				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd"></asp:TextBox>
-			</div>
 
             <div class="form-group">
 				<label for="officelabel">
@@ -186,17 +174,34 @@
 				<label for="Pcplabel">
                 <br />
                 Select a Primary Care Physician <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="primary" runat="server" Width="140px" ></asp:DropDownList>
+                <asp:DropDownList ID="primary" runat="server" Width="140px" AutoPostBack="True" ></asp:DropDownList>
 			    <br />
                 <br />
 			</div>
+
+            <div class="form-group">
+				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
+                <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" ></asp:TextBox>
+			    <span class="required"><asp:Literal ID="ErrorMessage_date2" runat="server" ></asp:Literal></span>
+			</div>
+
+			<div class="form-group">
+				<label for="time-requested">
+                <br />
+                Time Requested <span class="required">*</span></label>&nbsp;
+                <asp:DropDownList ID="ddlTimeRequested" runat="server" Width="140px" AutoPostBack="True" OnTextChanged="date_requested_TextChanged"></asp:DropDownList>
+			    <span class="required"><asp:Literal ID="ErrorMessage_date" runat="server" ></asp:Literal></span>
+			    <br />
+                <br />
+			</div>
+
 
 			<div class="form-group">
 				<label for="pcp-or-specialist">Do you want to see a PCP or specialist?<span class="required">*</span></label>
                 <asp:CheckBox ID="pcp" runat="server" />
                 <label for="pcp-or-specialist">PCP<br />
                 </label>
-                &nbsp;<asp:CheckBox ID="spec" runat="server" />
+                <asp:CheckBox ID="spec" runat="server" />
                 <label for="pcp-or-specialist">Specialist<br />
                 <br />
                 </label>
@@ -212,17 +217,17 @@
                 <label for="referral">No<br />
                 <br />
                 </label>
-			&nbsp;</div>
+			</div>
 
 			<div class="form-group">
 				<label for="insurance">Do you have insurance?<span class="required">*</span></label>
                 <asp:CheckBox ID="ins" runat="server" />
                 <label for="insurance">Yes<br />
                 </label>
-                &nbsp;<asp:CheckBox ID="no_ins" runat="server" />
+                <asp:CheckBox ID="no_ins" runat="server" />
                 <label for="insurance">No<br />
                 </label>
-			&nbsp;</div>
+			</div>
 
 			<div class="form-group">
 				<label for="insurance-name">Insurance Name</label>
@@ -246,7 +251,8 @@
                     $('#<%=SUBMIT.ClientID %>').on('click', function () {
                         // Check if required fields are filled out
                         if ($('#<%=fname.ClientID %>').val() === '' || $('#<%=lname.ClientID %>').val() === '' || $('#<%=email.ClientID %>').val() === ''
-                            || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === ''){
+                            || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === '' ||  $('#<%=DropDownList1.ClientID %>').val() === "" || $('#<%=ddlTimeRequested.ClientID %>').val() === ""
+                            || $('#<%=primary.ClientID %>').val() === "" || $('#<%=date_requested.ClientID %>').val() === ""){
                             // Display dialog box
                             alert('Please fill out all required fields.');
                             return false; // Cancel form submission

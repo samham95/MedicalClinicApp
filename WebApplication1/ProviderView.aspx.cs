@@ -23,7 +23,7 @@ namespace WebApplication1
             int doctorID =Convert.ToInt32 (Request.QueryString["doctorID"]);
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
-            string query = "SELECT CONCAT('Dr. ', fname, ' ', lname) from doctor WHERE doctorID = @doctorID";
+            string query = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) from doctor WHERE doctorID = @doctorID";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.Parameters.AddWithValue("doctorID", doctorID);
             connection.Open();

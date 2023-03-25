@@ -10,6 +10,7 @@ namespace WebApplication1
 {
     public partial class WebForm7 : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -18,8 +19,6 @@ namespace WebApplication1
             }
 
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
-            HyperLink1.NavigateUrl = "PatEdit.aspx?patientID=" + patientID.ToString();
-
             // Post Welcome Message for Specific Patient
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -156,8 +155,30 @@ namespace WebApplication1
             }
         }
 
-        protected void ImageButton1_Click(object sender, System.Web.UI.ImageClickEventArgs e)
+
+        protected void Button1_Click(object sender, EventArgs e)
         {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatEdit.aspx?patientID=" + patientID);
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PCPFollowUp.aspx?patientID=" +patientID);
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("NewAppointment.aspx?patientID=" + patientID);
+
+        }
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatBilling.aspx?patientID=" + patientID);
+        }
+
     }
 }

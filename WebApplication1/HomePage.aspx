@@ -23,8 +23,8 @@
 
       .container {
           margin: 0 auto;
-          max-width: 940px;
-          padding: 0 10px;
+          max-width: 1000px;
+          padding: 0 0px;
           text-align: center;
       }
 
@@ -45,10 +45,10 @@
           font-family: fantasy;
       }
 
-          .header h1 {
-              text-transform: uppercase;
-              font-family: times;
-          }
+      .header h1 {
+          text-transform: uppercase;
+          font-family: times;
+       }
 
       .btn {
           color: white;
@@ -122,7 +122,7 @@
 </div>
 <div class="main">
   <div class="container">
-    <img src="https://www.usbets.com/wp-content/uploads/2021/04/texas-california-florida-new-york-signs.jpg.webp" alt="tower" height="400" width="650">
+    <img src="https://www.usbets.com/wp-content/uploads/2021/04/texas-california-florida-new-york-signs.jpg.webp" alt="tower" height="500" width="750">
     <h2>Here at your convenience</h2>
     <p>With offices in Texas, California, Florida, and New York, we are wherever you need us to be!</p>
    </div>
@@ -135,6 +135,7 @@
 <div class="footer">
   <section class="contact">
     <p>Email: info@umamedicalgroup.com | Phone: (713)867-5309</p>
+    <p><a href="AdminLogin.aspx">Admin Login</a></p>
   </section>
 </div>
 

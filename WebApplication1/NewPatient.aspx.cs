@@ -12,7 +12,71 @@ namespace WebApplication1
     public partial class WebForm2 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+
         {
+            // check if selected appointment available
+            if (IsPostBack)
+            {
+                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+                MySqlConnection connection = new MySqlConnection(connString);
+                string query = "SELECT * FROM appointment, doctor WHERE appointmentDate = @AppDate AND appointmentTime = @AppTime AND CONCAT(doctor.fname, ' ', doctor.lname) = @fullname AND appointment.doctorID = doctor.doctorID";
+
+                MySqlCommand command = new MySqlCommand(query, connection);
+
+                string AppDate = date_requested.Text;
+                string time_selected = ddlTimeRequested.SelectedValue.ToString();
+                string AppTime = time_selected;
+                string fullname = primary.SelectedValue;
+                if (time_selected != "")
+                {
+                    DateTime dateTime = DateTime.ParseExact(time_selected, "h:mm tt", CultureInfo.InvariantCulture);
+                    AppTime = dateTime.ToString("hh:mm");
+                }
+      
+                command.Parameters.AddWithValue("@AppDate", AppDate);
+                command.Parameters.AddWithValue("@AppTime", AppTime);
+                command.Parameters.AddWithValue("@fullname", fullname);
+                connection.Open();
+                DateTime currentDate = DateTime.Now;
+
+                    try
+                    {
+                        MySqlDataReader reader = command.ExecuteReader();
+                        reader.Read();
+                        if (fullname != "" && AppTime != "" && AppDate != "")
+                        {
+                            DateTime selected_date = DateTime.Parse(AppDate);
+
+                            if (currentDate > selected_date || selected_date.DayOfWeek.ToString() == "Saturday" || selected_date.DayOfWeek.ToString() == "Sunday")
+                            {
+                                ErrorMessage_date.Text = "";
+                                ErrorMessage_date2.Text = "Invalid Date";
+                            }
+                            
+                            else if (reader.HasRows)
+                            {
+                                ErrorMessage_date.Text = "Appointment Unavailable. Please make different selection!";
+                            }
+                            else
+                            {
+                                ErrorMessage_date.Text = "Appointment Available!";
+                            }
+                        }
+                        else
+                        {
+                            ErrorMessage_date.Text = "Please make sure to complete all preceeding selections";
+                        }
+                    }
+
+                    catch (Exception)
+                    {
+                        ErrorMessage_date.Text = "Please make sure to complete all preceeding selections";
+                    }
+
+                // scroll to appointment section on post back
+                ScriptManager.RegisterStartupScript(this, GetType(), "scrollToBottom", "window.scrollTo(0, document.body.scrollHeight/2);", true);
+            }
+
             dob.Attributes.Add("placeholder", "yyyy-mm-dd");
             dob.Attributes.Add("type", "date");
             dob.Attributes.Add("onkeydown", "return false");
@@ -22,7 +86,7 @@ namespace WebApplication1
 
                 // Create a list to hold the time slots
                 List<string> timeSlots = new List<string>();
-
+                timeSlots.Add("");
                 // Add the time slots to the list
                 DateTime startTime = DateTime.Parse("8:00 AM");
                 DateTime endTime = DateTime.Parse("6:00 PM");
@@ -35,6 +99,7 @@ namespace WebApplication1
                 // Bind the list to the dropdown list
                 ddlTimeRequested.DataSource = timeSlots;
                 ddlTimeRequested.DataBind();
+                ddlTimeRequested.SelectedIndex = 0;
 
                 // populate office locations
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
@@ -153,12 +218,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                string time_selected = ddlTimeRequested.SelectedValue.ToString();
-                DateTime dateTime = DateTime.ParseExact(time_selected, "h:mm tt", CultureInfo.InvariantCulture);
-                string time = dateTime.ToString("hh:mm");
-
-                //Response.Redirect("unsuccessful.aspx");
-                Response.Write("Error: " + ex.Message + '\n' +time);
+                Response.Redirect("unsuccessful.aspx");
+                //Response.Write("Error: " + ex.Message + '\n' +time);
             }
 
             connection.Close();
@@ -169,7 +230,7 @@ namespace WebApplication1
             string officeAddress = DropDownList1.SelectedValue;
             // Query the database to get the primary care physicians for the selected office
             string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT DISTINCT CONCAT(doctor.fname, ' ', doctor.lname) AS fullname FROM doctor,office,schedule WHERE doctor.doctorID=schedule.doctor AND office.officeAddress = @OfficeAddress AND (Monday = officeID OR Tuesday = officeID OR Wednesday = officeID OR Thursday = officeID OR Friday = officeID)";
+            string query = "SELECT DISTINCT CONCAT(doctor.fname, ' ', doctor.lname) AS fullname FROM doctor,office,schedule WHERE doctor.doctorID=schedule.doctor AND doctor.specialty = 'PCP' AND office.officeAddress = @OfficeAddress AND (Monday = officeID OR Tuesday = officeID OR Wednesday = officeID OR Thursday = officeID OR Friday = officeID)";
             MySqlConnection connection = new MySqlConnection(connString);
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@officeAddress", officeAddress);
@@ -178,6 +239,7 @@ namespace WebApplication1
 
             // Create a list to hold the primary care physician names for the selected office
             List<string> PCPs = new List<string>();
+            PCPs.Add("");
             reader.Read();
             if (reader.HasRows)
             {
@@ -193,6 +255,7 @@ namespace WebApplication1
                 primary.Items.Clear();
                 primary.DataSource = PCPs;
                 primary.DataBind();
+                primary.SelectedIndex = 0;
             }
             else { primary.Items.Clear(); }
             reader.Close();
@@ -205,6 +268,11 @@ namespace WebApplication1
         }
 
         protected void ECemail_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void date_requested_TextChanged(object sender, EventArgs e)
         {
 
         }

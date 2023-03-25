@@ -21,7 +21,7 @@ public class AppointmentDataAccessLayer
         {
             connection.Open();
             string query = "UPDATE appointment SET archive = true WHERE DATEDIFF(appointmentDate, CURDATE()) <= 1 AND PATIENT_CONFIRM = false";
-            string query2 = "SELECT patients.email FROM patients, appointment WHERE appointment.patientID=patients.patientID AND DATEDIFF(appointmentDate, CURDATE()) <= 1 AND PATIENT_CONFIRM = false";
+            string query2 = "SELECT patients.email FROM patients, appointment WHERE appointment.patientID=patients.patientID AND DATEDIFF(appointmentDate, CURDATE()) <= 1 AND (PATIENT_CONFIRM = false OR Approval = false)";
             MySqlCommand command2 = new MySqlCommand(query2, connection);
            
             MySqlDataReader reader = command2.ExecuteReader();
