@@ -10,7 +10,7 @@ using static System.Web.UI.ScriptManager;
 
 namespace WebApplication1
 {
-    public partial class WebForm6 : System.Web.UI.Page
+    public partial class ProviderView : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -96,9 +96,6 @@ namespace WebApplication1
                 }
                 connection.Close();
             }
-
-
-
         }
 
 
@@ -301,7 +298,6 @@ namespace WebApplication1
                         }
                     }
                 }
-
             }
         }
 

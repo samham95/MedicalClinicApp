@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProviderView.aspx.cs" Inherits="WebApplication1.WebForm6" %>
+﻿a<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProviderView.aspx.cs" Inherits="WebApplication1.ProviderView" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions" %>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 
     <style>   
         .approve-button {
-          background-color: green;
+          background-color: mediumseagreen;
           color: white;
           padding: 10px 20px;
           border: none;

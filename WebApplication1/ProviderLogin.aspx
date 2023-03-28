@@ -48,7 +48,7 @@
             margin: 20px;
             overflow: hidden;
             top: 1px;
-            left: 34px;
+            left: 20px;
         }
 
         .square img {
@@ -98,8 +98,8 @@
           <a href="HomePage.aspx">Home</a>
         </div>
 	    <div class="container">
-		    <header style="margin-left: 0px">Provider Portal Login</header>
-            <p style="margin-left: 0px"><a href="PatientLogin.aspx">Use this link if you are a patient</a></p>
+		    <header style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provider Portal Login</header>
+            <p style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="PatientLogin.aspx">Use this link if you are a patient</a></p>
 		<div class="squares-container">
 			<a href="NurseLogin.aspx">
 				<div class="square">

@@ -111,8 +111,8 @@
             <div class="form-group">
                 <label for="phone">Phone Number <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="phone_num" runat="server" placeholder="1234567890" MaxLength="10" />
-                <asp:RegularExpressionValidator ID="phoneValidator" runat="server" ControlToValidate="phone_num"
-                    ValidationExpression="^\d{10}$" ErrorMessage="Please enter a valid phone number" />
+                <span class="required"><asp:RegularExpressionValidator ID="phoneValidator" runat="server" ControlToValidate="phone_num"
+                    ValidationExpression="^\d{10}$" ErrorMessage="Please enter a valid phone number" /></span>
             </div>
 
 
@@ -120,9 +120,9 @@
 			<div class="form-group">
 				<label for="email">Email <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="email" runat="server" placeholder="you@example.com"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="emailValidator" runat="server" 
+                <span class="required"><asp:RegularExpressionValidator ID="emailValidator" runat="server" 
                 ControlToValidate="email" ErrorMessage="Please enter a valid email address." 
-                    ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
+                    ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" /></span>
 			</div>
 
 			<div class="form-group"> 
@@ -143,16 +143,16 @@
             <div class="form-group">
                 <label for="ECphone">Emergency Contact Phone Number <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="ECphone" runat="server" placeholder="1234567890" MaxLength="10" />
-                <asp:RegularExpressionValidator ID="ecphonevalidator" runat="server" ControlToValidate="phone_num"
-                    ValidationExpression="^\d{10}$" ErrorMessage="Please enter a valid phone number" />
+               <span class="required"> <asp:RegularExpressionValidator ID="ecphonevalidator" runat="server" ControlToValidate="phone_num"
+                    ValidationExpression="^\d{10}$" ErrorMessage="Please enter a valid phone number" /></span>
             </div>
 
 			<div class="form-group">
 				<label for="ECemail">Emergency Contact Email <span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="ECemail" runat="server" placeholder="you@example.com" OnTextChanged="ECemail_TextChanged"></asp:TextBox>
-                <asp:RegularExpressionValidator ID="ecemailvalidator" runat="server" 
+                <asp:TextBox ID="ECemail" runat="server" placeholder="you@example.com"></asp:TextBox>
+                <span class="required"><asp:RegularExpressionValidator ID="ecemailvalidator" runat="server" 
                 ControlToValidate="ECemail" ErrorMessage="Please enter a valid email address." 
-                    ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
+                    ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" /></span>
 			</div>
 			</fieldset>
  
@@ -189,7 +189,7 @@
 				<label for="time-requested">
                 <br />
                 Time Requested <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="ddlTimeRequested" runat="server" Width="140px" AutoPostBack="True" OnTextChanged="date_requested_TextChanged"></asp:DropDownList>
+                <asp:DropDownList ID="ddlTimeRequested" runat="server" Width="140px" AutoPostBack="True"></asp:DropDownList>
 			    <span class="required"><asp:Literal ID="ErrorMessage_date" runat="server" ></asp:Literal></span>
 			    <br />
                 <br />
@@ -251,8 +251,8 @@
                     $('#<%=SUBMIT.ClientID %>').on('click', function () {
                         // Check if required fields are filled out
                         if ($('#<%=fname.ClientID %>').val() === '' || $('#<%=lname.ClientID %>').val() === '' || $('#<%=email.ClientID %>').val() === ''
-                            || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === '' ||  $('#<%=DropDownList1.ClientID %>').val() === "" || $('#<%=ddlTimeRequested.ClientID %>').val() === ""
-                            || $('#<%=primary.ClientID %>').val() === "" || $('#<%=date_requested.ClientID %>').val() === ""){
+                            || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === '' || $('#<%=DropDownList1.ClientID %>').val() === ""
+                            || $('#<%=ddlTimeRequested.ClientID %>').val() === "" || $('#<%=primary.ClientID %>').val() === "" || $('#<%=date_requested.ClientID %>').val() === ""){
                             // Display dialog box
                             alert('Please fill out all required fields.');
                             return false; // Cancel form submission

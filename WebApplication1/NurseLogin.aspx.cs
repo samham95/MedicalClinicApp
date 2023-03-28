@@ -38,7 +38,7 @@ namespace WebApplication1
 
             {
                 int nurseID = (int)reader["nurseID"];
-                Response.Redirect("ProviderView.aspx?nurseID=" + nurseID);
+                Response.Redirect("NurseView.aspx?nurseID=" + nurseID);
             }
 
             else

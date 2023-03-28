@@ -42,7 +42,9 @@
     </style>
 
 </head>
-   <div class="navbar">
+
+<body style="Bold">
+    <div class="navbar">
       <a href="#">About Us</a>
       <a href="#">Contact Us</a>
       <a href="PatientLogin.aspx">Patient Login</a>
@@ -52,10 +54,8 @@
 
     <br />
     <h1>
-        Please sign in here. If you are a doctor, please instead use <a href="ProviderLogin.aspx">this login wizard.</a>
+        Please sign in here. If you are a doctor, please instead use <a href="DoctorLogin.aspx">this login wizard.</a>
     </h1>
-<body style="Bold">
-
     <br />
     <form id="form1" runat="server">
      

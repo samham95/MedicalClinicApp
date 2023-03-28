@@ -17,6 +17,7 @@ namespace WebApplication1
             // check if selected appointment available
             if (IsPostBack)
             {
+                ErrorMessage_date2.Text = "";
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
                 MySqlConnection connection = new MySqlConnection(connString);
                 string query = "SELECT * FROM appointment, doctor WHERE appointmentDate = @AppDate AND appointmentTime = @AppTime AND CONCAT(doctor.fname, ' ', doctor.lname) = @fullname AND appointment.doctorID = doctor.doctorID";
@@ -43,7 +44,7 @@ namespace WebApplication1
                     {
                         MySqlDataReader reader = command.ExecuteReader();
                         reader.Read();
-                        if (fullname != "" && AppTime != "" && AppDate != "")
+                        if (fullname != "" && AppTime != "" && AppDate != "" && DropDownList1.SelectedValue != "")
                         {
                             DateTime selected_date = DateTime.Parse(AppDate);
 
@@ -77,9 +78,6 @@ namespace WebApplication1
                 ScriptManager.RegisterStartupScript(this, GetType(), "scrollToBottom", "window.scrollTo(0, document.body.scrollHeight/2);", true);
             }
 
-            dob.Attributes.Add("placeholder", "yyyy-mm-dd");
-            dob.Attributes.Add("type", "date");
-            dob.Attributes.Add("onkeydown", "return false");
 
             if (!IsPostBack)
             {
@@ -122,6 +120,12 @@ namespace WebApplication1
                 DropDownList1.SelectedIndex = 0;
 
             }
+
+
+            dob.Attributes.Add("placeholder", "yyyy-mm-dd");
+            dob.Attributes.Add("type", "date");
+            dob.Attributes.Add("onkeydown", "return false");
+
         }
 
         protected void SUBMIT_Click(object sender, EventArgs e)
@@ -260,21 +264,6 @@ namespace WebApplication1
             else { primary.Items.Clear(); }
             reader.Close();
             connection.Close();
-        }
-
-        protected void primary_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void ECemail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void date_requested_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class WebForm6
+    public partial class ProviderView
     {
 
         /// <summary>
