@@ -92,7 +92,11 @@
                 <asp:Button ID="RemOff" runat="server" OnClick="ButtonRO_Click" Text="Remove Office" style="margin-left: 0px" />
 
                 <asp:Button ID="RemPer" runat="server" OnClick="ButtonRP_Click" Text="Remove Personnel" style="margin-left: 0px" />
-        </div>
+
+                <asp:Button ID="Reports" runat="server" OnClick="Report_Click" Text="Generate Reports" style="margin-left: 0px" />
+
+            </div>
+ 
     </form>
 
 </body>

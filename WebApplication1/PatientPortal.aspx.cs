@@ -5,6 +5,10 @@ using MySql.Data.MySqlClient;
 using System.Net;
 using System.Net.Mail;
 using System.Web.UI.WebControls;
+using System.Collections.Generic;
+using System.Globalization;
+
+
 
 namespace WebApplication1
 {
@@ -31,6 +35,7 @@ namespace WebApplication1
             welcomeHeader.InnerText = "Welcome, " + fullname;
         }
 
+
         protected void BindData()
         {
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
@@ -48,6 +53,30 @@ namespace WebApplication1
                     using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
                     {
                         adapter.Fill(dt);
+
+                        // Add a column to the data table for Time to Confirm
+                        dt.Columns.Add("TimeToConfirm");
+
+                        // Calculate Time to Confirm for each row
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            string appDate = Convert.ToDateTime(row["Date"]).ToString("yyyy-MM-dd");
+                            string appTime = Convert.ToString(row["Time"]);
+                            DateTime appointmentDateTime;
+                            DateTime.TryParseExact(appDate + " " + appTime, "yyyy-MM-dd h:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out appointmentDateTime);
+
+                            try
+                            {
+                                DateTime timeToConfirm = appointmentDateTime.AddHours(-24);
+                                TimeSpan timeRemaining = timeToConfirm - DateTime.Now;
+                                row["TimeToConfirm"] = String.Format("{0} days, {1} hours, {2} minutes", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes);
+                            }
+                            catch (Exception)
+                            {
+                                Response.Write(appDate.ToString() + " " + appTime + " ");
+                            }
+                        }
+                        // Bind data
                         GridView1.DataSource = dt;
                         GridView1.DataBind();
                     }
@@ -79,10 +108,11 @@ namespace WebApplication1
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+
             if (e.CommandName == "ConfirmAppointment")
             {
-                int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
-
                 // Get patient email
                 string email_query = "SELECT email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
@@ -126,15 +156,57 @@ namespace WebApplication1
                         }
                     }
                 }
-                else
-                {
-                    Response.Write(appointmentID);
-                }
+
             }
             else if (e.CommandName == "EditAppointment")
             {
-                int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
-                Response.Redirect("PatientEditApp.aspx?appointmentID=" + appointmentID);
+                Response.Redirect("PatEditApp.aspx?appointmentID=" + appointmentID +"&patientID=" + patientID);
+            }
+            else if (e.CommandName == "CancelAppointment")
+            {
+                // Get patient email
+                string email_query = "SELECT email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
+                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+                MySqlConnection connect = new MySqlConnection(connString);
+                connect.Open();
+                MySqlCommand cmd = new MySqlCommand(email_query, connect);
+                cmd.Parameters.AddWithValue("@apid", appointmentID);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                reader.Read();
+                if (reader.HasRows)
+                {
+                    string email = reader["email"].ToString();
+                    reader.Close();
+                    connect.Close();
+
+                    // Update approval status in database
+                    string query = "UPDATE appointment SET Archive = @archive WHERE appointmentID = @ID";
+                    using (MySqlConnection connection = new MySqlConnection(connString))
+                    {
+                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("@archive", true);
+                            command.Parameters.AddWithValue("@ID", appointmentID);
+                            connection.Open();
+                            int rowsAffected = command.ExecuteNonQuery();
+                            connection.Close();
+
+                            if (rowsAffected > 0)
+                            {
+                                // Send confirmation email to patient
+                                MailMessage mail = new MailMessage();
+                                mail.To.Add(email);
+                                mail.Subject = "Appointment Cancelled";
+                                mail.Body = "You have successfully cancelled your appointment. Please schedule a new appointment if you wish to see us.";
+                                SmtpClient smtp = new SmtpClient();
+                                smtp.Send(mail);
+
+                                // Refresh data grid
+                                BindData();
+                            }
+                        }
+                    }
+                }
             }
         }
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -165,7 +237,7 @@ namespace WebApplication1
         protected void Button2_Click(object sender, EventArgs e)
         {
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
-            Response.Redirect("PCPFollowUp.aspx?patientID=" +patientID);
+            Response.Redirect("PCPfollowup.aspx?patientID=" +patientID);
         }
 
         protected void Button3_Click(object sender, EventArgs e)

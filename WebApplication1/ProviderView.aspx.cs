@@ -253,7 +253,7 @@ namespace WebApplication1
             }
             else if (e.CommandName == "DenyAppointment2")
             {
-                int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+                int appointmentID = Convert.ToInt32(GridView2.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
 
                 // Get patient email
                 string email_query = "SELECT email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
@@ -272,7 +272,7 @@ namespace WebApplication1
                     // Update referral status in database
                     using (MySqlConnection connection = new MySqlConnection(connString))
                     {
-                        string query_ref = "UPDATE patients, appointment SET appointment.referral = false WHERE appointment.appointmentID = 30008 AND patients.patientID = appointment.patientID";
+                        string query_ref = "UPDATE patients, appointment SET appointment.Referral = @Referral WHERE appointment.appointmentID = @ID AND patients.patientID = appointment.patientID";
 
                         using (MySqlCommand command = new MySqlCommand(query_ref, connection))
                         {
@@ -318,6 +318,7 @@ namespace WebApplication1
                 Response.Redirect("ReportView.aspx?ReportID=" + ReportID);
             }
         }
+
     }
 }
 

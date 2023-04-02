@@ -47,7 +47,7 @@
         <div>
             <h1>Upcoming Appointments</h1>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID"
-                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+                 BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
                     <asp:BoundField DataField="appointmentID" HeaderText="AppointmentID" />
@@ -56,6 +56,9 @@
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
+                    <asp:ButtonField ButtonType="button" Text="GENERATE" CommandName="AppReport" HeaderText="REPORT" ControlStyle-BackColor="green">
+<ControlStyle BackColor="cyan"></ControlStyle>
+                    </asp:ButtonField>
 
 
                 </Columns>

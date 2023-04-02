@@ -11,70 +11,61 @@ namespace WebApplication1
 {
 
 
-    public partial class AdminView
+    public partial class PCPfollowup
     {
 
         /// <summary>
-        /// form1 control.
+        /// date_requested control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.TextBox date_requested;
 
         /// <summary>
-        /// welcomeHeader control.
+        /// ErrorMessage_date2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl welcomeHeader;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage_date2;
 
         /// <summary>
-        /// AddPer control.
+        /// ddlTimeRequested control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddPer;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTimeRequested;
 
         /// <summary>
-        /// AddOff control.
+        /// ErrorMessage_date control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AddOff;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage_date;
 
         /// <summary>
-        /// RemOff control.
+        /// SUBMIT control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RemOff;
+        protected global::System.Web.UI.WebControls.Button SUBMIT;
 
         /// <summary>
-        /// RemPer control.
+        /// Return control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RemPer;
-
-        /// <summary>
-        /// Reports control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Reports;
+        protected global::System.Web.UI.WebControls.Button Return;
     }
 }

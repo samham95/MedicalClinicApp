@@ -16,7 +16,7 @@ namespace WebApplication1
         }
         protected void SUBMIT_Click_RemPer(object sender, EventArgs e)
         {
-            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb;Uid=dbadmin;Pwd=Medical123!;";
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connString);
 
             connection.Open();

@@ -39,7 +39,7 @@
     </div>
     <br />
 
-        Response Saved Successfully! An email confirmation with your appointment request was sent. Your primary care provider will reach out to you shortly if you require a referral.<br />
+        Response Saved Successfully! An email confirmation with your appointment request was sent. Your primary care provider will reach out to you shortly with confirmation of your appointment.<br />
     <br />
     <form id="form1" runat="server">
         <div>

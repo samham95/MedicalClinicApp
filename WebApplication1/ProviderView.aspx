@@ -1,4 +1,4 @@
-﻿a<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProviderView.aspx.cs" Inherits="WebApplication1.ProviderView" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ProviderView.aspx.cs" Inherits="WebApplication1.ProviderView" %>
 <%@ Register TagPrefix="asp" Namespace="System.Web.UI" Assembly="System.Web.Extensions" %>
 
 <!DOCTYPE html>
@@ -81,13 +81,13 @@
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:ButtonField ButtonType="button" Text="APPROVE" CommandName="ApproveAppointment" HeaderText="Approval" ControlStyle-BackColor="cyan">
-<ControlStyle BackColor="Green"></ControlStyle>
+                    <asp:ButtonField ButtonType = "button" Text="APPROVE" CommandName="ApproveAppointment" HeaderText="Approval" ControlStyle-BackColor="">
+<ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
-                    <asp:ButtonField ButtonType="button" Text="DENY" CommandName="DenyAppointment" HeaderText="Denial" ControlStyle-BackColor="Red" >
+                    <asp:ButtonField ButtonType="button" Text="DENY" CommandName="DenyAppointment" HeaderText="Denial" ControlStyle-BackColor="" >
 
 
-<ControlStyle BackColor="Red"></ControlStyle>
+<ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
 
 
@@ -115,11 +115,11 @@
                     <asp:BoundField DataField="Referral" HeaderText="Referral Status" />
                     <asp:BoundField DataField="Date2" HeaderText="Date" DataFormatString="{0:d}"/>
                     <asp:BoundField DataField="Doctor" HeaderText="Doctor" />
-                    <asp:ButtonField ButtonType="button" Text="APPROVE" CommandName="ApproveAppointment2" HeaderText="Approval" ControlStyle-BackColor="Green">
-<ControlStyle BackColor="Green"></ControlStyle>
+                    <asp:ButtonField ButtonType="button" Text="APPROVE" CommandName="ApproveAppointment2" HeaderText="Approval" ControlStyle-BackColor="">
+<ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
-                    <asp:ButtonField ButtonType="button" Text="DENY" CommandName="DenyAppointment2" HeaderText="Denial" ControlStyle-BackColor="Red" >
-<ControlStyle BackColor="Red"></ControlStyle>
+                    <asp:ButtonField ButtonType="button" Text="DENY" CommandName="DenyAppointment2" HeaderText="Denial" ControlStyle-BackColor="" >
+<ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
                 </Columns>
                 <FooterStyle BackColor="#CCCCCC" />
@@ -143,8 +143,8 @@
                     <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" />
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:ButtonField ButtonType="button" Text="VIEW" CommandName="AppReport" HeaderText="REPORT" ControlStyle-BackColor="blue">
-<ControlStyle BackColor="cyan"></ControlStyle>
+                    <asp:ButtonField ButtonType="button" Text="VIEW" CommandName="AppReport" HeaderText="REPORT" ControlStyle-BackColor="">
+<ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
 
 

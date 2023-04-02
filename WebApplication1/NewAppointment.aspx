@@ -84,12 +84,12 @@
 				<label for="SpecDept">
                 <br />
                 Select a Specialty <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="specdept" runat="server" Width="140px" AutoPostBack="True" >
+                <asp:DropDownList ID="specdept" runat="server" Width="140px" AutoPostBack="True" OnSelectedIndexChanged="specdept_SelectedIndexChanged" >
                     <asp:ListItem Selected="True"></asp:ListItem>
                     <asp:ListItem>Oncology</asp:ListItem>
                     <asp:ListItem>Dermatology</asp:ListItem>
                     <asp:ListItem>Cardiology</asp:ListItem>
-                    <asp:ListItem>OB/GYN</asp:ListItem>
+                    <asp:ListItem>Neurology</asp:ListItem>
                     <asp:ListItem>Nephrology</asp:ListItem>
                     <asp:ListItem>Internal Medicine</asp:ListItem>
                 </asp:DropDownList>
@@ -189,5 +189,8 @@
                     });
                 });
             </script>
+    <p>
+			<asp:Button ID="Return" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" style="margin-left: 20px" />
+			</p>
 </body>
 </html>

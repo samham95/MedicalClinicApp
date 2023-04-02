@@ -99,6 +99,19 @@ namespace WebApplication1
                 Response.Redirect("ReportView.aspx?ReportID=" + ReportID);
             }
         }
+        protected void Generate_button(object sender, GridViewCommandEventArgs e)
+        {
+            int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+            if (e.CommandName == "GENERATE")
+            {
+                Response.Redirect("GenerateReport.aspx?AppointmentID=" + appointmentID);
+            }
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

@@ -47,7 +47,7 @@ namespace WebApplication1
                     {
                         MySqlDataReader reader = command.ExecuteReader();
                         reader.Read();
-                        if (fullname != "" && AppTime != "" && AppDate != "")
+                        if (fullname != "" && AppTime != "" && AppDate != "" && DropDownList1.SelectedValue != "" && date_requested.Text !="" && specdept.SelectedValue != "")
                         {
                             DateTime selected_date = DateTime.Parse(AppDate);
 
@@ -214,6 +214,18 @@ namespace WebApplication1
         protected void date_requested_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void specdept_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DropDownList1.SelectedIndex = 0;
+            specialist.SelectedIndex = 0;
+        }
+
+        protected void Return_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
         }
     }
 }

@@ -25,12 +25,11 @@ namespace WebApplication1
                 MySqlCommand command = new MySqlCommand(query, connection);
 
                 string AppDate = date_requested.Text;
-                string time_selected = ddlTimeRequested.SelectedValue.ToString();
-                string AppTime = time_selected;
+                string AppTime = ddlTimeRequested.SelectedValue.ToString();
                 string fullname = primary.SelectedValue;
-                if (time_selected != "")
+                if (AppTime != "")
                 {
-                    DateTime dateTime = DateTime.ParseExact(time_selected, "h:mm tt", CultureInfo.InvariantCulture);
+                    DateTime dateTime = DateTime.ParseExact(AppTime, "h:mm tt", CultureInfo.InvariantCulture);
                     AppTime = dateTime.ToString("hh:mm");
                 }
       
@@ -44,9 +43,9 @@ namespace WebApplication1
                     {
                         MySqlDataReader reader = command.ExecuteReader();
                         reader.Read();
-                        if (fullname != "" && AppTime != "" && AppDate != "" && DropDownList1.SelectedValue != "")
-                        {
-                            DateTime selected_date = DateTime.Parse(AppDate);
+                    if (fullname != "" && AppTime != "" && AppDate != "" && DropDownList1.SelectedValue != "" && date_requested.Text != "")
+                    {
+                        DateTime selected_date = DateTime.Parse(AppDate);
 
                             if (currentDate > selected_date || selected_date.DayOfWeek.ToString() == "Saturday" || selected_date.DayOfWeek.ToString() == "Sunday")
                             {
@@ -222,8 +221,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Redirect("unsuccessful.aspx");
-                //Response.Write("Error: " + ex.Message + '\n' +time);
+                //Response.Redirect("unsuccessful.aspx");
+                Response.Write("Error: " + ex.Message + '\n');
             }
 
             connection.Close();
