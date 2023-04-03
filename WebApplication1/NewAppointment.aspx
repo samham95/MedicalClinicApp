@@ -170,7 +170,10 @@
             <p>
                 <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
             </p>
+                <p>
+                    &nbsp;</p>
 	</fieldset>
+               <asp:Button ID="Return" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
     </form>
      </div>
 
@@ -189,8 +192,6 @@
                     });
                 });
             </script>
-    <p>
-			<asp:Button ID="Return" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" style="margin-left: 20px" />
-			</p>
+
 </body>
 </html>

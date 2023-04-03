@@ -66,8 +66,9 @@
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
                     <asp:BoundField DataField="Time" HeaderText="Time" />
-                    <asp:BoundField DataField="Confirm" HeaderText="Confirmation Status" />
+                    <asp:BoundField DataField="Confirm" HeaderText="Confirmation Status" Visible ="false" />
                     <asp:BoundField DataField="TimeToConfirm" HeaderText="Time to Confirm" />
+                    <asp:BoundField DataField="ConfirmText" HeaderText="Patient Confirmation" />
                     <asp:ButtonField ButtonType="button" Text="RESCHEDULE" CommandName="EditAppointment" HeaderText="Reschedule" />
                     <asp:ButtonField ButtonType="button" Text="CONFIRM" CommandName="ConfirmAppointment" HeaderText="Confirm" />
                     <asp:ButtonField ButtonType="button" Text="CANCEL" CommandName="CancelAppointment" HeaderText="Cancel" />
@@ -114,7 +115,7 @@
         <script>
             $(document).ready(function () {
                 // Attach click event handler to the approve and deny buttons
-                $("input[type='button'][value='CONFIRM'], input[type='button'][value='CANCEL']").click(function (e) {
+                $("input[type='button'][value='CANCEL']").click(function (e) {
                     // Prevent the button from performing its default action
                     e.preventDefault();
                     // Open the dialog box
@@ -125,6 +126,28 @@
                     }
                     else {
                         return false;
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                // Attach click event handler to the CONFIRM button
+                $("input[type='button'][value='CONFIRM']").click(function (e) {
+                    // Prevent the button from performing its default action
+                    e.preventDefault();
+
+                    // Get the Approval status of the appointment
+                    var approvalStatus = $(this).closest("tr").find("td:nth-child(5)").text().trim();
+
+                    // If the approval status is false, show the dialog box
+                    if (approvalStatus === "False") {
+                        var message = "Doctor must approve before you can confirm. Press OK to acknowledge.";
+                        alert(message);
+                        return false;
+                    } else {
+                        // If the approval status is true, submit the form
+                        $(this).closest("form").submit();
+ 
                     }
                 });
             });

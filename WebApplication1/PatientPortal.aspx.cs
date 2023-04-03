@@ -56,10 +56,28 @@ namespace WebApplication1
 
                         // Add a column to the data table for Time to Confirm
                         dt.Columns.Add("TimeToConfirm");
+                        dt.Columns.Add("ConfirmText");
 
                         // Calculate Time to Confirm for each row
                         foreach (DataRow row in dt.Rows)
                         {
+                            // Set the value for the Confirm field
+                            bool? confirmValue = row.Field<bool?>("Confirm");
+                            string confirmText;
+                            if (confirmValue.HasValue)
+                            {
+                                confirmText = confirmValue.Value ? "Patient Confirmed" : "Not Confirmed";
+                            }
+                            else
+                            {
+                                confirmText = "Needs Approval";
+                            }
+
+
+                            // Add a new column to the DataRow with the Confirm field value
+                            row["ConfirmText"] = confirmText;
+
+                            // calculate time to confirm
                             string appDate = Convert.ToDateTime(row["Date"]).ToString("yyyy-MM-dd");
                             string appTime = Convert.ToString(row["Time"]);
                             DateTime appointmentDateTime;
@@ -144,8 +162,10 @@ namespace WebApplication1
                             command.Parameters.AddWithValue("@ID", appointmentID);
                             int rowsAffected = command.ExecuteNonQuery();
                             connection.Close();
-
-                            if (rowsAffected > 0)
+                            // Refresh data grid
+                            BindData();
+                            string confirmed = GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[8].Text;
+                            if (confirmed == "Patient Confirmed")
                             {
                                 // Send confirmation email to patient
                                 MailMessage mail = new MailMessage();

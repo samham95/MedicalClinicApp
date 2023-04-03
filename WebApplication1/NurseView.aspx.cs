@@ -59,7 +59,7 @@ namespace WebApplication1
 
 
             // Retrieve data from database into past appointments 
-            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse where appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointmentDate < current_date() AND archive = false ORDER BY appointmentDate DESC";
+            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID , appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse WHERE NID = @NID AND appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointmentDate < current_date() AND archive = True AND PATIENT_CONFIRM = true ORDER BY appointmentDate DESC";
             DataTable dt3 = new DataTable();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
