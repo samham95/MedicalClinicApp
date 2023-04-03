@@ -46,7 +46,7 @@
     <form id="form1" runat="server">
         <div>
             <h1>Upcoming Appointments</h1>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID"
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID" OnRowCommand="GridView1_RowCommand"
                  BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
@@ -56,8 +56,8 @@
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:ButtonField ButtonType="button" Text="GENERATE" CommandName="AppReport" HeaderText="REPORT" ControlStyle-BackColor="green">
-<ControlStyle BackColor="cyan"></ControlStyle>
+                    <asp:ButtonField ButtonType="button" Text="GENERATE" CommandName="GENERATE" HeaderText="REPORT" ControlStyle-BackColor="">
+<ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
 
 
@@ -84,8 +84,8 @@
                     <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" />
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:ButtonField ButtonType="button" Text="VIEW" CommandName="AppReport" HeaderText="REPORT" ControlStyle-BackColor="blue">
-<ControlStyle BackColor="cyan"></ControlStyle>
+                    <asp:ButtonField ButtonType="button" Text="VIEW" CommandName="VIEW" HeaderText="REPORT" ControlStyle-BackColor="">
+<ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
 
 
@@ -101,22 +101,6 @@
                 <sorteddescendingheaderstyle backcolor="#383838" />
             </asp:GridView>
         </div>
-
-        <script>
-            $(document).ready(function () {
-                // Attach click event handler to the approve and deny buttons
-                $("input[type='button'][value='APPROVE'], input[type='button'][value='DENY']").click(function (e) {
-                    // Prevent the button from performing its default action
-                    e.preventDefault();
-                    // Open the dialog box
-                    var message = "ARE YOU SURE YOU WANT TO " + $(this).val() + " THIS APPOINTMENT? PRESS OK TO EMAIL THE PATIENT";
-                    if (confirm(message)) {
-                        // If the user confirms, submit the form
-                        $(this).closest("form").submit();
-                    }
-                });
-            });
-        </script>
 
     </form>
 </body>

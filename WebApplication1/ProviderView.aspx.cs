@@ -7,6 +7,8 @@ using System.Net.Mail;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using static System.Web.UI.ScriptManager;
+using System.Globalization;
+
 
 namespace WebApplication1
 {
@@ -40,7 +42,7 @@ namespace WebApplication1
 
             // Retrieve data from database into upcoming appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate DESC";
+            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -52,6 +54,7 @@ namespace WebApplication1
                         adapter.Fill(dt);
                         GridView1.DataSource = dt;
                         GridView1.DataBind();
+                     
                     }
                 }
                 connection.Close();
@@ -59,7 +62,7 @@ namespace WebApplication1
 
 
             // Retrive data from database into referral review
-            string query2 = "SELECT appointment.appointmentID as appointmentID2, CONCAT(patients.fname, ' ', patients.lname) as PatientName2, spec.specialty as Specialist, appointment.Referral as Referral,CONCAT(spec.fname, ' ', spec.lname) as Doctor, appointmentDate as Date2 FROM appointment, patients, doctor as prim, doctor as spec  WHERE appointment.doctorID = spec.doctorID AND prim.doctorID = patients.doctorID AND appointment.patientID = patients.patientID AND prim.doctorID = @DoctorID AND prim.doctorID != spec.doctorID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate DESC";
+            string query2 = "SELECT appointment.appointmentID as appointmentID2, CONCAT(patients.fname, ' ', patients.lname) as PatientName2, spec.specialty as Specialist, appointment.Referral as Referral,CONCAT(spec.fname, ' ', spec.lname) as Doctor, appointmentDate as Date2 FROM appointment, patients, doctor as prim, doctor as spec  WHERE appointment.doctorID = spec.doctorID AND prim.doctorID = patients.doctorID AND appointment.patientID = patients.patientID AND prim.doctorID = @DoctorID AND prim.doctorID != spec.doctorID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate ASC";
             DataTable dt2 = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -78,7 +81,7 @@ namespace WebApplication1
             }
 
             // Retrieve data from database into past appointments 
-            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < current_date() ORDER BY appointmentDate DESC";
+            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < current_date() ORDER BY appointmentDate ASC";
             DataTable dt3 = new DataTable();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -105,21 +108,25 @@ namespace WebApplication1
                 int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
 
                 // Get patient email
-                string email_query = "SELECT email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
+                string email_query = "SELECT DISTINCT patients.email as email, appointmentDate as date, appointmentTime as time, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as doctorName FROM patients, appointment, doctor WHERE appointment.patientID=patients.patientID AND appointment.doctorID = doctor.doctorID AND appointmentID = @APID";
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
                 MySqlConnection connect = new MySqlConnection(connString);
                 connect.Open();
                 MySqlCommand cmd = new MySqlCommand(email_query, connect);
-                cmd.Parameters.AddWithValue("@apid", appointmentID);
+                cmd.Parameters.AddWithValue("@APID", appointmentID);
                 MySqlDataReader reader = cmd.ExecuteReader();
                 reader.Read();
                 if (reader.HasRows) {
-                 string email = reader["email"].ToString();
-                 reader.Close();
-                 connect.Close();
+                    string email = reader["email"].ToString();
+                    string doctorName = reader["doctorName"].ToString();
+                    string date = reader["date"].ToString();
+                    string time = reader["time"].ToString();
+                    reader.Close();
+                    connect.Close();
+                    date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
 
-                // Update approval status in database
-                string query = "UPDATE appointment SET Approval = @Approved WHERE appointmentID = @ID";
+                    // Update approval status in database
+                    string query = "UPDATE appointment SET Approval = @Approved WHERE appointmentID = @ID";
                 using (MySqlConnection connection = new MySqlConnection(connString))
                 {
                     using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -136,8 +143,9 @@ namespace WebApplication1
                                 MailMessage mail = new MailMessage();
                                 mail.To.Add(email);
                                 mail.Subject = "Appointment Approved";
-                                mail.Body = "Your appointment has been approved. To avoid cancellation, please log on to your account to confirm your appointment at least 24 hours before its scheduled date. We look forward to seeing you!";
+                                mail.Body = "Your appointment on " + date + " at " + time + " with " + doctorName + " has been confirmed by your doctor. Please log on to your patient portal to confirm your appointment at least 24 hours until before the scheduled time";
                                 SmtpClient smtp = new SmtpClient();
+
                                 smtp.Send(mail);
 
                                 // Refresh data grid
@@ -164,7 +172,12 @@ namespace WebApplication1
                 if (reader.HasRows)
                 {
                     string email = reader["email"].ToString();
+                    string doctorName = reader["doctorName"].ToString();
+                    string date = reader["date"].ToString();
+                    string time = reader["time"].ToString();
                     reader.Close();
+                    date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
+
 
                     // Update approval status in database
                     string query = "UPDATE appointment SET Approval = @Approved WHERE appointmentID = @ID";
@@ -184,7 +197,7 @@ namespace WebApplication1
                                 MailMessage mail = new MailMessage();
                                 mail.To.Add(email);
                                 mail.Subject = "Appointment Denied";
-                                mail.Body = "Your appointment has been denied. Please reach out to us further for clarification and to reschedule.";
+                                mail.Body = "Your appointment on " + date + " at " + time + " with " + doctorName + " has been denied by your doctor. Please log on to your patient portal to schedule an appointment again";
                                 SmtpClient smtp = new SmtpClient();
                                 smtp.Send(mail);
                                 // Refresh data grid
@@ -205,7 +218,7 @@ namespace WebApplication1
                 int appointmentID = Convert.ToInt32(GridView2.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
 
                 // Get patient email
-                string email_query = "SELECT patients.email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
+                string email_query = "SELECT patients.email as email, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName, doctor.Specialty as specialty, AppointmentDate as date, AppointmentTime as time FROM patients, appointment, doctor WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID and appointment.doctorID = doctor.doctorID";
 
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
                 MySqlConnection connect = new MySqlConnection(connString);
@@ -217,10 +230,16 @@ namespace WebApplication1
                 if (reader.HasRows)
                 {
                     string email = reader["email"].ToString();
+                    string specialty = reader["specialty"].ToString();
+                    string doctorName = reader["docName"].ToString();
+                    string date = reader["date"].ToString();
+                    string time = reader["time"].ToString();
+                    date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
+
                     reader.Close();
 
                     // Update approval status in database
-                    string query = "UPDATE patients, appointment SET appointment.referral = @Referral WHERE appointment.appointmentID = @ID AND patients.patientID = appointment.patientID";
+                    string query = "UPDATE appointment SET appointment.referral = @Referral WHERE appointment.appointmentID = @ID";
 
                     using (MySqlConnection connection = new MySqlConnection(connString))
                     {
@@ -238,7 +257,7 @@ namespace WebApplication1
                                 MailMessage mail = new MailMessage();
                                 mail.To.Add(email);
                                 mail.Subject = "Referral Approved";
-                                mail.Body = "Your specialist appointment requiring referral has been approved. To avoid cancellation, please log on to your account to confirm at least 24 hours before your scheduled date. We look forward to seeing you!";
+                                mail.Body = "The referral for your " + specialty + " appointment on" + date + " at " + time + " with " + doctorName + " has been approved by your primary care physician. To avoid cancellation, please log on to your account to confirm at least 24 hours before your scheduled date. We look forward to seeing you!";
                                 SmtpClient smtp = new SmtpClient();
                                 smtp.Send(mail);
 
@@ -256,7 +275,7 @@ namespace WebApplication1
                 int appointmentID = Convert.ToInt32(GridView2.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
 
                 // Get patient email
-                string email_query = "SELECT email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
+                string email_query = "SELECT patients.email as email, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName, doctor.Specialty as specialty, AppointmentDate as date, AppointmentTime as time FROM patients, appointment, doctor WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID and appointment.doctorID = doctor.doctorID";
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
                 MySqlConnection connect = new MySqlConnection(connString);
                 connect.Open();
@@ -267,13 +286,17 @@ namespace WebApplication1
                 if (reader.HasRows)
                 {
                     string email = reader["email"].ToString();
+                    string specialty = reader["specialty"].ToString();
+                    string doctorName = reader["docName"].ToString();
+                    string date = reader["date"].ToString();
+                    string time = reader["time"].ToString();
+                    date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
                     reader.Close();
-                    connect.Close();
+
                     // Update referral status in database
                     using (MySqlConnection connection = new MySqlConnection(connString))
                     {
-                        string query_ref = "UPDATE patients, appointment SET appointment.Referral = @Referral WHERE appointment.appointmentID = @ID AND patients.patientID = appointment.patientID";
-
+                        string query_ref = "UPDATE appointment SET appointment.Referral = @Referral WHERE appointment.appointmentID = @ID";
                         using (MySqlCommand command = new MySqlCommand(query_ref, connection))
                         {
                             command.Parameters.AddWithValue("@Referral", false);
@@ -288,7 +311,7 @@ namespace WebApplication1
                                 MailMessage mail = new MailMessage();
                                 mail.To.Add(email);
                                 mail.Subject = "Referral Denied";
-                                mail.Body = "Your referral has been denied. Please reach out to you primary care physician for further clarification and to reschedule.";
+                                mail.Body = "The referral for your " + specialty + " appointment on" + date + " at " + time + " with " + doctorName + " has been denied by your primary care physician. Please consult with your primary care physician as to the reason why.";
                                 SmtpClient smtp = new SmtpClient();
                                 smtp.Send(mail);
 
@@ -297,6 +320,7 @@ namespace WebApplication1
                             }
                         }
                     }
+                    connect.Close();
                 }
             }
         }

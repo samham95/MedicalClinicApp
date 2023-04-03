@@ -175,6 +175,13 @@
     <Compile Include="NewPersonnel.aspx.designer.cs">
       <DependentUpon>NewPersonnel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="nurseReport.aspx.cs">
+      <DependentUpon>nurseReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nurseReport.aspx.designer.cs">
+      <DependentUpon>nurseReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NurseView.aspx.cs">
       <DependentUpon>NurseView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -245,6 +252,13 @@
     </Compile>
     <Compile Include="RemPersonnel.aspx.designer.cs">
       <DependentUpon>RemPersonnel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportView.aspx.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportView.aspx.designer.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
     </Compile>
     <Compile Include="success.aspx.cs">
       <DependentUpon>success.aspx</DependentUpon>
@@ -322,6 +336,7 @@
     <Content Include="NewAppointment.aspx" />
     <Content Include="NewOffice.aspx" />
     <Content Include="NewPersonnel.aspx" />
+    <Content Include="nurseReport.aspx" />
     <Content Include="NurseView.aspx" />
     <Content Include="PatEdit.aspx" />
     <Content Include="DoctorLogin.aspx" />
@@ -332,6 +347,7 @@
     <Content Include="NewPatient.aspx" />
     <Content Include="RemOffice.aspx" />
     <Content Include="RemPersonnel.aspx" />
+    <Content Include="ReportView.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />

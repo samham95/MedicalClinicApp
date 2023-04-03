@@ -43,7 +43,7 @@ namespace WebApplication1
 
             // Retrieve data from database into appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, PATIENT_CONFIRM as Confirm, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @patientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate DESC";
+            string query = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, PATIENT_CONFIRM as Confirm, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @patientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -87,7 +87,7 @@ namespace WebApplication1
             DataTable dt2 = new DataTable();
 
             // Retrieve data from database into previous appointment grid
-            string query2 = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointmentTime as Time, appointmentDate as Date, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @PatientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < current_date() ORDER BY appointmentDate DESC";
+            string query2 = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointmentTime as Time, appointmentDate as Date, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @PatientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < current_date() ORDER BY appointmentDate ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query2, connection))
@@ -114,7 +114,7 @@ namespace WebApplication1
             if (e.CommandName == "ConfirmAppointment")
             {
                 // Get patient email
-                string email_query = "SELECT email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
+                string email_query = "SELECT DISTINCT patients.email as email, appointmentDate as date, appointmentTime as time, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as doctorName FROM patients, appointment, doctor WHERE appointment.patientID=patients.patientID AND appointment.doctorID = doctor.doctorID AND appointmentID = @APID";
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
                 MySqlConnection connect = new MySqlConnection(connString);
                 connect.Open();
@@ -125,18 +125,23 @@ namespace WebApplication1
                 if (reader.HasRows)
                 {
                     string email = reader["email"].ToString();
+                    string doctorName = reader["doctorName"].ToString();
+                    string date = reader["date"].ToString();
+                    string time = reader["time"].ToString();
                     reader.Close();
                     connect.Close();
+                    date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
+
 
                     // Update approval status in database
                     string query = "UPDATE appointment SET PATIENT_CONFIRM = @CONFIRM WHERE appointmentID = @ID";
                     using (MySqlConnection connection = new MySqlConnection(connString))
                     {
+                        connection.Open();
                         using (MySqlCommand command = new MySqlCommand(query, connection))
                         {
                             command.Parameters.AddWithValue("@CONFIRM", true);
                             command.Parameters.AddWithValue("@ID", appointmentID);
-                            connection.Open();
                             int rowsAffected = command.ExecuteNonQuery();
                             connection.Close();
 
@@ -146,7 +151,7 @@ namespace WebApplication1
                                 MailMessage mail = new MailMessage();
                                 mail.To.Add(email);
                                 mail.Subject = "Appointment Confirmed";
-                                mail.Body = "You have successfully confirmed your appointment. We look forward to seeing you!";
+                                mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please arrive to your appointment at least 15 minutes before the scheduled time";
                                 SmtpClient smtp = new SmtpClient();
                                 smtp.Send(mail);
 
@@ -165,7 +170,7 @@ namespace WebApplication1
             else if (e.CommandName == "CancelAppointment")
             {
                 // Get patient email
-                string email_query = "SELECT email FROM patients, appointment WHERE appointment.appointmentID = @apid AND appointment.patientID = patients.patientID";
+                string email_query = "SELECT DISTINCT patients.email as email, appointmentDate as date, appointmentTime as time, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as doctorName FROM patients, appointment, doctor WHERE appointment.patientID=patients.patientID AND appointment.doctorID = doctor.doctorID AND appointmentID = @APID";
                 string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
                 MySqlConnection connect = new MySqlConnection(connString);
                 connect.Open();
@@ -176,9 +181,13 @@ namespace WebApplication1
                 if (reader.HasRows)
                 {
                     string email = reader["email"].ToString();
+                    string doctorName = reader["doctorName"].ToString();
+                    string date = reader["date"].ToString();
+                    string time = reader["time"].ToString();
                     reader.Close();
                     connect.Close();
-
+                    date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
+                    time = DateTime.ParseExact(time, "h:mm:ss", CultureInfo.InvariantCulture).ToString("h:mm");
                     // Update approval status in database
                     string query = "UPDATE appointment SET Archive = @archive WHERE appointmentID = @ID";
                     using (MySqlConnection connection = new MySqlConnection(connString))
@@ -197,7 +206,7 @@ namespace WebApplication1
                                 MailMessage mail = new MailMessage();
                                 mail.To.Add(email);
                                 mail.Subject = "Appointment Cancelled";
-                                mail.Body = "You have successfully cancelled your appointment. Please schedule a new appointment if you wish to see us.";
+                                mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please schedule a new appointment if you wish to see us again.";
                                 SmtpClient smtp = new SmtpClient();
                                 smtp.Send(mail);
 

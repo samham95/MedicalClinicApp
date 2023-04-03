@@ -84,7 +84,7 @@ namespace WebApplication1
 
         protected void GridView3_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+            int appointmentID = Convert.ToInt32(GridView3.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
             string query = "SELECT reportID FROM appointment WHERE appointmentID = @AID";
             string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connect = new MySqlConnection(connString);
@@ -96,15 +96,15 @@ namespace WebApplication1
             connect.Close();
             if (e.CommandName == "VIEW")
             {
-                Response.Redirect("ReportView.aspx?ReportID=" + ReportID);
+                Response.Redirect("ViewReport.aspx?ReportID=" + ReportID);
             }
         }
-        protected void Generate_button(object sender, GridViewCommandEventArgs e)
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
             if (e.CommandName == "GENERATE")
             {
-                Response.Redirect("GenerateReport.aspx?AppointmentID=" + appointmentID);
+                Response.Redirect("nurseReport.aspx?appID=" + appointmentID);
             }
         }
 
