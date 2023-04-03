@@ -46,7 +46,7 @@
         <asp:Button ID="Button1" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button1_Click" Text="Edit Personal Information" Height="51px" Width="302px" Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" />
        <asp:Button ID="Button3" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button3_Click" Text="Schedule Specialist Appointment" Height="51px" Width="388px" Font-Bold="True" Font-Overline="False" Font-Size="Medium" />
        <asp:Button ID="Button2" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button2_Click" Text="Schedule PCP Follow-Up" Height="51px" Width="293px" BorderColor="Black" Font-Bold="True" Font-Size="Medium" />
-       <asp:Button ID="Button4" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button2_Click" Text="Billing" Height="51px" Width="247px" BorderColor="Black" Font-Bold="True" Font-Size="Medium" style="margin-left: 0px" />
+       <asp:Button ID="Button4" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button4_Click" Text="Billing" Height="51px" Width="247px" BorderColor="Black" Font-Bold="True" Font-Size="Medium" style="margin-left: 0px" />
     <br />
 
         <div>
