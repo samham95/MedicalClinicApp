@@ -35,7 +35,7 @@
         }
 
         .bill-item {
-          margin-bottom: 10px;
+          margin-bottom: 20px;
         }
         .bill-total{
           font-size: 28px;
@@ -44,6 +44,8 @@
         .print-btn {
             margin-left: 0px;
         }
+
+        .pay-now-btn {}
 
     </style>
 </head>
@@ -56,7 +58,9 @@
       <a href="HomePage.aspx">Home</a>
     </div>
     <form id="form1" runat="server">
-    <h1 id="welcome" style ="font-size: 40px" runat="server"></h1>
+        <h1 style ="font-size: 32px; width: 907px;" runat="server">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
+        &nbsp;</h1>
     <asp:Panel ID="pnlBillSummary" runat="server" CssClass="bill-summary">
         <div>
             <span class="bill-title">Current Bill&nbsp; |&nbsp; Due on <asp:Label ID="lblDueDate" runat="server"></asp:Label>
@@ -76,18 +80,21 @@
             <br />
         </div>
         <div>
-            <span class="bill-item">Payments:</span> <asp:Label ID="lblpayments" runat="server" Text="-$0.00"></asp:Label>
+            <span class="bill-item">Co-Pays:</span> <asp:Label ID="lblpayments" runat="server" Text="-$0.00"></asp:Label>
             <br />
         </div>
-
+        <div>
+            <span class="bill-item">Payments:</span> <asp:Label ID="lblmanpay" runat="server" Text="-$0.00"></asp:Label>
+            <br />
+        </div>
         <div>
             <span class="bill-total">Total due:</span> <asp:Label ID="lblTotalDue" runat="server" Text="$0.00" style= "background-color: darkgray"></asp:Label>
             <br />
             <br />
         </div>
         <div>
-            <asp:Button ID="btnPayNow" runat="server" Text="Pay now" CssClass="pay-now-btn" OnClick="btnPayNow_Click" />
-            <asp:Button ID="btnPrintSummary" runat="server" Text="Print Bill Summary" CssClass="print-btn" OnClick="btnPrintSummary_Click" />
+            <asp:Button ID="btnPayNow" runat="server" Text="Pay now" CssClass="pay-now-btn" OnClick="btnPayNow_Click" Width="133px" />
+            <asp:Button ID="btnPrintSummary" runat="server" Text="Print Bill Summary" CssClass="print-btn" OnClick="btnPrintSummary_Click" Width="168px" />
             <br />
             <br />
         </div>

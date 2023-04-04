@@ -74,9 +74,16 @@
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
     </div>
-		<div class="form-container">
-           <form id="form1" runat="server">
+   <form id="form1" runat="server">
 
+     <h1 style ="font-size: 32px; width: 907px;" runat="server">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
+        &nbsp;</h1>
+
+    <h1 style = "text-align: center">Schedule your Appointment Today</h1>
+	<p style = "text-align: center">Please fill out where indicated</p>
+
+		<div class="form-container">
 			<fieldset>
 			<legend>Appointment Details</legend>
 
@@ -174,8 +181,10 @@
                     &nbsp;</p>
 	</fieldset>
                <asp:Button ID="Return" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
-    </form>
-     </div>
+    
+     </div>     
+            
+
 
             <script>
                 //Client-side jQuery to cancel form submission if required fields empty 
@@ -192,6 +201,6 @@
                     });
                 });
             </script>
-
+       </form>
 </body>
 </html>

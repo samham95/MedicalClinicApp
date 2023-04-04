@@ -42,7 +42,9 @@
     </style>
 
 </head>
-   <div class="navbar">
+
+<body style="Bold">
+    <div class="navbar">
       <a href="#">About Us</a>
       <a href="#">Contact Us</a>
       <a href="PatientLogin.aspx">Patient Login</a>
@@ -54,14 +56,12 @@
     <h1>
         Please sign in here. If you are a  patient, please instead use <a href="PatientLogin.aspx">this login wizard.</a>
     </h1>
-<body style="Bold">
-
     <br />
     <form id="form1" runat="server">
      
     <table >
         <tr>
-            <td align="left-center" colspan="2" style =" border-left">Sign In with Your Username and Password</td>
+            <td align="left-center" colspan="2" style = "text-align:left">Sign In with Your Username and Password</td>
         </tr>
         <tr>
             <td align="right" class="auto-style1">

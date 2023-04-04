@@ -13,8 +13,17 @@ namespace WebApplication1
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string patientID = (Request.QueryString["patientID"]).ToString();
-            HyperLink1.NavigateUrl = "PatientPortal.aspx?patientID=" + patientID;
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection connect = new MySqlConnection(connectionString);
+            string pat_query = "SELECT CONCAT(fname, ' ', lname) from patients WHERE patientID = @patientID";
+            MySqlCommand cmd = new MySqlCommand(pat_query, connect);
+            cmd.Parameters.AddWithValue("patientID", patientID);
+            connect.Open();
+            object result = cmd.ExecuteScalar();
+            string fullname = result.ToString();
+            connect.Close();
+            LinkButton1.Text = "Logged in as: " + fullname; 
         }
 
         protected void SUBMIT_Click(object sender, EventArgs e)
@@ -36,6 +45,13 @@ namespace WebApplication1
             command.Parameters.AddWithValue("@Address", address.Text);
 
             Response.Redirect("PatientPortal.aspx?patientID=" + patID.ToString());
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
+
         }
     }
 }

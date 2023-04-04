@@ -78,8 +78,11 @@
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
     </div>
-        <h1>Reschedule Your Appointment</h1>
-        <br />
+        <h1 style ="font-size: 32px; width: 907px;" runat="server">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
+        &nbsp;</h1>        
+    <h1 style = "text-align: center">Reschedule your Appointment Today</h1>
+	<p style = "text-align: center">Please fill out where indicated</p>
         <br />
    			<fieldset>
 			<legend>Appointment Reschedule</legend>

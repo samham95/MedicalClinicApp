@@ -76,11 +76,16 @@
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
     </div>
+		<form id="form2" runat="server">
+
+        <h1 style ="font-size: 32px; width: 907px;" runat="server">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
+        &nbsp;</h1>
+
 <h1 style = "text-align: center">Make Your Payment Today</h1>
 	<p style = "text-align: center">Please fill out where indicated</p>
 
 	<div class="form-container">
-		<form id="form2" runat="server">
 		<fieldset>
 		<legend>Payment Details</legend>
 			<div class="form-group">
@@ -136,7 +141,6 @@
                     &nbsp;</p>
           <asp:Button ID="Return" runat="server" Text="Return to Billing Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
 
-        </form>
      </div>
                 <script>
                 //Client-side jQuery to cancel form submission if required fields empty 
@@ -153,7 +157,8 @@
                     });
                 });
                 </script>
- 
+         </form>
+
 </body>
 </html>
 

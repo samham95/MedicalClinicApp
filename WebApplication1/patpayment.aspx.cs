@@ -25,11 +25,13 @@ namespace WebApplication1
             string fullname = result.ToString();
             connection.Close();
             fname.Text = fullname;
+            LinkButton1.Text = "Logged in as: " + fullname;
         }
 
         protected void Return_Click(object sender, EventArgs e)
         {
-            Response.Redirect(Request.UrlReferrer.ToString());
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatBilling.aspx?patientID=" + patientID);
         }
 
         protected void SUBMIT_Click(object sender, EventArgs e)
@@ -44,8 +46,15 @@ namespace WebApplication1
             connection.Open();
             cmd.ExecuteNonQuery();
             connection.Close();
-            Response.Redirect(Request.UrlReferrer.ToString());
+            Response.Redirect("PatBilling.aspx?patientID="+patientID);
 
+
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
 
         }
     }

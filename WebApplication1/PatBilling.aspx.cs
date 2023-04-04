@@ -33,7 +33,8 @@ namespace WebApplication1
             object result = cmd.ExecuteScalar();
             string fullname = result.ToString();
             connection.Close();
-            welcome.InnerText = "Billing - " + fullname;
+            LinkButton1.Text = "Logged in as: " + fullname;
+           
         }
 
         protected void BindData()
@@ -95,6 +96,7 @@ namespace WebApplication1
                         lblDueDate.Text = dueDate.ToString("MMM dd");
                         lblBillAmount.Text = "$" + total.ToString("F2");
                         lblInsuranceAdjustments.Text = "-$" + insuranceAdjustments.ToString("F2");
+                        lblpayments.Text = "-$" + paidAmount.ToString("F2");
                     }
                 }
                 string past_due_query = "SELECT SUM(total) - SUM(claim) - SUM(paid_amount) as past_due FROM invoice WHERE patientID = @PatientID AND CURRENT_DATE() > due_date";
@@ -110,16 +112,27 @@ namespace WebApplication1
                 {
                     past_due = Convert.ToDecimal(result);
                 }
-                lblPastDue.Text = "$" + past_due.ToString("F2");
+
 
                 string pay_query = "SELECT payment from patients where patientID = @patientID";
                 MySqlCommand pay_cmd = new MySqlCommand(pay_query, connection);
                 pay_cmd.Parameters.AddWithValue("@patientID", patientID);
                 object pay = pay_cmd.ExecuteScalar();
-                decimal paid = Convert.ToDecimal(pay) + paidAmount;
-                totalDue -= Convert.ToDecimal(pay);
-                lblpayments.Text = "-$" + paid.ToString("F2");
+                decimal paid = Convert.ToDecimal(pay);
+                totalDue -= paid;
+                lblmanpay.Text = "-$" + paid.ToString("F2");
                 lblTotalDue.Text = "$" + totalDue.ToString("F2");
+
+                if (past_due > 0)
+                {
+                    past_due -= paid;
+                    if (past_due < 0)
+                    {
+                        past_due = 0;
+                    }
+                }
+                lblPastDue.Text = "$" + past_due.ToString("F2");
+
                 connection.Close();
             }
         }
@@ -217,6 +230,10 @@ namespace WebApplication1
             Response.End();
         }
 
-
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
+        }
     }
 }

@@ -77,11 +77,17 @@
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
     </div>
-	
-    <h1>Edit your personal information</h1>
-	<p><asp:HyperLink ID="HyperLink1" runat="server">Please click here to return to your patient portal</asp:HyperLink></p>
+
+   <form id="form2" runat="server">
+    <h1 style ="font-size: 32px; width: 907px;" runat="server">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
+        &nbsp;</h1>
 	<div class="form-container">
-		<form id="form2" runat="server">
+
+    <h1 style = "text-align: center">Edit your Personal Information</h1>
+            <p style = "text-align: center">Please fill out where indicated</p>
+
+
 		<fieldset>
 		<legend>Contact Information</legend>
 			<div class="form-group">
@@ -173,8 +179,8 @@
                     });
                 });
             </script>
-            </form>
-        </div>
+            </div>
+   </form>
  
 </body>
 </html>

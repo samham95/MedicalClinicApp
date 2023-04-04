@@ -76,6 +76,9 @@
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
     </div>
+        <h1 style ="font-size: 32px; width: 907px;" runat="server">
+            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
+        &nbsp;</h1>
         <h1>Schedule a Follow-Up with Your Primary Physician</h1>
         <br />
         <br />

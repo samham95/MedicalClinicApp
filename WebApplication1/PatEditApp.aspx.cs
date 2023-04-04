@@ -16,7 +16,17 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             int appointmentID = Convert.ToInt32(Request.QueryString["appointmentID"]);
-
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection connect = new MySqlConnection(connectionString);
+            string pat_query = "SELECT CONCAT(fname, ' ', lname) from patients WHERE patientID = @patientID";
+            MySqlCommand cmd = new MySqlCommand(pat_query, connect);
+            cmd.Parameters.AddWithValue("patientID", patientID);
+            connect.Open();
+            object result = cmd.ExecuteScalar();
+            string fullname = result.ToString();
+            connect.Close();
+            LinkButton1.Text = "Logged in as: " + fullname;
             // check if selected appointment available
             if (IsPostBack)
             {
