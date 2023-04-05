@@ -40,15 +40,19 @@
           
     </style>
 
-</head>
-<body >
-        	<div class="navbar">
-      <a href="#">About Us</a>
-      <a href="#">Contact Us</a>
-      <a href="PatientLogin.aspx">Patient Login</a>
-      <a href="ProviderLogin.aspx">Provider Login</a>
-      <a href="HomePage.aspx">Home</a>
-    </div>
+<body>
+    <!-- Define the navigation bar at the top of the page -->
+    <div class="navbar">
+	  <div class="navbar-left">
+		<a href="HomePage.aspx" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+	  </div>
+	  <div class="navbar-right">
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
 
     <br />
 

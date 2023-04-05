@@ -88,27 +88,30 @@
 	</style>
 
 </head>
+<body>
+    <div class="navbar">
+	  <div class="navbar-left">
+		<a href="HomePage.aspx" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+	  </div>
+	  <div class="navbar-right">
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
 
-    <body style="height: 726px; width: 1265px; margin-left: 0px">
-        <div class="navbar">
-          <a href="#">About Us</a>
-          <a href="#">Contact Us</a>
-          <a href="PatientLogin.aspx">Patient Login</a>
-          <a href="ProviderLogin.aspx">Provider Login</a>
-          <a href="HomePage.aspx">Home</a>
-        </div>
-	    <div class="container">
-		    <header style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provider Portal Login</header>
-            <p style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="PatientLogin.aspx">Use this link if you are a patient</a></p>
-		<div class="squares-container">
-			<a href="NurseLogin.aspx">
-				<div class="square">
-					        <img src="https://imageio.forbes.com/specials-images/imageserve/619ea056b05de2285c025b70/Any-updates-on-this-patient-/960x0.jpg?format=jpg&width=960" alt="Nurse">
-            		<div class="overlay">
-						<h2 style="height: 199px; width: 527px">NURSE LOGIN</h2>
-					</div>
-				</div>
-			</a>
+    <div class="container">
+        <header>Provider Login</header>
+        <div class="squares-container">
+		    <a href="NurseLogin.aspx">
+			    <div class="square">
+				    <img src="https://imageio.forbes.com/specials-images/imageserve/619ea056b05de2285c025b70/Any-updates-on-this-patient-/960x0.jpg?format=jpg&width=960" alt="Nurse">
+            	    <div class="overlay">
+					    <h2>NURSE LOGIN</h2>
+				    </div>
+			    </div>
+		    </a>
             <a href="DoctorLogin.aspx">
 				<div class="square">
 					        <img src="https://health.gov/sites/default/files/styles/topic_card_image/public/2020-01/regular-checkups_banner.jpg?itok=2HIjcA3h" alt="Doctor">
