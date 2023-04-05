@@ -20,6 +20,7 @@
     </div>
 
     <br />
+<<<<<<< HEAD
 	<form id="form1" runat="server">
 	<div class="login-container">
 		<table class="login-table">
@@ -49,6 +50,44 @@
 					<asp:Literal ID="ErrorMessage" runat="server" EnableViewState="False"></asp:Literal>
 				</td>
 			</tr>
+=======
+    <h1>Nurse Login</h1>
+    <p>
+        Please sign in here. If you are a doctor, please instead use <a href="DoctorLogin.aspx">this login wizard.</a>
+    </p>
+    <br />
+    <form id="form1" runat="server">
+     
+    <table>
+        <tr>
+            <td align="left-center" colspan="2" style =" border-left">Sign In with Your Username and Password</td>
+        </tr>
+        <tr>
+            <td align="right" class="auto-style1">
+                <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
+                
+            </td>
+            <td class="auto-style2">
+                <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="Username_valid" runat="server"
+                    ControlToValidate="UserName"
+                    ErrorMessage="Please enter a valid username." style="color:Red;">
+                </asp:RequiredFieldValidator>
+            </td>
+        </tr>
+        <tr>
+            <td align="right">
+                <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
+            </td>
+            <td class="auto-style3">
+                <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="password_valid" runat="server"
+                    ControlToValidate="Password"
+                    ErrorMessage="Please enter a valid password." style="color:Red;">
+                </asp:RequiredFieldValidator>
+            </td>
+        </tr>
+>>>>>>> 7d3053af6d7f8daf75c72a6e2f3d9e50217fe9b0
 
 			<!-- Button for Submitting Form -->
 			<tr>
