@@ -44,16 +44,22 @@
 
 
     </style>
+	<link href="navbar.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="navbar">
-      <a href="#">About Us</a>
-      <a href="#">Contact Us</a>
-      <a href="PatientLogin.aspx">Patient Login</a>
-      <a href="ProviderLogin.aspx">Provider Login</a>
-      <a href="HomePage.aspx">Home</a>
-    </div>
+	  <div class="navbar-right">
+		<a href="#" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
     <form id="form1" runat="server">
+        <h1 style ="font-size: 32px; width: 907px;" runat="server">
+            &nbsp;</h1>
         <h1 style ="font-size: 32px; width: 907px;" runat="server">
             <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
         &nbsp;</h1>
@@ -97,7 +103,7 @@
     </asp:Panel>
 
         <h1>Invoice Summary</h1>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
         <Columns>
             <asp:BoundField DataField="invoiceID" HeaderText="Invoice ID" />
             <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:c}" />

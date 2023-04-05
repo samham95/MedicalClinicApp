@@ -420,6 +420,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="LoginStyle.css" />
+    <Content Include="navbar.css" />
     <Content Include="NewAppointment.aspx" />
     <Content Include="NewOffice.aspx" />
     <Content Include="NewPersonnel.aspx" />

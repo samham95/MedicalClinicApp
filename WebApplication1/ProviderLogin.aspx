@@ -5,24 +5,7 @@
 <head>
 	<title>ProviderLogin</title>
 	<style>
-                /* Styles for the navigation bar */
-          .navbar {
-            background-color: #333;
-            overflow: hidden;
-                    height: 48px;
-                }
-          .navbar a {
-            float: right;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-          }
-          .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-          }
+
         header {
             background-color: white;
             color: black;
@@ -86,17 +69,23 @@
         }
 
 	</style>
+     <link href="LoginStyle.css" rel="stylesheet" />
+	<link href="navbar.css" rel="stylesheet" />
 
 </head>
 
     <body style="height: 726px; width: 1265px; margin-left: 0px">
-        <div class="navbar">
-          <a href="#">About Us</a>
-          <a href="#">Contact Us</a>
-          <a href="PatientLogin.aspx">Patient Login</a>
-          <a href="ProviderLogin.aspx">Provider Login</a>
-          <a href="HomePage.aspx">Home</a>
-        </div>
+
+    <!-- Define the navigation bar at the top of the page -->
+    <div class="navbar">
+	  <div class="navbar-right">
+		<a href="#" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
 	    <div class="container">
 		    <header style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provider Portal Login</header>
             <p style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="PatientLogin.aspx">Use this link if you are a patient</a></p>
