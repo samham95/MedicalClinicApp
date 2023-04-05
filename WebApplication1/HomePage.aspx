@@ -34,36 +34,33 @@
           top: 80px;
       }
 
-      .text{
-          background-image: url("https://c0.wallpaperflare.com/preview/4/544/846/medical-local-doctor-medicine.jpg");
-          background-size: cover;
+      .header {
+          position: relative;
           height: 100vh;
           text-align: center;
           color: black;
           font-family: monospace;
           font-size: 40px;
           font-family: fantasy;
-
         }
-          .header {
+
+      .header::before {
+          content: "";
           background-image: url("https://c0.wallpaperflare.com/preview/4/544/846/medical-local-doctor-medicine.jpg");
           background-size: cover;
-          height: 100vh;
-          text-align: center;
-          color: black;
-          font-family: monospace;
-          font-size: 40px;
-          font-family: fantasy;
-
-        }
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 0px;
+          filter: blur(8px);
+          -webkit-filter: blur(8px);
+      }
 
 
         .header img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-           filter: blur(8px);
-           -webkit-filter: blur(8px);
         }
 
 
@@ -152,7 +149,7 @@
       <a href="HomePage.aspx">Home</a>
       <left>Dr. Uma Medical Clinic</left>
     </div>
-  <div class="text">
+  <div class="header">
     <div class="container">
       <h1>Dr.Uma Clinic </h1>
       <p>Your Health Journey Start Here!<p>
