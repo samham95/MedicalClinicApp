@@ -41,11 +41,7 @@
           font-size: 28px;
         }
 
-        .print-btn {
-            margin-left: 0px;
-        }
 
-        .pay-now-btn {}
 
     </style>
 </head>
@@ -88,7 +84,7 @@
             <br />
         </div>
         <div>
-            <span class="bill-total">Total due:</span> <asp:Label ID="lblTotalDue" runat="server" Text="$0.00" style= "background-color: darkgray"></asp:Label>
+            <span class="bill-total" style ="color:darkred">Total due:</span> <asp:Label ID="lblTotalDue" runat="server" Text="$0.00" style= "background-color: darkgray"></asp:Label>
             <br />
             <br />
         </div>
@@ -101,14 +97,15 @@
     </asp:Panel>
 
         <h1>Invoice Summary</h1>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
         <Columns>
             <asp:BoundField DataField="invoiceID" HeaderText="Invoice ID" />
             <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:c}" />
             <asp:BoundField DataField="claim" HeaderText="Claim Amount" DataFormatString="{0:c}" />
             <asp:BoundField DataField="paid_amount" HeaderText="Paid Amount" DataFormatString="{0:c}" />
             <asp:BoundField DataField="due_date" HeaderText="Due Date" DataFormatString="{0:d}" />
-            <asp:BoundField DataField="reportID" HeaderText="Report ID" />
+            <asp:BoundField DataField="reportID" HeaderText="Report ID" Visible="false" />
+            <asp:ButtonField ButtonType ="button" HeaderText="Report" Text="VIEW" CommandName="viewReport" />
         </Columns>
         <FooterStyle BackColor="#CCCCCC" />
         <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />

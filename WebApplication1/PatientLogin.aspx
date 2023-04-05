@@ -51,9 +51,9 @@
     </div>
 
     <br />
-
-<h1>Please sign in here. If you are a new patient, please fill out the <a href="NewPatient.aspx">new patient form here.</a>
-</h1>
+    <h1>Patient Login</h1>
+<p>Please sign in here. New patient? Please fill out the <a href="NewPatient.aspx">new patient form here.</a>
+</p>
     <br />
     <form id="form1" runat="server">
      

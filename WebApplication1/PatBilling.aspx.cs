@@ -235,5 +235,15 @@ namespace WebApplication1
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
             Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
         }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int reportID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[5].Text);
+            if (e.CommandName == "viewReport")
+            {
+                Response.Redirect("ReportView.aspx?reportID=" + reportID);
+            } 
+
+        }
     }
 }

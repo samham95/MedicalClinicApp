@@ -53,9 +53,10 @@
     </div>
 
     <br />
-    <h1>
+    <h1>Nurse Login</h1>
+    <p>
         Please sign in here. If you are a doctor, please instead use <a href="DoctorLogin.aspx">this login wizard.</a>
-    </h1>
+    </p>
     <br />
     <form id="form1" runat="server">
      
