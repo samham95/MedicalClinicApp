@@ -52,8 +52,8 @@
           height: 100%;
           position: absolute;
           left: 0px;
-          filter: blur(8px);
-          -webkit-filter: blur(8px);
+          filter: blur(2px);
+          -webkit-filter: blur(2px);
       }
 
 

@@ -87,8 +87,10 @@
 	  </div>
 	</div>
 	    <div class="container">
-		    <header style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provider Portal Login</header>
-            <p style="margin-left: 0px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="PatientLogin.aspx">Use this link if you are a patient</a></p>
+            <p style="margin-left: 0px">&nbsp;</p>
+            <p style="margin-left: 0px">&nbsp;</p>
+            <h  style="font-size: 48px" >PROVIDER PORTAL LOGIN</h>
+            <p style="margin-left: 0px">&nbsp;</p>
 		<div class="squares-container">
 			<a href="NurseLogin.aspx">
 				<div class="square">

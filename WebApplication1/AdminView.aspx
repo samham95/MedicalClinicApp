@@ -55,7 +55,7 @@
     <!-- Define the navigation bar at the top of the page -->
     <div class="navbar">
 	  <div class="navbar-right">
-		<a href="#" class="nav-item">Home</a>
+		<a href="HomePage.aspx" class="nav-item">Home</a>
 		<a href="#" class="nav-item">About Us</a>
 		<a href="#" class="nav-item">Contact Us</a>
 		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
@@ -72,11 +72,11 @@
             <div class="personnel-box" style="text-align: center; margin-bottom:2cm; margin-top:1px">
                 <div style="display: inline-block;">
                     <div class="image-box">
-                        <a href="#" onclick="addPersonnel()"><img src="https://cdn.icon-icons.com/icons2/1572/PNG/512/3592854-add-user-business-man-employee-general-human-member-office_107767.png" alt="Add Personnel"></a>
+                        <a href="NewPersonnel.aspx" onclick="addPersonnel()"><img src="https://cdn.icon-icons.com/icons2/1572/PNG/512/3592854-add-user-business-man-employee-general-human-member-office_107767.png" alt="Add Personnel"></a>
                         <div class="image-text">Add Personnel</div>
                     </div>
                     <div class="image-box">
-                        <a href="#" onclick="removePersonnel()"><img src="https://cdn.icon-icons.com/icons2/1572/PNG/512/3592826-employee-human-member-office-remove-remove-user-user_107791.png" alt="Remove Personnel"></a>
+                        <a href="RemPersonnel.aspx" onclick="removePersonnel()"><img src="https://cdn.icon-icons.com/icons2/1572/PNG/512/3592826-employee-human-member-office-remove-remove-user-user_107791.png" alt="Remove Personnel"></a>
                         <div class="image-text">Remove Personnel</div>
                     </div>
                 </div>
@@ -86,11 +86,11 @@
             <div class="office-box" style="text-align: center; margin-bottom:2cm; margin-top:1px">
                 <div style="display: inline-block;">
                     <div class="image-box">
-                        <a href="#" onclick="addOffice()"><img src="https://cdn-icons-png.flaticon.com/512/15/15735.png?w=740&t=st=1680571821~exp=1680572421~hmac=d4771d192ae9b4f18c929417ca097612ef912ad30f2fb9be3307b82fe6a636b0" alt="Add Office"></a>
+                        <a href="NewOffice.aspx" onclick="addOffice()"><img src="https://cdn-icons-png.flaticon.com/512/15/15735.png?w=740&t=st=1680571821~exp=1680572421~hmac=d4771d192ae9b4f18c929417ca097612ef912ad30f2fb9be3307b82fe6a636b0" alt="Add Office"></a>
                         <div class="image-text">Add Office</div>
                     </div>
                     <div class="image-box">
-                        <a href="#" onclick="removeOffice()"><img src="https://cdn-icons-png.flaticon.com/512/15/15762.png?w=740&t=st=1680571689~exp=1680572289~hmac=b8c84a454135ecb86dec775625e8e383e30e91314cccf9814d2687b27cfc7821" alt="Remove Office"></a>
+                        <a href="RemOffice.aspx" onclick="removeOffice()"><img src="https://cdn-icons-png.flaticon.com/512/15/15762.png?w=740&t=st=1680571689~exp=1680572289~hmac=b8c84a454135ecb86dec775625e8e383e30e91314cccf9814d2687b27cfc7821" alt="Remove Office"></a>
                         <div class="image-text">Remove Office</div>
                     </div>
                 </div>
