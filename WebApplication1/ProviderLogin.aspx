@@ -4,43 +4,33 @@
 <html>
 <head>
 	<title>ProviderLogin</title>
+    <link href="LoginStyle.css" rel="stylesheet"/>
+    <link href="navbar.css" rel="stylesheet"/>
 	<style>
-                /* Styles for the navigation bar */
-          .navbar {
-            background-color: #333;
-            overflow: hidden;
-                    height: 48px;
-                }
-          .navbar a {
-            float: right;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-          }
-          .navbar a:hover {
-            background-color: #ddd;
-            color: black;
-          }
         header {
-            background-color: white;
             color: black;
-            padding: 0px;
             text-align: center;
             font-size: 50px;
             font-weight: bold;
+            margin-bottom: 50px;
+        }
+        h2 {
         }
         .container {
-            margin-top: 50px;
-            text-align: center;
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0 auto;
+            margin-top: -50px;
         }
-
         .squares-container {
             display: flex;
             justify-content: center;
+            align-items: center;
         }
-
         .square {
             position: relative;
             width: 478px;
@@ -50,25 +40,23 @@
             top: 1px;
             left: 20px;
         }
-
-        .square img {
-            width: 100%;
-            height: 101%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            margin-left: 0px;
-            margin-right: 13px;
-            margin-top: 1px;
-        }
-
-        .square:hover img {
-            transform: scale(1.1);
-        }
+            .square img {
+                width: 100%;
+                height: 101%;
+                object-fit: cover;
+                transition: transform 0.5s ease;
+                margin-left: 0px;
+                margin-right: 13px;
+                margin-top: 1px;
+            }
+                .square:hover img {
+                    transform: scale(1.1);
+                }
         
         .overlay {
             position: absolute;
             top: 50%;
-            left: 56%;
+            left: 50%;
             transform: translate(-50%, -50%);
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
@@ -80,26 +68,21 @@
             height: 225px;
             width: 572px;
         }
-
         .square:hover .overlay {
             opacity: 1;
         }
-
 	</style>
 
 </head>
 <body>
-    <div class="navbar">
-	  <div class="navbar-left">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-	  </div>
-	  <div class="navbar-right">
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
+    <!-- Define the navigation bar at the top of the page -->
+	<div class="navbar">
+        <a href="HomePage.aspx">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="PatientLogin.aspx">Patient Login</a>
+        <a href="ProviderLogin.aspx">Provider Login</a>
+    </div>
 
     <div class="container">
         <header>Provider Login</header>
@@ -113,13 +96,13 @@
 			    </div>
 		    </a>
             <a href="DoctorLogin.aspx">
-				<div class="square">
-					        <img src="https://health.gov/sites/default/files/styles/topic_card_image/public/2020-01/regular-checkups_banner.jpg?itok=2HIjcA3h" alt="Doctor">
-					<div class="overlay">
-						<h2 style="height: 203px; width: 521px">DOCTOR LOGIN</h2>
-					</div>
-				</div>
-			</a>
+			    <div class="square">
+		            <img src="https://health.gov/sites/default/files/styles/topic_card_image/public/2020-01/regular-checkups_banner.jpg?itok=2HIjcA3h" alt="Doctor">
+			        <div class="overlay">
+				        <h2>DOCTOR LOGIN</h2>
+				    </div>
+			    </div>
+		    </a>
 		</div>
 	</div>
 </body>
