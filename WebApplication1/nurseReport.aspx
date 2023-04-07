@@ -34,19 +34,33 @@
 
             <label for="patientCondition">
             <br />
-            Patient Condition/Diagnosis: <br />
-
-            <label for="patientSymptoms">
+            Patient Condition/Diagnosis: 
+             <br />
+            </label>
             <asp:TextBox ID="diagnosisBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="72px" MaxLength="200" TextMode="MultiLine" Width="428px"></asp:TextBox>
+            
+            <label for="patientSymptoms">
+            <br />
+            <br />
+            Temperature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Pressure:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Heart Rate:
+            <br />
+
+             <div style="display:inline">
+                  <asp:TextBox ID="temperatureBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="pressureBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="heartrateBox" runat="server" Width="86px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+             </div>
+            
             <br />
             <br />
             Patient Symptoms:</label><br />
-
             <asp:TextBox ID="symptomsBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="57px" MaxLength="200" TextMode="MultiLine" Width="420px"></asp:TextBox>
 &nbsp;<br />
             Patient Prescription:<br />
             <asp:TextBox ID="prescriptionBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="57px" MaxLength="200" TextMode="MultiLine" Width="420px"></asp:TextBox>
             <br />
+            <br />
+            &nbsp;<asp:CheckBox ID="evaluationCheckbox" runat="server" BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" BorderWidth="2px" Text="Requires Further Evaluation/Tests" />
             <br />
             <br />
             Appointment Total:

@@ -60,6 +60,33 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox diagnosisBox;
 
         /// <summary>
+        /// temperatureBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox temperatureBox;
+
+        /// <summary>
+        /// pressureBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox pressureBox;
+
+        /// <summary>
+        /// heartrateBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox heartrateBox;
+
+        /// <summary>
         /// symptomsBox control.
         /// </summary>
         /// <remarks>
@@ -76,6 +103,15 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox prescriptionBox;
+
+        /// <summary>
+        /// evaluationCheckbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox evaluationCheckbox;
 
         /// <summary>
         /// apptTotalBox control.
