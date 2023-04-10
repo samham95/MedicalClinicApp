@@ -203,15 +203,15 @@ namespace WebApplication1
 
             // Add invoice list section
             // Add invoice list section
-            var table = new PdfPTable(GridView1.Columns.Count);
-            for (int i = 0; i < GridView1.Columns.Count; i++)
+            var table = new PdfPTable(GridView1.Columns.Count-2);
+            for (int i = 0; i < GridView1.Columns.Count-2; i++)
             {
                 var cell = new PdfPCell(new Phrase(GridView1.Columns[i].HeaderText));
                 table.AddCell(cell);
             }
             for (int i = 0; i < GridView1.Rows.Count; i++)
             {
-                for (int j = 0; j < GridView1.Columns.Count; j++)
+                for (int j = 0; j < GridView1.Columns.Count-2; j++)
                 {
                     var cell = new PdfPCell(new Phrase(GridView1.Rows[i].Cells[j].Text));
                     table.AddCell(cell);

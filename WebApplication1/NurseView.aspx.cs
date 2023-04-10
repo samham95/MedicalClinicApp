@@ -59,7 +59,7 @@ namespace WebApplication1
 
 
             // Retrieve data from database into past appointments 
-            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID , appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse WHERE NID = @NID AND appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointmentDate < current_date() AND archive = True AND PATIENT_CONFIRM = true ORDER BY appointmentDate DESC";
+            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID , appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse WHERE NID = @NID AND appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointmentDate <= current_date() AND archive = True AND PATIENT_CONFIRM = true ORDER BY appointmentDate DESC";
             DataTable dt3 = new DataTable();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -94,17 +94,20 @@ namespace WebApplication1
             object result = cmd.ExecuteScalar();
             int ReportID = Convert.ToInt32(result);
             connect.Close();
+            int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
+
             if (e.CommandName == "VIEW")
             {
-                Response.Redirect("ViewReport.aspx?ReportID=" + ReportID);
+                Response.Redirect("ReportView.aspx?ReportID=" + ReportID+"&nurseID="+nurseID);
             }
         }
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
             int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
             if (e.CommandName == "GENERATE")
             {
-                Response.Redirect("nurseReport.aspx?appID=" + appointmentID);
+                Response.Redirect("nurseReport.aspx?appID=" + appointmentID + "&NID=" + nurseID);
             }
         }
 

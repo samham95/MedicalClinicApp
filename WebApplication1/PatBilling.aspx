@@ -60,37 +60,48 @@
     <form id="form1" runat="server">
         <h1 style ="font-size: 32px; width: 907px;" runat="server">
             &nbsp;</h1>
-        <h1 style ="font-size: 32px; width: 907px;" runat="server">
+        <p runat="server">
             <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
-        &nbsp;</h1>
+        &nbsp;</p>
     <asp:Panel ID="pnlBillSummary" runat="server" CssClass="bill-summary">
         <div>
             <span class="bill-title">Current Bill&nbsp; |&nbsp; Due on <asp:Label ID="lblDueDate" runat="server"></asp:Label>
-            <br />
             </span>
+            <hr style="color: #000000" />
+
         </div>
         <div>
             <span class="bill-item">Total past due:</span> <asp:Label ID="lblPastDue" runat="server" Text="$0.00"></asp:Label>
             <br />
         </div>
+        <hr style="color: #000000" />
+
         <div>
             <span class="bill-item">Bill amount:</span> <asp:Label ID="lblBillAmount" runat="server" Text="$0.00"></asp:Label>
             <br />
         </div>
+        <hr style="color: #000000" />
+
         <div>
             <span class="bill-item">Insurance Adjustments:</span> <asp:Label ID="lblInsuranceAdjustments" runat="server" Text="-$0.00"></asp:Label>
             <br />
         </div>
+        <hr style="color: #000000" />
+
         <div>
             <span class="bill-item">Co-Pays:</span> <asp:Label ID="lblpayments" runat="server" Text="-$0.00"></asp:Label>
             <br />
         </div>
+        <hr style="color: #000000" />
+
         <div>
             <span class="bill-item">Payments:</span> <asp:Label ID="lblmanpay" runat="server" Text="-$0.00"></asp:Label>
             <br />
         </div>
+        <hr style="color: #000000" />
+
         <div>
-            <span class="bill-total" style ="color:darkred">Total due:</span> <asp:Label ID="lblTotalDue" runat="server" Text="$0.00" style= "background-color: darkgray"></asp:Label>
+            <span class="bill-total" style ="color:darkred">Total due:</span> <asp:Label ID="lblTotalDue" runat="server" Text="$0.00" style= "color:darkred"></asp:Label>
             <br />
             <br />
         </div>

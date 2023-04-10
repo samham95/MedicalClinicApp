@@ -1,20 +1,34 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminReportsaspx.aspx.cs" Inherits="WebApplication1.AdminReportsaspx" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminReports.aspx.cs" Inherits="WebApplication1.AdminReportsaspx" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
+    <title>Admin Reports</title>
 </head>
 <body>
+    <!-- Define the navigation bar at the top of the page -->
+    <div class="navbar">
+	  <div class="navbar-right">
+		<a href="HomePage.aspx" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
+    <br />
+    <br />
+    <br />
     <form id="form1" runat="server">
-               <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body">
-                            <h1 style="margin-left: 0px">Generate Report</h1>
-                            <p>
-&nbsp;Please choose where indicated</p>
-                            <div class="form-group">
+               <div role="document">
+                   <h1>Generate Report</h1>
+                   <p>Please choose where indicated</p>
+                    <div class="form-container">
+                        <div>
+                            <div>
                                 <br />
                                 <label for="jobtype">
                                 Choose Report Type:</label>&nbsp;
@@ -33,6 +47,9 @@
                         </div>
                     </div>
                 </div>
+                    <div>
+                <asp:Button ID="exit" runat="server" OnClick="ButtonExit_Click" Text="Return to Admin Page"/>
+            </div>
 
             <!-- Adding scripts to use bootstrap -->
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

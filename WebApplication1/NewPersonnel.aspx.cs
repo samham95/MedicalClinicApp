@@ -10,12 +10,14 @@ namespace WebApplication1
 {
     public partial class NewPersonnel : System.Web.UI.Page
     {
+
+        private string adminID;
         protected void Page_Load(object sender, EventArgs e)
         {
             dob.Attributes.Add("placeholder", "yyyy-mm-dd");
             dob.Attributes.Add("type", "date");
             dob.Attributes.Add("onkeydown", "return false");
-            WelcomeHeader.InnerText = "Welcome, Administrator!";
+            adminID = Request.QueryString["adminID"];
 
         }
         protected void SUBMIT_Click_addPer(object sender, EventArgs e)
@@ -93,7 +95,7 @@ namespace WebApplication1
         }
         protected void ButtonExit_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AdminView.aspx?AdminID=");//doesn't have + adminId in url
+            Response.Redirect("AdminView.aspx?adminID=" + adminID);
         }
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {

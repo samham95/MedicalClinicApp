@@ -105,13 +105,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox prescriptionBox;
 
         /// <summary>
-        /// evaluationCheckbox control.
+        /// evalBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox evaluationCheckbox;
+        protected global::System.Web.UI.WebControls.TextBox evalBox;
 
         /// <summary>
         /// apptTotalBox control.
@@ -130,6 +130,15 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox insuranceCovBox;
+
+        /// <summary>
+        /// copayBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox copayBox;
 
         /// <summary>
         /// returnBttn control.

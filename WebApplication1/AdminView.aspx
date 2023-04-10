@@ -4,50 +4,50 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head runat="server">i
     <link href="navbar.css" rel="stylesheet" />
     <title>Admin View</title>
     <style>
-        body{
-            background-image: url(https://img.freepik.com/free-photo/blur-hospital-clinic-interior_74190-5207.jpg?w=996&t=st=1680656377~exp=1680656977~hmac=2cb637b5fedbcdd2c55e716be17f7dad5159d4ded0c4bca6e93c034b8fd1864b);
+        body {
+            background-image: url(https://img.freepik.com/free-photo/blur-hospital_1203-7972.jpg?w=740&t=st=1680371876~exp=1680372476~hmac=b046d30cd6532065742f9ff17312d9ab44b28023c50553b2ee18c66f64c1cb86);
             background-repeat: no-repeat;
             background-size: cover;
         }
-        h1 {
-          font-family: 'Open Sans', sans-serif;
-          font-weight: bold;
-          margin-top: 40px;
-          margin-left: 20px;
+        h1{
+            font-family: 'Open Sans', sans-serif;
+            margin: 50px 50px;
         }
-        a img {
-            width: 100px;
-            height: 100px;
-        }
-        .personnel-box a {
-          display: block;
-        }
+        .custom-button {
+            background-repeat: no-repeat;
+            
+            background-color: #f2f2f2;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border: 1px solid black;
+            border-radius: 10px;
 
-        .office-box a {
-          display: block;
+            background-position: center top;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            font-size: 10px;
+            font-weight: bold;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            font-size: 16px;
+            margin: 20px 10px;
+            cursor: pointer;
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
         }
-
-        .image-box {
-          display: inline-block;
-          text-align: center;
-          margin: 0 10px;
-          border: 1px solid #ccc;
-          padding: 10px;
-          border-radius: 10px;
-          background-color: #fff;
-          width: 150px; /* set the width of the box */
-          height: 150px; /* set the height of the box */
+    
+        /* On hover, darken the button */
+        .custom-button:hover {
+            background-color: darkgrey;
         }
-
-        .image-text {
-          font-family: 'Open Sans', sans-serif;
-          margin-top: 10px;
-          font-weight: bold;
-        }
+        
     </style>
     </head>
 <body>
@@ -63,36 +63,22 @@
 	  </div>
 	</div>
     <br />
-
     <form id="form1" runat="server">
-        <h1 id="welcomeHeader" runat="server"> </h1>
-        <br />
-        <br />
-        <div class="personnel-container">
-            <div class="personnel-box" style="text-align: center; margin-bottom:2cm; margin-top:1px">
-                <div style="display: inline-block;">
-                    <div class="image-box">
-                        <a href="NewPersonnel.aspx" onclick="addPersonnel()"><img src="https://cdn.icon-icons.com/icons2/1572/PNG/512/3592854-add-user-business-man-employee-general-human-member-office_107767.png" alt="Add Personnel"></a>
-                        <div class="image-text">Add Personnel</div>
-                    </div>
-                    <div class="image-box">
-                        <a href="RemPersonnel.aspx" onclick="removePersonnel()"><img src="https://cdn.icon-icons.com/icons2/1572/PNG/512/3592826-employee-human-member-office-remove-remove-user-user_107791.png" alt="Remove Personnel"></a>
-                        <div class="image-text">Remove Personnel</div>
-                    </div>
+        <h1>Welcome, Administrator!</h1>
+
+        <div style="display: flex; justify-content: center; align-items: center; height: 70vh;">
+            <div style="display: flex; flex-direction: row;">
+                <div>
+                    <asp:Button ID="ButtonAP" runat="server" Text="Add Personnel" OnClick="ButtonAP_Click" CssClass="custom-button" style="background-size: 80% 80%; padding: 10px; background-image: url(https://cdn.icon-icons.com/icons2/1572/PNG/512/3592854-add-user-business-man-employee-general-human-member-office_107767.png); " />
+                    <asp:Button ID="ButtonAO" runat="server" Text="Add Office" OnClick="ButtonAO_Click" CssClass="custom-button"  style="background-size: 80% 80%; padding: 10px; background-image: url(https://cdn-icons-png.flaticon.com/512/15/15735.png?w=740&t=st=1680571821~exp=1680572421~hmac=d4771d192ae9b4f18c929417ca097612ef912ad30f2fb9be3307b82fe6a636b0);"/>
                 </div>
-            </div>
-        </div>
-        <div class="office-container">
-            <div class="office-box" style="text-align: center; margin-bottom:2cm; margin-top:1px">
-                <div style="display: inline-block;">
-                    <div class="image-box">
-                        <a href="NewOffice.aspx" onclick="addOffice()"><img src="https://cdn-icons-png.flaticon.com/512/15/15735.png?w=740&t=st=1680571821~exp=1680572421~hmac=d4771d192ae9b4f18c929417ca097612ef912ad30f2fb9be3307b82fe6a636b0" alt="Add Office"></a>
-                        <div class="image-text">Add Office</div>
-                    </div>
-                    <div class="image-box">
-                        <a href="RemOffice.aspx" onclick="removeOffice()"><img src="https://cdn-icons-png.flaticon.com/512/15/15762.png?w=740&t=st=1680571689~exp=1680572289~hmac=b8c84a454135ecb86dec775625e8e383e30e91314cccf9814d2687b27cfc7821" alt="Remove Office"></a>
-                        <div class="image-text">Remove Office</div>
-                    </div>
+
+                <div>
+                    <asp:Button ID="ButtonRP" runat="server" Text="Remove Personnel" OnClick="ButtonRP_Click" CssClass="custom-button" style="background-size: 80% 80%; padding: 10px; background-image: url(https://cdn.icon-icons.com/icons2/1572/PNG/512/3592826-employee-human-member-office-remove-remove-user-user_107791.png);"/>
+                    <asp:Button ID="ButtonRO" runat="server" Text="Remove Office" OnClick="ButtonRO_Click" CssClass="custom-button"  style="background-size: 80% 80%; padding: 10px; background-image: url(https://cdn-icons-png.flaticon.com/512/15/15762.png?w=740&t=st=1680571689~exp=1680572289~hmac=b8c84a454135ecb86dec775625e8e383e30e91314cccf9814d2687b27cfc7821);"/>
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+                    <asp:Button ID="Report" runat="server" Text="Generate Report" OnClick="Report_Click" CssClass="custom-button"  style="background-size: 70% 70%; padding: 10px; background-position: center 20px; background-image: url(https://cdn-icons-png.flaticon.com/512/38/38817.png?w=740&t=st=1680915029~exp=1680915629~hmac=670e5463286b79d12c9af5e1f3f83f203df3d06b45a11f0abb303a52aa1a107d)"/>
                 </div>
             </div>
         </div>

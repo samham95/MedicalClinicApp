@@ -68,7 +68,7 @@
 	</div>
         <h1 style ="font-size: 32px; width: 907px;" runat="server">
         &nbsp;</h1>
-        <p style ="font-size: 32px; width: 907px;" runat="server">
+        <p  runat="server">
             <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
         </p>        
     <h1 style = "text-align: center">Reschedule your Appointment Today</h1>

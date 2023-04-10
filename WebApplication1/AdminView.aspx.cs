@@ -1,46 +1,42 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
-using System.IO;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.html.simpleparser;
 
 namespace WebApplication1
 {
     public partial class AdminView : System.Web.UI.Page
     {
+        private string adminID;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            welcomeHeader.InnerText = "Welcome, Administrator!";
-
+            adminID = Request.QueryString["adminID"];
         }
 
         protected void ButtonAP_Click(object sender, EventArgs e)
         {
-            Response.Redirect("NewPersonnel.aspx?");
+            Response.Redirect("NewPersonnel.aspx?adminID=" + adminID);
         }
         protected void ButtonRP_Click(object sender, EventArgs e)
         {
-            Response.Redirect("RemPersonnel.aspx?");
+            Response.Redirect("RemPersonnel.aspx?adminID=" + adminID);
         }
         protected void ButtonAO_Click(object sender, EventArgs e)
         {
-            Response.Redirect("NewOffice.aspx?");
+            Response.Redirect("NewOffice.aspx?adminID=" + adminID);
         }
         protected void ButtonRO_Click(object sender, EventArgs e)
         {
-            Response.Redirect("RemOffice.aspx?");
+            Response.Redirect("RemOffice.aspx?adminID=" + adminID);
         }
 
         protected void Report_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AdminReports.aspx?adminID=");
+            Response.Redirect("AdminReports.aspx?adminID=" + adminID);
         }
     }
 }

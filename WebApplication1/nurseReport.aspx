@@ -15,6 +15,10 @@
     <form id="patientForm" runat="server">
         <div style="font-weight: bold">
             <!--<h1>Report for spiderman on 3/28/23</h1> --> <!-- placeholder header -->
+               <p> <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
+</p>
+    <br />
+
             <h1 id="reportHeader" runat="server"> </h1>
             <hr style="color: #000000" />
             <label for="patientName" style="font-weight: bold">
@@ -63,6 +67,12 @@
             &nbsp;<asp:CheckBox ID="evaluationCheckbox" runat="server" BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" BorderWidth="2px" Text="Requires Further Evaluation/Tests" />
             <br />
             <br />
+            Follow-up evaluation:<br />
+&nbsp;<asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSource1" DataTextField="test" DataValueField="code" BackColor="#CCCCCC"></asp:DropDownList>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:medicalclinicdbConnectionString %>" ProviderName="<%$ ConnectionStrings:medicalclinicdbConnectionString.ProviderName %>" SelectCommand="SELECT * FROM evaluation;"></asp:SqlDataSource>
+            <br />
+            <br />
+
             Appointment Total:
             <br />
             <asp:TextBox ID="apptTotalBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="19px" Width="70px" Wrap="False"></asp:TextBox>
@@ -71,7 +81,10 @@
             Insurance Coverage:<br />
             <asp:TextBox ID="insuranceCovBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="16px" Width="79px"></asp:TextBox>
             <br />
-
+                        <br />
+            Co-Payment:<br />
+            <asp:TextBox ID="copayBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="16px" Width="79px"></asp:TextBox>
+            <br />
             &nbsp;</div>
         <p>
             <asp:Button ID="submitBttn" runat="server" BackColor="#003300" BorderColor="#009933" BorderWidth="2px" Font-Bold="True" ForeColor="White" Height="37px" OnClick="submitBttn_Click" Text="Submit Report" Width="251px" />

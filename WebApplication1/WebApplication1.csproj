@@ -399,6 +399,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLogin.aspx" />
+    <Content Include="AdminPages.css" />
     <Content Include="AdminReports.aspx" />
     <Content Include="AdminView.aspx" />
     <Content Include="Content\bootstrap-grid.css" />

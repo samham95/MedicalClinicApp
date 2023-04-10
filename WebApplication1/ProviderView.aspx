@@ -132,7 +132,7 @@
                     <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" />
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:ButtonField ButtonType="button" Text="VIEW" CommandName="AppReport" HeaderText="REPORT" ControlStyle-BackColor="">
+                    <asp:ButtonField ButtonType="button" Text="VIEW" CommandName="VIEW" HeaderText="REPORT" ControlStyle-BackColor="">
 <ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
 

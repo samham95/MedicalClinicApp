@@ -105,7 +105,7 @@ namespace WebApplication1
             DataTable dt2 = new DataTable();
 
             // Retrieve data from database into previous appointment grid
-            string query2 = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointmentTime as Time, appointmentDate as Date, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @PatientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < current_date() ORDER BY appointmentDate ASC";
+            string query2 = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointmentTime as Time, appointmentDate as Date, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @PatientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND PATIENT_CONFIRM = true AND Approval = true AND appointmentDate <= current_date() ORDER BY appointmentDate ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query2, connection))
@@ -240,7 +240,8 @@ namespace WebApplication1
         }
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            int appointmentID = Convert.ToInt32(GridView2.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
             string query = "SELECT reportID FROM appointment WHERE appointmentID = @AID";
             string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connect = new MySqlConnection(connString);
@@ -248,12 +249,15 @@ namespace WebApplication1
             MySqlCommand cmd = new MySqlCommand(query, connect);
             cmd.Parameters.AddWithValue("@AID", appointmentID);
             object result = cmd.ExecuteScalar();
-            int ReportID = Convert.ToInt32(result);
-            connect.Close();
-            if (e.CommandName == "VIEW")
-            {
-                Response.Redirect("ReportView.aspx?ReportID=" + ReportID);
-            }
+
+                int ReportID = Convert.ToInt32(result);
+                connect.Close();
+
+                if (e.CommandName == "ViewReport")
+                {
+                    Response.Redirect("ReportView.aspx?ReportID=" + ReportID + "&patientID=" + patientID);
+                }
+
         }
 
 

@@ -10,9 +10,11 @@ namespace WebApplication1
 {
     public partial class RemOffice : System.Web.UI.Page
     {
+
+        private string adminID;
         protected void Page_Load(object sender, EventArgs e)
         {
-            WelcomeHeader.InnerText = "Welcome, Administrator!";
+            adminID = Request.QueryString["adminID"];
         }
         protected void SUBMIT_Click_RemOff(object sender, EventArgs e)
         {
@@ -43,7 +45,7 @@ namespace WebApplication1
         }
         protected void ButtonExit_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AdminView.aspx?AdminID=");//doesn't have + adminId in url
+            Response.Redirect("AdminView.aspx?adminID=" + adminID);
         }
         protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
         {

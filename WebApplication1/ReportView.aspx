@@ -10,9 +10,21 @@
             width: 521px;
         }
     </style>
+    	<link href="navbar.css" rel="stylesheet" />
 </head>
 <body>
     <form id="patientForm" runat="server">
+            <div class="navbar">
+	  <div class="navbar-right">
+		<a href="HomePage.aspx" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
+        <br />
+        <br />
         <div style="font-weight: bold">
             <!--<h1>Report for spiderman on 3/28/23</h1> --> <!-- placeholder header -->
             <h1 id="reportHeader" runat="server"> </h1>
@@ -60,7 +72,10 @@
             <asp:TextBox ID="prescriptionBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="57px" MaxLength="200" TextMode="MultiLine" Width="420px" ReadOnly="True"></asp:TextBox>
             <br />
             <br />
-            &nbsp;<asp:CheckBox ID="evaluationCheckbox" runat="server" BackColor="#CCCCCC" BorderColor="Black" BorderStyle="Solid" BorderWidth="2px" Text="Requires Further Evaluation/Tests" Enabled="False" />
+
+            Follow-up evaluation:<br />
+                  <asp:TextBox ID="evalBox" runat="server" Width="137px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px" ReadOnly="True"></asp:TextBox>
+
             <br />
             <br />
             Appointment Total:
@@ -71,7 +86,10 @@
             Insurance Coverage:<br />
             <asp:TextBox ID="insuranceCovBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="16px" Width="79px" ReadOnly="True"></asp:TextBox>
             <br />
-
+            <br />
+            Co-Payment:<br />
+            <asp:TextBox ID="copayBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="16px" Width="79px"></asp:TextBox>
+            <br />
             &nbsp;</div>
         <p>
             <asp:Button ID="returnBttn" runat="server" BackColor="#003300" BorderColor="#009933" BorderWidth="2px" Font-Bold="True" ForeColor="White" Height="37px" OnClick="returnBttn_Click" Text="Return" Width="251px" />

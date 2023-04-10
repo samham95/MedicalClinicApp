@@ -9,6 +9,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 
     <title>Add Personnel</title>
 </head>
@@ -23,7 +24,6 @@
 	  </div>
 	</div>
     <br />
-    <h1 id="WelcomeHeader" runat="server"> </h1>
     <br />
     <br />
 
@@ -32,27 +32,22 @@
             <h1>Remove Office</h1>
             <p>Please fill out where indicated</p>
             <div class="form-container">
-                <fieldset>
                     <div class="form-group">
-                        <label for="id"> ID <span class="required">*</span></label>&nbsp;
+                        <label for="id"> ID <span class="required">*</span></label>
                         <asp:TextBox ID="id" runat="server"></asp:TextBox>
                     </div>
                     <p><span class="required">*</span> Required information</p>
-                    <p><asp:Button ID="Button3" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click_RemOff" /></p>
-                </fieldset>
-                &nbsp;
+                    <asp:Button ID="clear" runat="server" OnClick="ButtonClear_Click" Text="Clear Entries"/>
+                    <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click_RemOff" />
             </div>
             <div>
-                <asp:Button ID="clear" runat="server" OnClick="ButtonClear_Click" Text="Clear Entries" style="margin-left: 0px" />
-            </div>
-            <div>
-                <asp:Button ID="exit" runat="server" OnClick="ButtonExit_Click" Text="Return to Admin Page" style="margin-left: 0px" />
+                <asp:Button ID="exit" runat="server" OnClick="ButtonExit_Click" Text="Return to Admin Page"/>
             </div>
             <script>
                 //Client-side jQuery to cancel form submission if required fields empty
                 $(function () {
                     // Attach event handler to form submit button click
-                    $('#<%=Button3.ClientID %>').on('click', function () {
+                    $('#<%=SUBMIT.ClientID %>').on('click', function () {
                         // Check if required fields are filled out
                         if ($('#<%=id.ClientID %>').val() === '') {
                             // Display dialog box

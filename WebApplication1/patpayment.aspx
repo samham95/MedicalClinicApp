@@ -64,9 +64,9 @@
 	</div>
 		<form id="form2" runat="server">
 
-        <h1 style ="font-size: 32px; width: 907px;" runat="server">
+        <p  runat="server">
             <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
-        &nbsp;</h1>
+        &nbsp;</p>
 
 <h1 style = "text-align: center">Make Your Payment Today</h1>
 	<p style = "text-align: center">Please fill out where indicated</p>

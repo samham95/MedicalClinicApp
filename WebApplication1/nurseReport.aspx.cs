@@ -13,12 +13,14 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {                                                                           //TODO: match variable names in button redirect in nurseView.aspx.cs
             int appointmentID = Convert.ToInt32(Request.QueryString["appID"]);
+            int nurseID = Convert.ToInt32(Request.QueryString["NID"]);
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
 
             string titleQuery = "SELECT CONCAT(fname,' ', lname, ' Appointment on ', AppointmentDate) FROM patients, appointment WHERE appointment.patientID = patients.patientID AND appointment.appointmentID = @appointmentID";
             string patientNameQuery = "SELECT CONCAT(fname, ' ', lname) FROM appointment, patients WHERE appointment.appointmentID = @appointmentID AND appointment.patientID = patients.patientID";
-            string doctorNameQuery = "SELECT CONCAT('Dr. ', Fname, ' ', Lname, ' - ', Specialty) from doctor, appointment WHERE appointment.appointmentID = @appointmentID AND appointment.doctorID = doctor.doctorID ";
+            string doctorNameQuery = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', Specialty) from doctor, appointment WHERE appointment.appointmentID = @appointmentID AND appointment.doctorID = doctor.doctorID ";
+            string nurseNameQuery = "SELECT CONCAT('RN ', fname, ' ', lname) from nurse WHERE NID = @nurseID";
 
             MySqlConnection connection = new MySqlConnection(connectionString);
 
@@ -31,107 +33,95 @@ namespace WebApplication1
             MySqlCommand doctorNameCmd = new MySqlCommand(doctorNameQuery, connection);
             doctorNameCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
 
+            MySqlCommand nurseNameCmd = new MySqlCommand(nurseNameQuery, connection);
+            nurseNameCmd.Parameters.AddWithValue("@nurseID", nurseID);
             connection.Open();
 
             string headerStr = (string)titleCommand.ExecuteScalar();
             string patientName = (string)patientNameCmd.ExecuteScalar();
             string docName = (string)doctorNameCmd.ExecuteScalar();
+            string nurseName = (string)nurseNameCmd.ExecuteScalar();
+
 
             connection.Close();
 
             reportHeader.InnerText = "Report for " + headerStr;
             patientNameBox.Text = patientName;
             doctorNameBox.Text = docName;
+            LinkButton1.Text = "Logged in as: " + nurseName;
             
         }
 
         protected void submitBttn_Click(object sender, EventArgs e)
         {
-
+            int nurseID = Convert.ToInt32(Request.QueryString["NID"]);
             int appointmentID = Convert.ToInt32(Request.QueryString["appID"]);
             string patientSymptoms = symptomsBox.Text;
             string patientDiagnosis = diagnosisBox.Text;
             string patientPrescription = prescriptionBox.Text;
-            int appointmentTotal = int.Parse(apptTotalBox.Text);
-            int insuranceCoverage = int.Parse(insuranceCovBox.Text);
-            int temperature = int.Parse(temperatureBox.Text);
-            int pressure = int.Parse(pressureBox.Text);
+            decimal appointmentTotal = decimal.Parse(apptTotalBox.Text);
+            decimal insuranceCoverage = decimal.Parse(insuranceCovBox.Text);
+            decimal copay = decimal.Parse(copayBox.Text);
+            decimal temperature = decimal.Parse(temperatureBox.Text);
+            string pressure = pressureBox.Text;
             int heartRate = int.Parse(heartrateBox.Text);
-
+            string furtherEval = DropDownList1.SelectedValue;
 
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
 
-            string insertSymptoms = "INSERT INTO visit_details (symptoms) VALUES (@symptoms) WHERE visit_details.appointmentID = @appointmentID";
-            string insertDiagnosis = "INSERT INTO visit_details (diagnosis) VALUES (@diagnosis) visit_details.appointmentID = @appointmentID";
-            string insertPrescription = "INSERT INTO visit_details (prescription) VALUES (@prescription) visit_details.appointmentID = @appointmentID";
-
-            string insertTemperature = "INSERT INTO visit_details (temperature) VALUES (@temperature) WHERE visit_details.appointmentID = @appointmentID";
-            string insertPressure = "INSERT INTO visit_details (bloodPressure) VALUES (@pressure) WHERE visit_details.appointmentID = @appointmentID";
-            string insertRate = "INSERT INTO visit_details (heartRate) VALUES (@heartRate) WHERE visit_details.appointmentID = @appointmentID";
-
-            string insertApptTotal = "INSERT INTO invoice (total) VALUES (@apptTotal) WHERE invoice.reportID = visit_details.reportID  AND visit_details.appointmentID = @appointmentID";
-            string insertInsCov = "INSERT INTO invoice (claim) VALUES (@insuranceCov) WHERE invoice.reportID = visit_details.reportID  AND visit_details.appointmentID = @appointmentID";           //TODO: create insert strings;
-
-            string changeFurtherEval = "UPDATE visit_details SET (furtherEval) = 1 WHERE visit_details.appointmentID = @appointmentID";
+            string insertVisit = "INSERT INTO visit_details (symptoms,diagnosis,prescription,temperature,bloodPressure,heartRate,appointmentID, nurseID) VALUES (@symptoms,@diagnosis,@prescription,@temperature,@pressure,@heartRate, @appID, @nurseID)";
+            string getReportID = "Select reportID from visit_details WHERE appointmentID = @appID";
+            string insertInvoice = "INSERT INTO invoice (total,claim,paid_amount,reportID) VALUES (@total,@claim,@copay,@reportID)";
+            string eval = "UPDATE visit_details SET furtherEval = @furtherEval WHERE reportID = @reportID";
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                MySqlCommand symptomsCmd = new MySqlCommand(insertSymptoms, connection);
-                symptomsCmd.Parameters.AddWithValue("@symptoms", patientSymptoms);
-                symptomsCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
+                MySqlCommand visitCmd = new MySqlCommand(insertVisit, connection);
+                visitCmd.Parameters.AddWithValue("@symptoms", patientSymptoms);
+                visitCmd.Parameters.AddWithValue("@diagnosis", patientDiagnosis);
+                visitCmd.Parameters.AddWithValue("@prescription", patientPrescription);
+                visitCmd.Parameters.AddWithValue("@temperature", temperature);
+                visitCmd.Parameters.AddWithValue("@heartrate", heartRate);
+                visitCmd.Parameters.AddWithValue("@pressure", pressure);
+                visitCmd.Parameters.AddWithValue("@appID", appointmentID);
+                visitCmd.Parameters.AddWithValue("@nurseID", nurseID);
 
-                MySqlCommand diagnosisCmd = new MySqlCommand(insertDiagnosis, connection);
-                diagnosisCmd.Parameters.AddWithValue("@diagnosis", patientDiagnosis);
-                diagnosisCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
-
-                MySqlCommand prescriptionCmd = new MySqlCommand(insertPrescription, connection);
-                prescriptionCmd.Parameters.AddWithValue("@prescription", patientPrescription);
-                prescriptionCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
-
-                MySqlCommand tempCmd = new MySqlCommand(insertTemperature, connection);
-                tempCmd.Parameters.AddWithValue("@temperature", temperature);
-                tempCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
-
-                MySqlCommand pressureCmd = new MySqlCommand(insertPressure, connection);
-                pressureCmd.Parameters.AddWithValue("@pressure", pressure);
-                pressureCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
-
-                MySqlCommand rateCmd = new MySqlCommand(insertRate, connection);
-                rateCmd.Parameters.AddWithValue("@heartRate", heartRate);
-                rateCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
-
-                MySqlCommand totalcmd = new MySqlCommand(insertApptTotal, connection);
-                totalcmd.Parameters.AddWithValue("@apptTotal", appointmentTotal);
-                totalcmd.Parameters.AddWithValue("@appointmentID", appointmentID);
-
-                MySqlCommand covCmd = new MySqlCommand(insertInsCov, connection);
-                covCmd.Parameters.AddWithValue("@insuranceCov", insuranceCoverage);
-                covCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
-
-                MySqlCommand checkBoxCmd = new MySqlCommand(changeFurtherEval, connection);
-                checkBoxCmd.Parameters.AddWithValue("@appointmentID", appointmentID);
                 connection.Open();
 
-                symptomsCmd.ExecuteNonQuery();
-                diagnosisCmd.ExecuteNonQuery();
-                prescriptionCmd.ExecuteNonQuery();
-                tempCmd.ExecuteNonQuery();
-                pressureCmd.ExecuteNonQuery();
-                rateCmd.ExecuteNonQuery();
-                totalcmd.ExecuteNonQuery();
-                covCmd.ExecuteNonQuery();
+                visitCmd.ExecuteNonQuery();
+
+                MySqlCommand getReportID_cmd = new MySqlCommand(getReportID, connection);
+                getReportID_cmd.Parameters.AddWithValue("@appID", appointmentID);
+                int reportID = (int)getReportID_cmd.ExecuteScalar();
+
+                MySqlCommand insertInvoice_cmd = new MySqlCommand(insertInvoice, connection);
+                insertInvoice_cmd.Parameters.AddWithValue("@total", appointmentTotal);
+                insertInvoice_cmd.Parameters.AddWithValue("@claim", insuranceCoverage);
+                insertInvoice_cmd.Parameters.AddWithValue("@copay", copay);
+                insertInvoice_cmd.Parameters.AddWithValue("@ReportID", reportID);
+
+                insertInvoice_cmd.ExecuteNonQuery();
+
                 if (evaluationCheckbox.Checked)
                 {
-                    checkBoxCmd.ExecuteNonQuery();
+                    MySqlCommand insertEval = new MySqlCommand(eval, connection);
+                    insertEval.Parameters.AddWithValue("@reportID", reportID);
+                    insertEval.Parameters.AddWithValue("@furtherEval", furtherEval);
+                    insertEval.ExecuteNonQuery();
                 }
 
                 connection.Close();
 
             }
-            Response.Redirect(Request.UrlReferrer.ToString());
+            Response.Redirect("NurseView.aspx?nurseID="+nurseID);
 
         }
 
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            int nurseID = Convert.ToInt32(Request.QueryString["NID"]);
+            Response.Redirect("NurseView.aspx?nurseID=" + nurseID);
+        }
     }
 }
