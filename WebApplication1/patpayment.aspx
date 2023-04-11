@@ -4,74 +4,35 @@
 <html>
 <head>
 	<title>Payment Page</title>
-	<style>
-
-
-      /* Styles for the form */
-      .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-      .form-container label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .form-container input[type="text"],
-      .form-container input[type="email"],
-      .form-container input[type="date"] {
-        width: 30%;
-        padding: 10px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-      }
-      .form-container input[type="checkbox"] {
-        margin-right: 10px;
-      }
-      .form-container input[type="submit"] {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .form-container input[type="submit"]:hover {
-        background-color: #555;
-      }
-      .required {
-        color: red;
-      }
-
-    </style>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 
 </head>
 <body>
-    <div class="navbar">
+    <p>
+        <br />
+    </p>
+
+		<form id="form2" runat="server">
+                <div class="navbar">
+                            <div class ="navbar-left"><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></div>
+
 	  <div class="navbar-right">
 		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
+		<a href="AboutUs.aspx" class="nav-item">About Us</a>
+		<a href="ContactUs.aspx" class="nav-item">Contact Us</a>
 		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
 		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
 	  </div>
 	</div>
-		<form id="form2" runat="server">
-
         <p  runat="server">
-            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
         &nbsp;</p>
 
 <h1 style = "text-align: center">Make Your Payment Today</h1>
 	<p style = "text-align: center">Please fill out where indicated</p>
 
-	<div class="form-container">
+	<div class="form-container" style="margin: auto;">
 		<fieldset>
 		<legend>Payment Details</legend>
 			<div class="form-group">
@@ -122,12 +83,8 @@
                 <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
             </p>
 			</fieldset>
-            <br />
-                 <p>
-                    &nbsp;</p>
-          <asp:Button ID="Return" runat="server" Text="Return to Billing Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
-
      </div>
+    <asp:Button ID="exit" runat="server" Text="Return to Billing Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
                 <script>
                 //Client-side jQuery to cancel form submission if required fields empty 
                 $(function () {

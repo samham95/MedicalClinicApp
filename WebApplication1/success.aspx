@@ -17,6 +17,7 @@
 
     </style>
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 
 </head>
 <body style="Bold">
@@ -30,6 +31,7 @@
 	  </div>
 	</div>
     <br />
+    <br />
     <p>Response Saved Successfully! An email confirmation was sent with your new patientID code. Use that to complete the account set up below. We will reach out to you shortly with confirmation of your appointment.
 </p>
     <br />
@@ -38,41 +40,39 @@
     <br />
     <br />
     <form id="form1" runat="server">
-     
-    <table>
-        <tr>
-            <td align="left" colspan="2">Sign Up for Your New Account</td>
-        </tr>
-        <tr>
-            <td align="right">
+    <div class="form-container">
+        <fieldset>
+            <legend>Sign Up for Your New Account</legend>
+        <div>
+            <p>
                 <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:<span class="required">*</span></asp:Label>
                 
-            </td>
-            <td class="auto-style1">
+            <p>
+            <p>
                 <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="Username_valid" runat="server"
                     ControlToValidate="UserName"
                     ErrorMessage="Please enter a valid username." style="color:Red;">
                 </asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
+            </p>
+        </div>
+        <div>
+            <p>
                 <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:<span class="required">*</span></asp:Label>
-            </td>
-            <td class="auto-style1">
+            </p>
+            <p>
                 <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="password_valid" runat="server"
                     ControlToValidate="Password"
                     ErrorMessage="Please enter a valid password." style="color:Red;">
                 </asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
+            </p>
+        </div>
+        <div>
+            <p>
                 <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword">Confirm Password:<span class="required">*</span></asp:Label>
-            </td>
-            <td class="auto-style1">
+            </p>
+            <div>
                 <asp:TextBox ID="ConfirmPassword" runat="server" TextMode="Password"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="cpv" runat="server"
                     ControlToValidate="ConfirmPassword"
@@ -83,53 +83,45 @@
                     ControlToValidate="ConfirmPassword" 
                     ErrorMessage="Passwords do not match." 
                     style="color:Red;" Font-Bold="True"></asp:CompareValidator>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
+            </div>
+        </div>
+        <div>
+            <p>
                 <asp:Label ID="EmailLabel" runat="server" AssociatedControlID="Email">E-mail:<span class="required">*</span></asp:Label>
                 
-            </td>
-            <td class="auto-style1">
+            </p>
+            <div>
                 <asp:TextBox ID="Email" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="emailvalid" runat="server"
                     ControlToValidate="Email"
                     ErrorMessage="Please enter a valid email." style="color:Red;">
                 </asp:RequiredFieldValidator>
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
+            </div>
+        </div>
+        <div>
+            <p>
                 <asp:Label ID="PatientLabel" runat="server" AssociatedControlID="PatientID">PatientID:<span class="required">*</span></asp:Label>
             
-            </td>
-            <td class="auto-style1">
+            </p>
+            <p>
                 <asp:TextBox ID="PatientID" runat="server"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="patientvalid" runat="server"
                     ControlToValidate="PatientID"
                     ErrorMessage="Please enter a valid patientID." style="color:Red;">
                 </asp:RequiredFieldValidator>
 
-            </td>
-        </tr>
-        
-        <tr>
-            <td align="center" colspan="2">
-            </td>
-        </tr>
-        <tr>
-            <td align="left" colspan="2" style="color:Red;">
-                <asp:Literal ID="ErrorMessage" runat="server" Text="Passwords must match"></asp:Literal>
-            </td>
-        </tr>
-    </table>
-
-        <div style="margin-left: 240px">
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Submit" />
+            </p>
         </div>
-
+        <div>
+            <p align="left" colspan="2" style="color:Red;">
+                <asp:Literal ID="ErrorMessage" runat="server" Text="Passwords must match"></asp:Literal>
+            </p>
+        </div>
+        <asp:Button ID="SUBMIT" runat="server" OnClick="Button1_Click" Text="Submit" />
+    </fieldset>
+    </div>
     </form>
-        </body>
+</body>
 </html>
 
 

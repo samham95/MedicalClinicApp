@@ -8,66 +8,7 @@
 	<meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<style>
-
-            /* Styles for the navigation bar */
-      .navbar {
-        background-color: #333;
-        overflow: hidden;
-                height: 48px;
-            }
-      .navbar a {
-        float: right;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-      .navbar a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      /* Styles for the form */
-      .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-      .form-container label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .form-container input[type="text"],
-      .form-container input[type="email"],
-      .form-container input[type="date"] {
-        width: 30%;
-        padding: 10px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-      }
-      .form-container input[type="checkbox"] {
-        margin-right: 10px;
-      }
-      .form-container input[type="submit"] {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .form-container input[type="submit"]:hover {
-        background-color: #555;
-      }
-      .required {
-        color: red;
-      }
-    </style>
+	<link href="AdminPages.css" rel="stylesheet" />
 	<link href="navbar.css" rel="stylesheet" />
 
 </head>
@@ -88,11 +29,10 @@
        <p runat="server">
             <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
         </p>
-	<div class="form-container">
-
-    <h1 style = "text-align: center">Edit your Personal Information</h1>
+     <h1 style = "text-align: center">Edit your Personal Information</h1>
             <p style = "text-align: center">Please fill out where indicated</p>
 
+	<div class="form-container" style="margin: auto;">
 
 		<fieldset>
 		<legend>Contact Information</legend>
@@ -164,11 +104,8 @@
                 ControlToValidate="ECemail" ErrorMessage="Please enter a valid email address." 
                     ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
 			</div>
+            <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
 			</fieldset>
-
-            <p>
-                <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
-            </p>
 
             <script>
                 //Client-side jQuery to cancel form submission if required fields empty 

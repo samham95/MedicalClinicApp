@@ -16,9 +16,9 @@
     <!-- Define the navigation bar at the top of the page -->
     <div class="navbar">
 	  <div class="navbar-right">
-		<a href="#" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
+		<a href="HomePage.aspx" class="nav-item">Home</a>
+		<a href="AboutUs.aspx" class="nav-item">About Us</a>
+		<a href="ContactUs.aspx" class="nav-item">Contact Us</a>
 		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
 		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
 	  </div>

@@ -10,6 +10,7 @@
 
 
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 
 
     <title>Nurse View</title>

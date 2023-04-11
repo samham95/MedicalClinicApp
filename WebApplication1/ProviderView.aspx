@@ -37,6 +37,7 @@
 
     </style>
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 
 
     <title>Provider View</title>

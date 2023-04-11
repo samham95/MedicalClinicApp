@@ -11,48 +11,11 @@
 	<style>
 
 
-      /* Styles for the form */
-      .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-      .form-container label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .form-container input[type="text"],
-      .form-container input[type="email"],
-      .form-container input[type="date"] {
-        width: 30%;
-        padding: 10px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-      }
-      .form-container input[type="checkbox"] {
-        margin-right: 10px;
-      }
-      .form-container input[type="submit"] {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .form-container input[type="submit"]:hover {
-        background-color: #555;
-      }
-      .required {
-        color: red;
-      }
+      
 
     </style>
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar">
@@ -142,7 +105,8 @@
 			</div>
 			</fieldset>
  
-
+            <br />
+            <br />
 			<fieldset>
 			<legend>Appointment Details</legend>
 
@@ -185,7 +149,7 @@
 			<div class="form-group">
 				<label for="pcp-or-specialist">Do you want to see a PCP or specialist?<span class="required">*</span></label>
                 <asp:CheckBox ID="pcp" runat="server" />
-                <label for="pcp-or-specialist">PCP<br />
+                <label for="pcp-or-specialist">PCP
                 </label>
                 <asp:CheckBox ID="spec" runat="server" />
                 <label for="pcp-or-specialist">Specialist<br />
@@ -208,7 +172,7 @@
 			<div class="form-group">
 				<label for="insurance">Do you have insurance?<span class="required">*</span></label>
                 <asp:CheckBox ID="ins" runat="server" />
-                <label for="insurance">Yes<br />
+                <label for="insurance">Yes
                 </label>
                 <asp:CheckBox ID="no_ins" runat="server" />
                 <label for="insurance">No<br />

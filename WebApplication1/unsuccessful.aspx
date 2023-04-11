@@ -6,6 +6,7 @@
 <head runat="server">
     <title></title>
     	<link href="navbar.css" rel="stylesheet" />
+        <link href="AdminPages.css" rel="stylesheet" />
 </head>
 <body>
         <div class="navbar">

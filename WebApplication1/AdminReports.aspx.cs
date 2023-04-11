@@ -14,8 +14,15 @@ namespace WebApplication1
 {
     public partial class AdminReportsaspx : System.Web.UI.Page
     {
+        private string adminID;
         protected void Page_Load(object sender, EventArgs e)
         {
+            adminID = Request.QueryString["adminID"];
+        }
+
+        protected void ButtonExit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AdminView.aspx?adminID=" + adminID);
         }
         protected void btnGenerateReport_Click(object sender, EventArgs e)
         {
@@ -116,9 +123,5 @@ namespace WebApplication1
             return pdfStream;
         }
 
-        protected void ButtonExit_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AdminView.aspx?adminID=");
-        }
     }
 }

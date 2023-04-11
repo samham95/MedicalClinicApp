@@ -5,52 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>PCP Follow-Up</title>
-    	<style>
-
-            /* Styles for the navigation bar */
-
-      /* Styles for the form */
-      .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-      .form-container label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .form-container input[type="text"],
-      .form-container input[type="email"],
-      .form-container input[type="date"] {
-        width: 30%;
-        padding: 10px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-      }
-      .form-container input[type="checkbox"] {
-        margin-right: 10px;
-      }
-      .form-container input[type="submit"] {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .form-container input[type="submit"]:hover {
-        background-color: #555;
-      }
-      .required {
-        color: red;
-      }
-
-    </style>
+    	
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -72,8 +29,11 @@
         <h1>Schedule a Follow-Up with Your Primary Physician</h1>
         <br />
         <br />
+        <div class="form-container">
    			<fieldset>
 			<legend>Schedule Appointment </legend>
+
+            <br />
             <div class="form-group">
 				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" ></asp:TextBox>
@@ -90,13 +50,12 @@
                 <br />
 			</div>
 			<p><span class="required">*</span> Required information</p>
-            <p>
-                <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" Width="112px" />
-            </p>
-                <p>
-                    &nbsp;</p>
+             <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
 			</fieldset>
-			<asp:Button ID="Return" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" />
+        
+            </div>
+        <asp:Button ID="exit" runat="server" Text="Return to Patient Portal" OnClick="Return_Click" />
+			
 			</form>
 </body>
 </html>

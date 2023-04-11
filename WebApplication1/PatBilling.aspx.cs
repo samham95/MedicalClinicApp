@@ -44,7 +44,7 @@ namespace WebApplication1
 
             // Retrieve data from database into invoice grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT * FROM invoice WHERE patientID = @PatientID ORDER BY invoiceID ASC";
+            string query = "SELECT invoiceID,total,claim,paid_amount,reportID,due_date FROM invoice WHERE patientID = @PatientID ORDER BY invoiceID ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -239,10 +239,11 @@ namespace WebApplication1
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int reportID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[5].Text);
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
             if (e.CommandName == "viewReport")
             {
-                Response.Redirect("ReportView.aspx?reportID=" + reportID);
-            } 
+            Response.Redirect("ReportView.aspx?ReportID=" + reportID+"&patientID="+patientID);
+            }
 
         }
     }

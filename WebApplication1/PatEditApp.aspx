@@ -52,8 +52,7 @@
       }
 
     </style>
-	<link href="navbar.css" rel="stylesheet" />
-
+    <link href="navbar.css" rel="stylesheet" />
 </head>
 <body>
     <form runat = "server">

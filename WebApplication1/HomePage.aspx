@@ -142,8 +142,8 @@
 <body>
   <form id="form1" runat="server">
       	<div class="navbar">
-      <a href="#">About Us</a>
-      <a href="#">Contact Us</a>
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
       <a href="PatientLogin.aspx">Patient Login</a>
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
@@ -164,7 +164,7 @@
 <div class="footer">
   <section class="contact">
     <p>Email: info@umamedicalgroup.com | Phone: (713)867-5309</p>
-    <p>Â© 2023 Group 13. All rights reserved.</p>
+    <p>Dr. Uma's Clinic © Group 13 - 2023. All rights reserved.</p>
     <p><a href="AdminLogin.aspx">Admin Login</a></p>
   </section>
 </div>

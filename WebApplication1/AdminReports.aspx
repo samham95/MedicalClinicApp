@@ -40,16 +40,14 @@
                                 <br />
                                 <br />
                             </div>
-                            <div class="modal-footer">
-                                <asp:Button ID="btnGenerateReport" runat="server" Text="Generate" CssClass="btn btn-secondary" OnClick="btnGenerateReport_Click" />
+                            <div >
+                                <asp:Button ID="btnGenerateReport" runat="server" Text="Generate" OnClick="btnGenerateReport_Click"/>
                             </div>
                         <!-- END MODAL: NEW OFFICE--->
                         </div>
                     </div>
+                   <asp:Button ID="exit" runat="server" OnClick="ButtonExit_Click" Text="Return to Admin Page"/>
                 </div>
-                    <div>
-                <asp:Button ID="exit" runat="server" OnClick="ButtonExit_Click" Text="Return to Admin Page"/>
-            </div>
 
             <!-- Adding scripts to use bootstrap -->
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -5,6 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Patient Form</title>
+    <link href="LoginStyle.css" rel="stylesheet" />
+	<link href="navbar.css" rel="stylesheet" />
+
     <style type="text/css">
         #patientName {
             width: 521px;
@@ -12,6 +15,19 @@
     </style>
 </head>
 <body>
+    <!-- Define the navigation bar at the top of the page -->
+    <div class="navbar">
+	  <div class="navbar-right">
+		<a href="HomePage.aspx" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
+    <br />
+    <br />
+    <br />
     <form id="patientForm" runat="server">
         <div style="font-weight: bold">
             <!--<h1>Report for spiderman on 3/28/23</h1> --> <!-- placeholder header -->

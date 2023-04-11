@@ -4,67 +4,11 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <style>
-      .navbar {
-        background-color: #333;
-        overflow: hidden;
-                height: 48px;
-            }
-      .navbar a {
-        float: right;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-      .navbar a:hover {
-        background-color: #ddd;
-        color: black;
-      }
-      /* Styles for the form */
-      .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-      .form-container label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .form-container input[type="text"],
-      .form-container input[type="email"],
-      .form-container input[type="date"] {
-        width: 30%;
-        padding: 10px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-      }
-      .form-container input[type="checkbox"] {
-        margin-right: 10px;
-      }
-      .form-container input[type="submit"] {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .form-container input[type="submit"]:hover {
-        background-color: #555;
-      }
-      .required {
-        color: red;
-      }
-      </style>
+    
     <title>NEW APPOINTMENT</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     	<link href="navbar.css" rel="stylesheet" />
+        <link href="AdminPages.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar">
@@ -162,8 +106,7 @@
 			<div class="form-group">
 				<label for="insurance">Do you have insurance?<span class="required">*</span></label>
                 <asp:CheckBox ID="ins" runat="server" />
-                <label for="insurance">Yes<br />
-                </label>
+                <label for="insurance">Yes                </label>
                 &nbsp;<asp:CheckBox ID="no_ins" runat="server" />
                 <label for="insurance">No<br />
                 </label>
@@ -184,9 +127,10 @@
                 <p>
                     &nbsp;</p>
 	</fieldset>
-               <asp:Button ID="Return" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
     
-     </div>     
+     </div>    
+       
+    <asp:Button ID="exit" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
             
 
 

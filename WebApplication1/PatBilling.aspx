@@ -6,23 +6,7 @@
 <head runat="server">
     <title></title>
     <style>
-      .navbar {
-        background-color: #333;
-        overflow: hidden;
-                height: 48px;
-       }
-      .navbar a {
-        float: right;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
-      .navbar a:hover {
-        background-color: #ddd;
-        color: black;
-      }
+
         .bill-summary {
           font-size: 24px;
           font-weight: bold;
@@ -40,11 +24,24 @@
         .bill-total{
           font-size: 28px;
         }
+        #btnPayNow, #btnPrintSummary{
+            background-color: cornflowerblue;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+
+        #btnPayNow:hover, #btnPrintSummary:hover{
+            background-color: dodgerblue;
+        }
 
 
 
     </style>
 	<link href="navbar.css" rel="stylesheet" />
+    <link href="AdminPages.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -114,14 +111,14 @@
     </asp:Panel>
 
         <h1>Invoice Summary</h1>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2">
+    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2" style="margin-top: 0px">
         <Columns>
             <asp:BoundField DataField="invoiceID" HeaderText="Invoice ID" />
             <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:c}" />
             <asp:BoundField DataField="claim" HeaderText="Claim Amount" DataFormatString="{0:c}" />
             <asp:BoundField DataField="paid_amount" HeaderText="Paid Amount" DataFormatString="{0:c}" />
             <asp:BoundField DataField="due_date" HeaderText="Due Date" DataFormatString="{0:d}" />
-            <asp:BoundField DataField="reportID" HeaderText="Report ID" Visible="false" />
+            <asp:BoundField DataField="reportID" HeaderText="Report ID" Visible="true" />
             <asp:ButtonField ButtonType ="button" HeaderText="Report" Text="VIEW" CommandName="viewReport" />
         </Columns>
         <FooterStyle BackColor="#CCCCCC" />
