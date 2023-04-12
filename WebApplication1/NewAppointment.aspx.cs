@@ -234,11 +234,6 @@ namespace WebApplication1
             specialist.SelectedIndex = 0;
         }
 
-        protected void Return_Click(object sender, EventArgs e)
-        {
-            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
-            Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
-        }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {

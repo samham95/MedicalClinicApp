@@ -10,69 +10,29 @@
 	<style>
 
 
-
-      /* Styles for the form */
-      .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-      .form-container label {
-        display: block;
-        margin-bottom: 10px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .form-container input[type="text"],
-      .form-container input[type="email"],
-      .form-container input[type="date"] {
-        width: 30%;
-        padding: 10px;
-        margin-bottom: 20px;
-        box-sizing: border-box;
-      }
-      .form-container input[type="checkbox"] {
-        margin-right: 10px;
-      }
-      .form-container input[type="submit"] {
-        background-color: #333;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .form-container input[type="submit"]:hover {
-        background-color: #555;
-      }
-      .required {
-        color: red;
-      }
-
     </style>
-    <link href="navbar.css" rel="stylesheet" />
+    <link href="navbar.css" rel="stylesheet" />'
+    	<link href="AdminPages.css" rel="stylesheet" />
+
 </head>
 <body>
     <form runat = "server">
     <div class="navbar">
-	  <div class="navbar-right">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
+    </div>
         <h1 style ="font-size: 32px; width: 907px;" runat="server">
         &nbsp;</h1>
-        <p  runat="server">
-            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
-        </p>        
+
     <h1 style = "text-align: center">Reschedule your Appointment Today</h1>
 	<p style = "text-align: center">Please fill out where indicated</p>
         <br />
+        	<div class="form-container" style="margin: auto;">
+
    			<fieldset>
 			<legend>Appointment Reschedule</legend>
             <div class="form-group">
@@ -97,7 +57,7 @@
                 <p>
                     &nbsp;</p>
 			</fieldset>
-			<asp:Button ID="Return" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" />
+                </div>
 			</form>
 </body>
 </html>

@@ -242,6 +242,13 @@
     <Compile Include="NewAppointment.aspx.designer.cs">
       <DependentUpon>NewAppointment.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NewLogin.aspx.cs">
+      <DependentUpon>NewLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewLogin.aspx.designer.cs">
+      <DependentUpon>NewLogin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NewOffice.aspx.cs">
       <DependentUpon>NewOffice.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -434,6 +441,7 @@
     <Content Include="LoginStyle.css" />
     <Content Include="navbar.css" />
     <Content Include="NewAppointment.aspx" />
+    <Content Include="NewLogin.aspx" />
     <Content Include="NewOffice.aspx" />
     <Content Include="NewPersonnel.aspx" />
     <Content Include="nurseReport.aspx" />

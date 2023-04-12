@@ -38,5 +38,10 @@ namespace WebApplication1
         {
             Response.Redirect("AdminReports.aspx?adminID=" + adminID);
         }
+
+        protected void login_click(object sender, EventArgs e)
+        {
+            Response.Redirect("NewLogin.aspx?adminID=" + adminID);
+        }
     }
 }

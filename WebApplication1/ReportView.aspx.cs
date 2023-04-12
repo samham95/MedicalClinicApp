@@ -16,7 +16,7 @@ namespace WebApplication1
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
 
-            string titleQuery = "SELECT CONCAT(fname,' ', lname, ' Appointment on ', AppointmentDate) FROM patients, appointment WHERE appointment.ReportID = @reportID AND appointment.patientID = patients.patientID";
+            string titleQuery = "SELECT CONCAT(fname,' ', lname, ' - Appointment on ', AppointmentDate) FROM patients, appointment WHERE appointment.ReportID = @reportID AND appointment.patientID = patients.patientID";
             string patientNameQuery = "SELECT CONCAT(fname, ' ', lname) FROM appointment, patients WHERE appointment.reportID = @reportID AND appointment.patientID = patients.patientID";
             string doctorNameQuery = "SELECT CONCAT('Dr. ', Fname, ' ', Lname, ' - ', Specialty) from doctor, appointment WHERE appointment.reportID = @reportID AND appointment.doctorID = doctor.doctorID ";
             

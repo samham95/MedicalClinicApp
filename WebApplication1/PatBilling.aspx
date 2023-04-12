@@ -45,21 +45,19 @@
 
 </head>
 <body>
+        <form id="form1" runat="server">
+
     <div class="navbar">
-	  <div class="navbar-right">
-		<a href="#" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
-    <form id="form1" runat="server">
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
+    </div>
         <h1 style ="font-size: 32px; width: 907px;" runat="server">
             &nbsp;</h1>
-        <p runat="server">
-            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
-        &nbsp;</p>
+
     <asp:Panel ID="pnlBillSummary" runat="server" CssClass="bill-summary">
         <div>
             <span class="bill-title">Current Bill&nbsp; |&nbsp; Due on <asp:Label ID="lblDueDate" runat="server"></asp:Label>
@@ -118,7 +116,7 @@
             <asp:BoundField DataField="claim" HeaderText="Claim Amount" DataFormatString="{0:c}" />
             <asp:BoundField DataField="paid_amount" HeaderText="Paid Amount" DataFormatString="{0:c}" />
             <asp:BoundField DataField="due_date" HeaderText="Due Date" DataFormatString="{0:d}" />
-            <asp:BoundField DataField="reportID" HeaderText="Report ID" Visible="true" />
+            <asp:BoundField DataField="reportID" HeaderText="Report ID" Visible="false" />
             <asp:ButtonField ButtonType ="button" HeaderText="Report" Text="VIEW" CommandName="viewReport" />
         </Columns>
         <FooterStyle BackColor="#CCCCCC" />

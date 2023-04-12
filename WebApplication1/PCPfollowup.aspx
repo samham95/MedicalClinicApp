@@ -13,20 +13,17 @@
 <body>
     <form runat = "server">
     <div class="navbar">
-	  <div class="navbar-right">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
+    </div>
         <h1 style ="font-size: 32px; width: 907px;" runat="server">
             &nbsp;</h1>
-        <p runat="server">
-            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
-        &nbsp;</p>
-        <h1>Schedule a Follow-Up with Your Primary Physician</h1>
+
+        <h1 style="text-align:center">Schedule a Follow-Up with Your Primary Physician</h1>
         <br />
         <br />
         <div class="form-container">
@@ -54,7 +51,6 @@
 			</fieldset>
         
             </div>
-        <asp:Button ID="exit" runat="server" Text="Return to Patient Portal" OnClick="Return_Click" />
 			
 			</form>
 </body>

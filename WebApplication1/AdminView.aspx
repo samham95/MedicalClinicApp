@@ -77,8 +77,9 @@
                     <asp:Button ID="ButtonRP" runat="server" Text="Remove Personnel" OnClick="ButtonRP_Click" CssClass="custom-button" style="background-size: 80% 80%; padding: 10px; background-image: url(https://cdn.icon-icons.com/icons2/1572/PNG/512/3592826-employee-human-member-office-remove-remove-user-user_107791.png);"/>
                     <asp:Button ID="ButtonRO" runat="server" Text="Remove Office" OnClick="ButtonRO_Click" CssClass="custom-button"  style="background-size: 80% 80%; padding: 10px; background-image: url(https://cdn-icons-png.flaticon.com/512/15/15762.png?w=740&t=st=1680571689~exp=1680572289~hmac=b8c84a454135ecb86dec775625e8e383e30e91314cccf9814d2687b27cfc7821);"/>
                 </div>
-                <div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
-                    <asp:Button ID="Report" runat="server" Text="Generate Report" OnClick="Report_Click" CssClass="custom-button"  style="background-size: 70% 70%; padding: 10px; background-position: center 20px; background-image: url(https://cdn-icons-png.flaticon.com/512/38/38817.png?w=740&t=st=1680915029~exp=1680915629~hmac=670e5463286b79d12c9af5e1f3f83f203df3d06b45a11f0abb303a52aa1a107d)"/>
+                <div>
+                   <asp:Button ID="login" runat="server" Text="Create Login" OnClick="login_click" CssClass="custom-button"  style="background-size: 80% 80%; padding: 10px; background-position: center 20px; background-image: url(https://cdn.icon-icons.com/icons2/2248/PNG/512/login_icon_137429.png)"/>
+                   <asp:Button ID="Report" runat="server" Text="Generate Report" OnClick="Report_Click" CssClass="custom-button"  style="background-size: 80% 80%; padding: 10px; background-position: center 10px; background-image: url(https://cdn-icons-png.flaticon.com/512/38/38817.png?w=740&t=st=1680915029~exp=1680915629~hmac=670e5463286b79d12c9af5e1f3f83f203df3d06b45a11f0abb303a52aa1a107d)"/>
                 </div>
             </div>
         </div>

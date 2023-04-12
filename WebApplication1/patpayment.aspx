@@ -5,27 +5,25 @@
 <head>
 	<title>Payment Page</title>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-	<link href="navbar.css" rel="stylesheet" />
     <link href="AdminPages.css" rel="stylesheet" />
+    	<link href="navbar.css" rel="stylesheet" />
 
+   
 </head>
 <body>
     <p>
         <br />
     </p>
 
-		<form id="form2" runat="server">
-                <div class="navbar">
-                            <div class ="navbar-left"><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></div>
-
-	  <div class="navbar-right">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="AboutUs.aspx" class="nav-item">About Us</a>
-		<a href="ContactUs.aspx" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
+<form id="form2" runat="server">
+    <div class="navbar">
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
+    </div>
         <p  runat="server">
         &nbsp;</p>
 
@@ -84,7 +82,9 @@
             </p>
 			</fieldset>
      </div>
-    <asp:Button ID="exit" runat="server" Text="Return to Billing Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
+    <div style="margin-left: 680px">
+        <asp:Button ID="exit" runat="server" Text="Return to Billing Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
+    </div>
                 <script>
                 //Client-side jQuery to cancel form submission if required fields empty 
                 $(function () {

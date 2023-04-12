@@ -55,7 +55,19 @@ input[type=text] {
     #SUBMIT:hover {
         background-color: dodgerblue;
     }
+#EDIT {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
 
+    #EDIT:hover {
+        background-color: dodgerblue;
+    }
 #clear {
     background-color: red;
     color: white;

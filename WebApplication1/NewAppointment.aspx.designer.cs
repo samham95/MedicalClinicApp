@@ -114,24 +114,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.CheckBox CheckBox6;
 
         /// <summary>
-        /// ins control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox ins;
-
-        /// <summary>
-        /// no_ins control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox no_ins;
-
-        /// <summary>
         /// SUBMIT control.
         /// </summary>
         /// <remarks>
@@ -139,14 +121,5 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SUBMIT;
-
-        /// <summary>
-        /// exit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button exit;
     }
 }

@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
   <title>DR. UMA'S HEALTH CLINIC</title>
   <style>
       html, body {
@@ -152,7 +152,7 @@
   <div class="header">
     <div class="container">
       <h1>Dr.Uma Clinic </h1>
-      <p>Your Health Journey Start Here!<p>
+      <p>Your Health Journey Start Here!</p>
       <a class="btn" href="NewPatient.aspx">Click Here to Schedule Your Appointment Today</a>
     </div>
   </div>

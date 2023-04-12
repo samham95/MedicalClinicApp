@@ -11,22 +11,20 @@
         <link href="AdminPages.css" rel="stylesheet" />
 </head>
 <body>
+       <form id="form1" runat="server">
     <div class="navbar">
-	  <div class="navbar-right">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
-   <form id="form1" runat="server">
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
+    </div>
+
 
      <h1 style ="font-size: 32px; width: 907px;" runat="server">
             &nbsp;</h1>
-       <p runat="server">
-            <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton>
-        &nbsp;</p>
+
 
     <h1 style = "text-align: center">Schedule your Appointment Today</h1>
 	<p style = "text-align: center">Please fill out where indicated</p>
@@ -103,23 +101,6 @@
                 </label>
 			&nbsp;</div>
 
-			<div class="form-group">
-				<label for="insurance">Do you have insurance?<span class="required">*</span></label>
-                <asp:CheckBox ID="ins" runat="server" />
-                <label for="insurance">Yes                </label>
-                &nbsp;<asp:CheckBox ID="no_ins" runat="server" />
-                <label for="insurance">No<br />
-                </label>
-			&nbsp;</div>
-
-			<div class="form-group">
-				<label for="insurance-name">Insurance Name</label>
-				<input type="text" name="insurance-name" id="insurance-name"/>
-
-				<label for="insurance-type">Insurance Type</label>
-				<input type="text" name="insurance-type" id="insurance-type"/>
-			</div>
-
 			<p><span class="required">*</span> Required information</p>
             <p>
                 <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
@@ -130,7 +111,6 @@
     
      </div>    
        
-    <asp:Button ID="exit" runat="server" Text="Return to Patient Portal" Width="239px" OnClick="Return_Click" style="margin-left: 0px" />
             
 
 

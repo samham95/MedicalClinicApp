@@ -40,18 +40,16 @@
     <link href="AdminPages.css" rel="stylesheet" />
 
 
-    <title>Provider View</title>
+    <title>Docotor View</title>
 </head>
-<body style: "Bold">
+<body>
     <div class="navbar">
-	  <div class="navbar-right">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+    </div>
     <br />
     <br />
    <h1 id="welcomeHeader" runat="server"> </h1>
@@ -69,7 +67,7 @@
                     <asp:BoundField DataField="PatientName" HeaderText="Patient Name" />
                     <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" />
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
-                    <asp:BoundField DataField="Time" HeaderText="Time" />
+                    <asp:BoundField DataField="Time" HeaderText="Time"/>
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
                     <asp:ButtonField ButtonType = "button" Text="APPROVE" CommandName="ApproveAppointment" HeaderText="Approval" ControlStyle-BackColor="">
 <ControlStyle BackColor=""></ControlStyle>
