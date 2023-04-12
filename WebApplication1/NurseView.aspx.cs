@@ -40,7 +40,7 @@ namespace WebApplication1
 
             // Retrieve data from database into upcoming appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse where appointment.patientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND nurse.NID = @NID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate DESC";
+            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse where appointment.patientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND nurse.NID = @NID AND appointmentDate >= current_date() AND appointment.archive = false ORDER BY appointmentDate DESC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -59,7 +59,7 @@ namespace WebApplication1
 
 
             // Retrieve data from database into past appointments 
-            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID , appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse WHERE NID = @NID AND appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointmentDate <= current_date() AND archive = True AND PATIENT_CONFIRM = true ORDER BY appointmentDate DESC";
+            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID , appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, nurse WHERE NID = @NID AND appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointmentDate <= current_date() AND appointment.archive = True AND PATIENT_CONFIRM = true ORDER BY appointmentDate DESC";
             DataTable dt3 = new DataTable();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))

@@ -42,7 +42,7 @@ namespace WebApplication1
 
             // Retrieve data from database into upcoming appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate ASC";
+            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND appointmentDate >= current_date() AND appointment.archive = false ORDER BY appointmentDate ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -62,7 +62,7 @@ namespace WebApplication1
 
 
             // Retrive data from database into referral review
-            string query2 = "SELECT appointment.appointmentID as appointmentID2, CONCAT(patients.fname, ' ', patients.lname) as PatientName2, spec.specialty as Specialist, appointment.Referral as Referral,CONCAT(spec.fname, ' ', spec.lname) as Doctor, appointmentDate as Date2 FROM appointment, patients, doctor as prim, doctor as spec  WHERE appointment.doctorID = spec.doctorID AND prim.doctorID = patients.doctorID AND appointment.patientID = patients.patientID AND prim.doctorID = @DoctorID AND prim.doctorID != spec.doctorID AND appointmentDate >= current_date() AND archive = false ORDER BY appointmentDate ASC";
+            string query2 = "SELECT appointment.appointmentID as appointmentID2, CONCAT(patients.fname, ' ', patients.lname) as PatientName2, spec.specialty as Specialist, appointment.Referral as Referral,CONCAT(spec.fname, ' ', spec.lname) as Doctor, appointmentDate as Date2 FROM appointment, patients, doctor as prim, doctor as spec  WHERE appointment.doctorID = spec.doctorID AND prim.doctorID = patients.doctorID AND appointment.patientID = patients.patientID AND prim.doctorID = @DoctorID AND prim.doctorID != spec.doctorID AND appointmentDate >= current_date() AND appointment.archive = false ORDER BY appointmentDate ASC";
             DataTable dt2 = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
