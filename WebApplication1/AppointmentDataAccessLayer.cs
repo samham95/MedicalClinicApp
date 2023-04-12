@@ -20,8 +20,8 @@ public class AppointmentDataAccessLayer
         using (MySqlConnection connection = new MySqlConnection(connectionString))
         {
             connection.Open();
-            string query = "UPDATE appointment SET archive = true WHERE DATEDIFF(appointmentDate, CURDATE()) <= 1 AND (PATIENT_CONFIRM = false OR Approval = false) AND archive = false";
-            string query2 = "SELECT DISTINCT patients.email as email, appointmentDate as date, appointmentTime as time, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as doctorName FROM patients, appointment, doctor WHERE appointment.patientID=patients.patientID AND appointment.doctorID = doctor.doctorID AND DATEDIFF(appointmentDate, CURDATE()) <= 1 AND (PATIENT_CONFIRM = false OR Approval = false) AND archive = true";
+            string query = "UPDATE appointment SET archive = true WHERE DATEDIFF(appointmentDate, CURDATE()) <= 1 AND (PATIENT_CONFIRM = false OR Approval = false) AND appointment.archive = false AND appointment.cancellation_reason = 'Patient failed to confirm'";
+            string query2 = "SELECT DISTINCT patients.email as email, appointmentDate as date, appointmentTime as time, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as doctorName FROM patients, appointment, doctor WHERE appointment.patientID=patients.patientID AND appointment.doctorID = doctor.doctorID AND DATEDIFF(appointmentDate, CURDATE()) <= 1 AND (PATIENT_CONFIRM = false OR Approval = false) AND appointment.archive = true";
             MySqlCommand command2 = new MySqlCommand(query2, connection);
             MySqlCommand command = new MySqlCommand(query, connection);
             int n = command.ExecuteNonQuery();

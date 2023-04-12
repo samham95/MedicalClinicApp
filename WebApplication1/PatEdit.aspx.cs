@@ -23,7 +23,10 @@ namespace WebApplication1
             object result = cmd.ExecuteScalar();
             string fullname = result.ToString();
             connect.Close();
-            LinkButton1.Text = "Logged in as: " + fullname; 
+            LinkButton1.Text = "Logged in as: " + fullname;
+
+            string infoquery = "Select patient";
+
         }
 
         protected void SUBMIT_Click(object sender, EventArgs e)
