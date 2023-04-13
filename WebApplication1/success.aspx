@@ -11,32 +11,25 @@
         color: red;
          }
 
-        .auto-style1 {
-            width: 737px;
-        }
-
-    </style>
+        </style>
 	<link href="navbar.css" rel="stylesheet" />
     <link href="AdminPages.css" rel="stylesheet" />
 
 </head>
-<body style="Bold">
+<body>
     <div class="navbar">
-	  <div class="navbar-right">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+    </div>
     <br />
     <br />
-    <p>Response Saved Successfully! An email confirmation was sent with your new patientID code. Use that to complete the account set up below. We will reach out to you shortly with confirmation of your appointment.
-</p>
-    <br />
-    <br />
-    <a href="WebForm1.aspx"> Click here to return home </a>
+    <h1 style="font-size: 26px">Response Saved Successfully! An email confirmation was sent with your new patientID code. Use that to complete the account set up below. 
+</h1>
+    <h1 style="font-size: 26px">We will reach out to you shortly with confirmation of your appointment.
+</h1>
     <br />
     <br />
     <form id="form1" runat="server">

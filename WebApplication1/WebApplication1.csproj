@@ -277,6 +277,20 @@
     <Compile Include="NurseView.aspx.designer.cs">
       <DependentUpon>NurseView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="OrderPrescription.aspx.cs">
+      <DependentUpon>OrderPrescription.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderPrescription.aspx.designer.cs">
+      <DependentUpon>OrderPrescription.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrderTest.aspx.cs">
+      <DependentUpon>OrderTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrderTest.aspx.designer.cs">
+      <DependentUpon>OrderTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PatBilling.aspx.cs">
       <DependentUpon>PatBilling.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -362,6 +376,13 @@
     <Compile Include="ReportView.aspx.designer.cs">
       <DependentUpon>ReportView.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ScheduleTest.aspx.cs">
+      <DependentUpon>ScheduleTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ScheduleTest.aspx.designer.cs">
+      <DependentUpon>ScheduleTest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="success.aspx.cs">
       <DependentUpon>success.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -446,6 +467,8 @@
     <Content Include="NewPersonnel.aspx" />
     <Content Include="nurseReport.aspx" />
     <Content Include="NurseView.aspx" />
+    <Content Include="OrderPrescription.aspx" />
+    <Content Include="OrderTest.aspx" />
     <Content Include="PatBilling.aspx" />
     <Content Include="PatEdit.aspx" />
     <Content Include="DoctorLogin.aspx" />
@@ -458,6 +481,7 @@
     <Content Include="RemOffice.aspx" />
     <Content Include="RemPersonnel.aspx" />
     <Content Include="ReportView.aspx" />
+    <Content Include="ScheduleTest.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />

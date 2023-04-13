@@ -54,8 +54,10 @@ namespace WebApplication1
             reader2.Close();
 
             connect.Close();
-            ScriptManager.RegisterStartupScript(this, GetType(), "scrollToBottom", "window.scrollTo(0, document.body.scrollHeight);", true);
-
+            if (IsPostBack)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "scrollToBottom", "window.scrollTo(0, document.body.scrollHeight);", true);
+            }
         }
 
         protected void SUBMIT_Click(object sender, EventArgs e)

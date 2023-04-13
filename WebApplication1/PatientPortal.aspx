@@ -98,6 +98,34 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
+        <br />
+        <br />
+                <div>
+            <h1>Medical Testing</h1>
+            <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" DataKeyNames="TestID"
+                OnRowCommand="GridView3_RowCommand" CellPadding="3" ForeColor="Black" GridLines="Vertical" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
+                <Columns>
+                    <asp:BoundField DataField="TestID" HeaderText="TestID"/>
+                    <asp:BoundField DataField="Test" HeaderText="Test Ordered" />
+                    <asp:BoundField DataField="officeID" HeaderText="OfficeID" Visible="false" />
+                    <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" NullDisplayText="Please Schedule" />
+                    <asp:BoundField DataField="nurseID" HeaderText="NurseID" Visible="false" />
+                    <asp:BoundField DataField="Nurse" HeaderText="Nurse" NullDisplayText="Please Schedule"/>
+                    <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}" NullDisplayText="Please Schedule" />
+                    <asp:BoundField DataField="Time" HeaderText="Time" NullDisplayText="Please Schedule" />
+                    <asp:ButtonField ButtonType="button" Text="SCHEDULE" CommandName="schedule" HeaderText="Schedule" />
+                </Columns>
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#808080" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#383838" />
+            </asp:GridView>
+        </div>
 
         <script>
             $(document).ready(function () {

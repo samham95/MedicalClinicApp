@@ -17,7 +17,7 @@
       <a href="PatientLogin.aspx">Patient Login</a>
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
-    </div>
+    </div>s
 
     <br />
 	<form id="form1" runat="server">

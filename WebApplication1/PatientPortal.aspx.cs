@@ -39,10 +39,65 @@ namespace WebApplication1
         protected void BindData()
         {
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection con = new MySqlConnection(connectionString);
+            DataTable dt_test = new DataTable();
+            string nurse_query = "SELECT CONCAT(nurse.fname, ' ', nurse.lname) FROM nurse WHERE NID=@nurseID";
+            string office_query = "SELECT officeAddress FROM office WHERE officeID=@officeID";
+            string test_query = "SELECT test.testID as TestID, evaluation.test as Test, test.test_date as Date, test.test_time as Time, test.nurseID as nurseID, test.officeID FROM test, evaluation WHERE test.patientID = @patientID AND test.test_code = evaluation.code";
+            MySqlCommand test_cmd = new MySqlCommand(test_query, con);
+
+            test_cmd.Parameters.AddWithValue("@patientID", patientID);
+
+            con.Open();
+            MySqlDataAdapter adp = new MySqlDataAdapter(test_cmd);
+
+            adp.Fill(dt_test);
+
+            // Add columns for Nurse and OfficeLocation to the DataTable
+            dt_test.Columns.Add("Nurse");
+            dt_test.Columns.Add("OfficeLocation");
+
+            string nurse_name;
+            string officeLocation;
+
+            // Set the Nurse and OfficeLocation values for each row
+            foreach (DataRow row in dt_test.Rows)
+            {
+                MySqlCommand nurse_cmd = new MySqlCommand(nurse_query, con);
+                MySqlCommand office_cmd = new MySqlCommand(office_query, con);
+
+                string officeID = row["officeID"].ToString();
+                string nurseID = row["nurseID"].ToString();
+
+
+                nurse_cmd.Parameters.AddWithValue("@nurseID", nurseID);
+                office_cmd.Parameters.AddWithValue("@officeID", officeID);
+                try
+                {
+                    nurse_name = nurse_cmd.ExecuteScalar().ToString();
+                    officeLocation = office_cmd.ExecuteScalar().ToString();
+
+                }
+                catch (Exception)
+                {
+                    officeLocation = DBNull.Value.ToString();
+                    nurse_name = DBNull.Value.ToString();
+
+                }
+
+                row["OfficeLocation"] = officeLocation;
+                row["Nurse"] = nurse_name;
+            }
+
+            GridView3.DataSource = dt_test;
+            GridView3.DataBind();
+            con.Close();
+
+
             DataTable dt = new DataTable();
 
             // Retrieve data from database into appointment grid
-            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             string query = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as DoctorName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, PATIENT_CONFIRM as Confirm, doctor.specialty as SPEC FROM appointment, doctor, office WHERE appointment.patientID = @patientID AND appointment.doctorID = doctor.doctorID AND appointment.officeID = office.officeID AND appointmentDate >= current_date() AND appointment.archive = false ORDER BY appointmentDate ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -260,6 +315,15 @@ namespace WebApplication1
 
         }
 
+        protected void GridView3_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "schedule")
+            {
+                int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+                int testID = Convert.ToInt32(GridView3.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+                Response.Redirect("ScheduleTest.aspx?patientID=" + patientID + "&testID=" + testID);
+            }
+        }
 
         protected void Button1_Click(object sender, EventArgs e)
         {

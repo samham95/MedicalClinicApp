@@ -99,6 +99,50 @@ namespace WebApplication1
                 }
                 connection.Close();
             }
+
+            // bind patient data to grid
+            string query4 = "SELECT patientID, CONCAT(patients.fname, ' ', patients.lname) as PatientName FROM patients WHERE patients.doctorID = @DoctorID";
+            DataTable dt4 = new DataTable();
+            string app_query = "SELECT MAX(appointmentDate) FROM appointment WHERE PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < CURRENT_DATE() AND patientID = @patientID";
+
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(query4, connection))
+                {
+                    command.Parameters.AddWithValue("@DoctorID", doctorID);
+                    connection.Open();
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+
+                        adapter.Fill(dt4);
+                        dt4.Columns.Add("LastVisitDate");
+                        foreach (DataRow row in dt4.Rows)
+                        {
+                            int patientID = Convert.ToInt32(row["patientID"]);
+
+                            MySqlCommand app_cmd = new MySqlCommand(app_query, connection);
+                            app_cmd.Parameters.AddWithValue("@patientID", patientID);
+                            object last_date =  app_cmd.ExecuteScalar();
+
+                            if (last_date != null && last_date != DBNull.Value)
+                            {
+                                string date = DateTime.ParseExact(last_date.ToString(), "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
+
+                                row["LastVisitDate"] = date;
+                            }
+                            else
+                            {
+                                row["LastVisitDate"] = DBNull.Value;
+                            }
+                        }
+
+                        GridView4.DataSource = dt4;
+                        GridView4.DataBind();
+                    }
+                }
+                connection.Close();
+            }
         }
 
 
@@ -343,6 +387,18 @@ namespace WebApplication1
                 Response.Redirect("ReportView.aspx?ReportID=" + ReportID+ "&doctorID="+doctorID);
             }
         }
+
+        protected void GridView4_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "OrderPrescription" || e.CommandName == "OrderTest")
+            {
+                int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
+                int patientID = Convert.ToInt32(GridView4.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+                string command = e.CommandName == "OrderPrescription" ? "OrderPrescription.aspx" : "OrderTest.aspx";
+                Response.Redirect(command + "?patientID=" + patientID+"&doctorID="+doctorID);
+            }
+        }
+
 
     }
 }

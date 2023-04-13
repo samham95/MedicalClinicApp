@@ -148,7 +148,29 @@
                 <sorteddescendingheaderstyle backcolor="#383838" />
             </asp:GridView>
         </div>
-
+        <br />
+        <h1>Patients</h1>
+        <div>
+            <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataKeyNames="patientID"
+                OnRowCommand="GridView4_RowCommand" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
+            <Columns>
+                <asp:BoundField DataField="patientID" HeaderText="Patient ID" />
+                <asp:BoundField DataField="PatientName" HeaderText="Patient Name" />
+                <asp:BoundField DataField="LastVisitDate" HeaderText="Last Visit Date" DataFormatString="{0:d}" NullDisplayText="Not Applicable"/>
+                <asp:ButtonField ButtonType="Button" Text="ORDER" HeaderText = "Prescription" CommandName="OrderPrescription" />
+                <asp:ButtonField ButtonType="Button" Text="ORDER" HeaderText="Medical Test" CommandName="OrderTest"/>
+            </Columns>
+              <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <sortedascendingcellstyle backcolor="#F1F1F1" />
+                <sortedascendingheaderstyle backcolor="#808080" />
+                <sorteddescendingcellstyle backcolor="#CAC9C9" />
+                <sorteddescendingheaderstyle backcolor="#383838" />
+        </asp:GridView>
+            </div>
         <script>
             $(document).ready(function () {
                 // Attach click event handler to the approve and deny buttons
