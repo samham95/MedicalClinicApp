@@ -18,15 +18,17 @@
 </head>
 
 <body>
+    <form id="form1" runat="server">
+
     <div class="navbar">
       <a href="AboutUs.aspx">About Us</a>
       <a href="ContactUs.aspx">Contact Us</a>
       <a href="PatientLogin.aspx">Patient Login</a>
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
     </div>
 
-    <form id="form1" runat="server">
         <br />
         <br />
     <br />
@@ -41,6 +43,7 @@
        &nbsp;</h1>
             <p runat="server"> 
                 &nbsp;</p>
+
             <h1>Upcoming Appointments</h1>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID"
                 OnRowCommand="GridView1_RowCommand" CellPadding="3" ForeColor="Black" GridLines="Vertical" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px">
@@ -52,9 +55,9 @@
                     <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" />
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:BoundField DataField="Time" HeaderText="Time"/>
+                    <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Confirm" HeaderText="Confirmation Status" Visible ="false" />
-                    <asp:BoundField DataField="TimeToConfirm" HeaderText="Time to Confirm" />
+                    <asp:BoundField DataField="TimeToConfirm" HeaderText="Time to Confirm" NullDisplayText ="Time Elapsed" HtmlEncode="false"/>
                     <asp:BoundField DataField="ConfirmText" HeaderText="Patient Confirmation" />
                     <asp:ButtonField ButtonType="button" Text="RESCHEDULE" CommandName="EditAppointment" HeaderText="Reschedule" />
                     <asp:ButtonField ButtonType="button" Text="CONFIRM" CommandName="ConfirmAppointment" HeaderText="Confirm" />
@@ -126,7 +129,29 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
+                    <h1>Prescriptions</h1>
+            <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataKeyNames="prescriptionID"
+                OnRowCommand="GridView4_RowCommand" CellPadding="3" ForeColor="Black" GridLines="Vertical" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
+                <Columns>
+                    <asp:BoundField DataField="PrescriptionID" HeaderText="PrescriptionID"/>
+                    <asp:BoundField DataField="DrugName" HeaderText="DrugName" />
+                    <asp:BoundField DataField="Dosage" HeaderText="Dosage" />
+                    <asp:BoundField DataField="Refills" HeaderText="Refills" />
+                    <asp:BoundField DataField="Notes" HeaderText="Instructions" />
 
+                    <asp:ButtonField ButtonType="button" Text="REQUEST" CommandName="requestRefill" HeaderText="Request Refill" />
+                </Columns>
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                <SortedAscendingHeaderStyle BackColor="#808080" />
+                <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                <SortedDescendingHeaderStyle BackColor="#383838" />
+            </asp:GridView>
+        </div>
         <script>
             $(document).ready(function () {
                 // Attach click event handler to the approve and deny buttons
@@ -153,13 +178,21 @@
 
                     // Get the Approval status of the appointment
                     var approvalStatus = $(this).closest("tr").find("td:nth-child(5)").text().trim();
+                    var timeRemaining = $(this).closest("tr").find("td:nth-child(8)").text().trim();
 
                     // If the approval status is false, show the dialog box
                     if (approvalStatus === "False") {
                         var message = "Doctor must approve before you can confirm. Press OK to acknowledge.";
                         alert(message);
                         return false;
-                    } else {
+
+                    }
+                    else if(timeRemaining == "Time Elapsed"){
+                        var message = "Time has elapsed to confirm. Your appointment has been cancelled. You'll receive an email with the details shortly.";
+                        alert(message);
+                        return false;
+                    }
+                    else {
                         // If the approval status is true, submit the form
                         $(this).closest("form").submit();
  

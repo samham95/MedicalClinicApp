@@ -43,12 +43,15 @@
     <title>Docotor View</title>
 </head>
 <body>
+        <form id="form1" runat="server">
+
     <div class="navbar">
       <a href="AboutUs.aspx">About Us</a>
       <a href="ContactUs.aspx">Contact Us</a>
       <a href="PatientLogin.aspx">Patient Login</a>
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
     </div>
     <br />
     <br />
@@ -56,7 +59,6 @@
     <br />
     <br />
 
-    <form id="form1" runat="server">
         <div>
             <h1>Upcoming Appointments</h1>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID"
@@ -89,7 +91,10 @@
                 <sorteddescendingcellstyle backcolor="#CAC9C9" />
                 <sorteddescendingheaderstyle backcolor="#383838" />
             </asp:GridView>
-        </div>
+                    </div>
+            <br />
+ 
+
 
         <div>
             <h1>Referral Review</h1>
@@ -149,6 +154,34 @@
             </asp:GridView>
         </div>
         <br />
+                <div>
+            <h1>Prescription Requests</h1>
+                            <asp:GridView ID="prescriptionGrid" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID"
+                OnRowCommand="prescriptions_RowCommand" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" Width="561px">
+                <AlternatingRowStyle BackColor="#CCCCCC" />
+                <Columns>
+                    <asp:BoundField DataField="appointmentID" HeaderText="AppointmentID" />
+                    <asp:BoundField DataField="patientID" HeaderText="patientID" />
+                    <asp:BoundField DataField="PatientName" HeaderText="Patient Name" />
+                    <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
+                    <asp:ButtonField ButtonType = "button" Text="ORDER" CommandName="create_prescription" HeaderText="Prescription" ControlStyle-BackColor="">
+<ControlStyle BackColor=""></ControlStyle>
+                    </asp:ButtonField>
+
+
+                </Columns>
+                <FooterStyle BackColor="#CCCCCC" />
+                <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
+                <sortedascendingcellstyle backcolor="#F1F1F1" />
+                <sortedascendingheaderstyle backcolor="#808080" />
+                <sorteddescendingcellstyle backcolor="#CAC9C9" />
+                <sorteddescendingheaderstyle backcolor="#383838" />
+            </asp:GridView>
+        </div>
+        <br />
+
         <h1>Patients</h1>
         <div>
             <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataKeyNames="patientID"

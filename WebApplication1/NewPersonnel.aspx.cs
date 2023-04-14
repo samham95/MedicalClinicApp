@@ -59,7 +59,7 @@ namespace WebApplication1
                 }
                 if (DropDownList1.SelectedValue == "Staff")
                 {
-                    string sql = "INSERT INTO staff (Fname, Lname, SRole, Work_email, officeID, Phone_num, DOB) VALUES (@fname, @lname, @role, @email, @office, @phone_num, @dob)";
+                    string sql = "INSERT INTO staff (Fname, Lname, SRole, Work_email, officeID, Phone_num, DOB, Salary) VALUES (@fname, @lname, @role, @email, @office, @phone_num, @dob, @Salary)";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@fname", fname.Text);
                     command.Parameters.AddWithValue("@role", role.Text);
@@ -68,6 +68,7 @@ namespace WebApplication1
                     command.Parameters.AddWithValue("@phone_num", phone_num.Text);
                     command.Parameters.AddWithValue("@email", email.Text);
                     command.Parameters.AddWithValue("@office", office.Text);
+                    command.Parameters.AddWithValue("@Salary", Salary.Text);
 
                     command.ExecuteNonQuery();
                 }

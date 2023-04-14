@@ -145,6 +145,7 @@ namespace WebApplication1
 
         protected void btnPrintSummary_Click(object sender, EventArgs e)
         {
+            
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -192,9 +193,14 @@ namespace WebApplication1
             pdfDoc.Add(insuranceAdjustmentsParagraph);
 
             // Add payments section
-            var paymentsParagraph = new iTextSharp.text.Paragraph($"Payments: {lblpayments.Text}\n\n", pastDueFont);
+            var paymentsParagraph = new iTextSharp.text.Paragraph($"Co-Payments: {lblpayments.Text}\n\n", pastDueFont);
             paymentsParagraph.Alignment = Element.ALIGN_CENTER;
-            pdfDoc.Add(paymentsParagraph);
+            pdfDoc.Add(paymentsParagraph)
+                ;
+            // Add payments section
+            var payments2Paragraph = new iTextSharp.text.Paragraph($"Payments: {lblmanpay.Text}\n\n", pastDueFont);
+            payments2Paragraph.Alignment = Element.ALIGN_CENTER;
+            pdfDoc.Add(payments2Paragraph);
 
             // Add total due section
             var totalDueParagraph = new iTextSharp.text.Paragraph($"Total due: {lblTotalDue.Text}\n\n", pastDueFont);

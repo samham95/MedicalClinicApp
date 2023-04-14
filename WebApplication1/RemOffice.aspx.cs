@@ -25,6 +25,15 @@ namespace WebApplication1
 
             try
             {
+
+                string query = "SELECT CONCAT(officeAddress) from office WHERE officeID = @address";
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@address", Convert.ToInt32(id.Text));
+                object result = cmd.ExecuteScalar();
+                string outcome = result.ToString();
+                
+                string script = "<scriptalert('DELETED ' + outcome)";
+
                 //  remove a office
                 string sql = "DELETE FROM office WHERE officeAddress = @address";
                 MySqlCommand command = new MySqlCommand(sql, connection);

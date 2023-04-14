@@ -33,8 +33,15 @@ namespace WebApplication1
             object result = cmd.ExecuteScalar();
             string fullname = result.ToString();
             welcomeHeader.InnerText = "Welcome, " + fullname;
-        }
+            LinkButton1.Text = "Logged in as: " + fullname;
 
+        }
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
+
+        }
 
         protected void BindData()
         {
@@ -142,7 +149,15 @@ namespace WebApplication1
                             {
                                 DateTime timeToConfirm = appointmentDateTime.AddHours(-24);
                                 TimeSpan timeRemaining = timeToConfirm - DateTime.Now;
-                                row["TimeToConfirm"] = String.Format("{0} days, {1} hours, {2} minutes", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes);
+
+                                if (timeRemaining < TimeSpan.Zero)
+                                {
+                                    row["TimeToConfirm"] = "Time Elapsed";
+                                }
+                                else
+                                {
+                                    row["TimeToConfirm"] = String.Format("{0} days, {1} hours, {2} minutes", timeRemaining.Days, timeRemaining.Hours, timeRemaining.Minutes);
+                                }
                             }
                             catch (Exception)
                             {
@@ -156,6 +171,8 @@ namespace WebApplication1
                     connection.Close();
                 }
             }
+
+
 
             DataTable dt2 = new DataTable();
 
@@ -176,6 +193,26 @@ namespace WebApplication1
                     connection.Close();
                 }
             }
+
+            DataTable dt3 = new DataTable();
+
+            // Retrieve data from database into previous appointment grid
+            string query3 = "SELECT prescriptionID as PrescriptionID, drug_name as DrugName, dosage as Dosage, refills as Refills, notes as Notes FROM prescriptions where patientID = @patientID";
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(query3, connection))
+                {
+                    command.Parameters.AddWithValue("@PatientID", patientID);
+                    connection.Open();
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt3);
+                        GridView4.DataSource = dt3;
+                        GridView4.DataBind();
+                    }
+                    connection.Close();
+                }
+            }
         }
 
 
@@ -183,64 +220,68 @@ namespace WebApplication1
         {
             int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            string timeRemaining = GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[8].Text;
 
             if (e.CommandName == "ConfirmAppointment")
             {
-                // Get patient email
-                string email_query = "SELECT DISTINCT patients.email as email, appointmentDate as date, appointmentTime as time, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as doctorName FROM patients, appointment, doctor WHERE appointment.patientID=patients.patientID AND appointment.doctorID = doctor.doctorID AND appointmentID = @APID";
-                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-                MySqlConnection connect = new MySqlConnection(connString);
-                connect.Open();
-                MySqlCommand cmd = new MySqlCommand(email_query, connect);
-                cmd.Parameters.AddWithValue("@apid", appointmentID);
-                MySqlDataReader reader = cmd.ExecuteReader();
-                reader.Read();
-                if (reader.HasRows)
+                if (!timeRemaining.Contains("Time Elapsed"))
                 {
-                    string email = reader["email"].ToString();
-                    string doctorName = reader["doctorName"].ToString();
-                    string date = reader["date"].ToString();
-                    string time = reader["time"].ToString();
-                    reader.Close();
-                    connect.Close();
-                    date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
-
-
-                    // Update approval status in database
-                    string query = "UPDATE appointment SET PATIENT_CONFIRM = @CONFIRM WHERE appointmentID = @ID";
-                    using (MySqlConnection connection = new MySqlConnection(connString))
-                    {
-                        connection.Open();
-                        using (MySqlCommand command = new MySqlCommand(query, connection))
+                        // Get patient email
+                        string email_query = "SELECT DISTINCT patients.email as email, appointmentDate as date, appointmentTime as time, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as doctorName FROM patients, appointment, doctor WHERE appointment.patientID=patients.patientID AND appointment.doctorID = doctor.doctorID AND appointmentID = @APID";
+                        string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+                        MySqlConnection connect = new MySqlConnection(connString);
+                        connect.Open();
+                        MySqlCommand cmd = new MySqlCommand(email_query, connect);
+                        cmd.Parameters.AddWithValue("@apid", appointmentID);
+                        MySqlDataReader reader = cmd.ExecuteReader();
+                        reader.Read();
+                        if (reader.HasRows)
                         {
-                            command.Parameters.AddWithValue("@CONFIRM", true);
-                            command.Parameters.AddWithValue("@ID", appointmentID);
-                            int rowsAffected = command.ExecuteNonQuery();
-                            connection.Close();
-                            // Refresh data grid
-                            BindData();
-                            string confirmed = GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[8].Text;
-                            if (confirmed == "Patient Confirmed")
-                            {
-                                // Send confirmation email to patient
-                                MailMessage mail = new MailMessage();
-                                mail.To.Add(email);
-                                mail.Subject = "Appointment Confirmed";
-                                mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please arrive to your appointment at least 15 minutes before the scheduled time";
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Send(mail);
+                            string email = reader["email"].ToString();
+                            string doctorName = reader["doctorName"].ToString();
+                            string date = reader["date"].ToString();
+                            string time = reader["time"].ToString();
+                            reader.Close();
+                            connect.Close();
+                            date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
 
-                                // Refresh data grid
-                                BindData();
+
+                            // Update approval status in database
+                            string query = "UPDATE appointment SET PATIENT_CONFIRM = @CONFIRM WHERE appointmentID = @ID";
+                            using (MySqlConnection connection = new MySqlConnection(connString))
+                            {
+                                connection.Open();
+                                using (MySqlCommand command = new MySqlCommand(query, connection))
+                                {
+                                    command.Parameters.AddWithValue("@CONFIRM", true);
+                                    command.Parameters.AddWithValue("@ID", appointmentID);
+                                    int rowsAffected = command.ExecuteNonQuery();
+                                    connection.Close();
+                                    // Refresh data grid
+                                    BindData();
+                                    string confirmed = GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[9].Text;
+                                    if (confirmed == "Patient Confirmed")
+                                    {
+                                        // Send confirmation email to patient
+                                        MailMessage mail = new MailMessage();
+                                        mail.To.Add(email);
+                                        mail.Subject = "Appointment Confirmed";
+                                        mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please arrive to your appointment at least 15 minutes before the scheduled time";
+                                        SmtpClient smtp = new SmtpClient();
+                                        smtp.Send(mail);
+
+                                        // Refresh data grid
+                                        BindData();
+                                    }
+                                }
                             }
                         }
-                    }
-                }
 
+                }
             }
             else if (e.CommandName == "EditAppointment")
             {
-                Response.Redirect("PatEditApp.aspx?appointmentID=" + appointmentID +"&patientID=" + patientID);
+                Response.Redirect("PatEditApp.aspx?appointmentID=" + appointmentID + "&patientID=" + patientID);
             }
             else if (e.CommandName == "CancelAppointment")
             {
@@ -323,6 +364,10 @@ namespace WebApplication1
                 int testID = Convert.ToInt32(GridView3.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
                 Response.Redirect("ScheduleTest.aspx?patientID=" + patientID + "&testID=" + testID);
             }
+        }
+        protected void GridView4_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)

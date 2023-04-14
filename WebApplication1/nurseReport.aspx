@@ -74,6 +74,10 @@
             Patient Symptoms:</label><br />
             <asp:TextBox ID="symptomsBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="57px" MaxLength="200" TextMode="MultiLine" Width="420px"></asp:TextBox>
 &nbsp;<br />
+            <br />
+                        <asp:CheckBox ID="prescriptionCheckBox" runat="server" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px" Text="Requires Prescription" Width="285px" />
+            <br />
+            <br />
             Patient Prescription:<br />
             <asp:TextBox ID="prescriptionBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="57px" MaxLength="200" TextMode="MultiLine" Width="420px"></asp:TextBox>
             <br />

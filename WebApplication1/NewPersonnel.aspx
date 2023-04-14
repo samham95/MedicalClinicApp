@@ -115,6 +115,10 @@
                         <label for="office">(If adding staff or nurse.) Office ID </label>
                         <asp:TextBox ID="office" runat="server"></asp:TextBox>
                     </div>
+                    <div class="form-group">
+                        Salary<label for="email"><span class="required">*</span></label>
+                        <asp:TextBox ID="Salary" runat="server"></asp:TextBox>
+                    </div>
                     <p style="font-weight: normal;"><span class="required">* </span>Required information</p>
                     <!-- This is a button to clear the form fields -->
                     <asp:Button ID="clear" runat="server" OnClick="ButtonClear_Click" Text="Clear Entries"/>

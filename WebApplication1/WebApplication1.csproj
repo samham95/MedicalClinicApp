@@ -369,6 +369,13 @@
     <Compile Include="RemPersonnel.aspx.designer.cs">
       <DependentUpon>RemPersonnel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportGenerator.aspx.cs">
+      <DependentUpon>ReportGenerator.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportGenerator.aspx.designer.cs">
+      <DependentUpon>ReportGenerator.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportView.aspx.cs">
       <DependentUpon>ReportView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -480,6 +487,7 @@
     <Content Include="NewPatient.aspx" />
     <Content Include="RemOffice.aspx" />
     <Content Include="RemPersonnel.aspx" />
+    <Content Include="ReportGenerator.aspx" />
     <Content Include="ReportView.aspx" />
     <Content Include="ScheduleTest.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />

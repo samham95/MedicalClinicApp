@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     
-    <title>NEW APPOINTMENT</title>
+    <title>NEW TEST</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
     	<link href="navbar.css" rel="stylesheet" />
         <link href="AdminPages.css" rel="stylesheet" />
