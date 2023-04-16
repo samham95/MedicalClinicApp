@@ -114,7 +114,7 @@
                     <asp:BoundField DataField="officeID" HeaderText="OfficeID" Visible="false" />
                     <asp:BoundField DataField="OfficeLocation" HeaderText="Office Location" NullDisplayText="Please Schedule" />
                     <asp:BoundField DataField="nurseID" HeaderText="NurseID" Visible="false" />
-                    <asp:BoundField DataField="Nurse" HeaderText="Nurse" NullDisplayText="Please Schedule"/>
+                    <asp:BoundField DataField="Nurse" HeaderText="Nurse" NullDisplayText="Not Assigned"/>
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}" NullDisplayText="Please Schedule" />
                     <asp:BoundField DataField="Time" HeaderText="Time" NullDisplayText="Please Schedule" />
                     <asp:ButtonField ButtonType="button" Text="SCHEDULE" CommandName="schedule" HeaderText="Schedule" />
@@ -129,6 +129,7 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
+        <div>
                     <h1>Prescriptions</h1>
             <asp:GridView ID="GridView4" runat="server" AutoGenerateColumns="False" DataKeyNames="prescriptionID"
                 OnRowCommand="GridView4_RowCommand" CellPadding="3" ForeColor="Black" GridLines="Vertical" BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px">

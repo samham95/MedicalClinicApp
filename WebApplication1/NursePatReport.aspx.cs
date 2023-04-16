@@ -8,41 +8,41 @@ using MySql.Data.MySqlClient;
 
 namespace WebApplication1
 {
-    public partial class ReportGenerator : System.Web.UI.Page
+    public partial class NursePatReport : System.Web.UI.Page
     {
-protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
 
-{
-    // Get Doctor Name for Welcome Header
-    int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
-    string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-    MySqlConnection connection = new MySqlConnection(connectionString);
-    string query = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) from doctor WHERE doctorID = @doctorID";
-    MySqlCommand command = new MySqlCommand(query, connection);
-    command.Parameters.AddWithValue("doctorID", doctorID);
-    connection.Open();
-    object result = command.ExecuteScalar();
-    string fullname = result.ToString();
-    LinkButton1.Text = "Logged in as: " + fullname;
-
-    if (!IsPostBack)
-    {
-        string query2 = "SELECT patients.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as fullname FROM patients WHERE patients.doctorID = @doctorID";
-        MySqlCommand cmd = new MySqlCommand(query2, connection);
-        cmd.Parameters.AddWithValue("@doctorID", doctorID);
-        MySqlDataReader reader = cmd.ExecuteReader();
-
-        while (reader.Read())
         {
-            ListItem item = new ListItem(reader["fullname"].ToString(), reader["patientID"].ToString());
-            patientName.Items.Add(item);
+            // Get Doctor Name for Welcome Header
+            int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
+            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            string query = "SELECT CONCAT('RN ', fname, ' ', lname) from nurse WHERE NID = @nurseID";
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("nurseID", nurseID);
+            connection.Open();
+            object result = command.ExecuteScalar();
+            string fullname = result.ToString();
+            LinkButton1.Text = "Logged in as: " + fullname;
+
+            if (!IsPostBack)
+            {
+                string query_dr = "SELECT CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName, doctor.doctorID as doctorID FROM doctor, office, nurse, schedule WHERE nurse.NID = @nurseID AND nurse.officeID = office.officeID AND schedule.doctor = doctor.doctorID AND (schedule.Monday = office.officeID OR schedule.Tuesday = office.officeID OR schedule.Wednesday = office.officeID OR schedule.Thursday = office.officeID OR schedule.Friday = office.officeID)";
+
+                MySqlCommand cmd_dr = new MySqlCommand(query_dr, connection);
+                cmd_dr.Parameters.AddWithValue("@nurseID", nurseID);
+                MySqlDataReader reader_dr = cmd_dr.ExecuteReader();
+                while (reader_dr.Read())
+                {
+                    ListItem item = new ListItem(reader_dr["docName"].ToString(), reader_dr["doctorID"].ToString());
+                    doctorName.Items.Add(item);
+                }
+
+                reader_dr.Close();
+            }
+            connection.Close();
+
         }
-
-        reader.Close();
-    }
-    connection.Close();
-
-}
 
 
         protected void GenerateReport_Click(object sender, EventArgs e)
@@ -178,7 +178,7 @@ protected void Page_Load(object sender, EventArgs e)
 
 
             // Add the report table to the page
-            
+
             reportDiv.Controls.Add(reportTable);
 
             // Generate the chart
@@ -191,7 +191,7 @@ protected void Page_Load(object sender, EventArgs e)
             Chart chart = new Chart();
             chart.Width = 500;
             chart.Height = 300;
-            chart.Titles.Add("Vital Stats History");
+            chart.Titles.Add("Vitals History - Blood Pressue");
             ChartArea chartArea = new ChartArea();
             chartArea.AxisY.Minimum = 50; // Set the minimum value for the Y-axis
             chartArea.AxisY.Maximum = 150; // Set the maximum value for the Y-axis
@@ -205,7 +205,7 @@ protected void Page_Load(object sender, EventArgs e)
             Chart chart2 = new Chart();
             chart2.Width = 500;
             chart2.Height = 300;
-            chart2.Titles.Add("Vital Stats History");
+            chart2.Titles.Add("Vitals History - Temperature");
             ChartArea chartArea2 = new ChartArea();
             chartArea2.AxisY.Minimum = 80; // Set the minimum value for the Y-axis
             chartArea2.AxisY.Maximum = 120; // Set the maximum value for the Y-axis
@@ -219,7 +219,7 @@ protected void Page_Load(object sender, EventArgs e)
             Chart chart3 = new Chart();
             chart3.Width = 500;
             chart3.Height = 300;
-            chart3.Titles.Add("Vital Stats History");
+            chart3.Titles.Add("Vitals History - Heart Rate");
             ChartArea chartArea3 = new ChartArea();
             chartArea3.AxisY.Minimum = 60; // Set the minimum value for the Y-axis
             chartArea3.AxisY.Maximum = 120; // Set the maximum value for the Y-axis
@@ -233,7 +233,7 @@ protected void Page_Load(object sender, EventArgs e)
             Chart chart4 = new Chart();
             chart4.Width = 500;
             chart4.Height = 300;
-            chart4.Titles.Add("Vital Stats History");
+            chart4.Titles.Add("Vitals History - Weight");
             ChartArea chartArea4 = new ChartArea();
             chartArea4.AxisY.Minimum = 100; // Set the minimum value for the Y-axis
             chartArea4.AxisY.Maximum = 200; // Set the maximum value for the Y-axis
@@ -256,38 +256,39 @@ protected void Page_Load(object sender, EventArgs e)
 
             // Set the chart series
             Series bloodPressureSeries_dia = new Series();
-            bloodPressureSeries_dia.Name = "BP diastolic";
+            bloodPressureSeries_dia.Name = "BP diastolic(mmHg)";
             bloodPressureSeries_dia.ChartType = SeriesChartType.Line;
             bloodPressureSeries_dia.BorderWidth = 3;
             chart.Series.Add(bloodPressureSeries_dia);
 
             Series bloodPressureSeries_sys = new Series();
-            bloodPressureSeries_sys.Name = "BP systolic";
+            bloodPressureSeries_sys.Name = "BP systolic(mmHg)";
             bloodPressureSeries_sys.ChartType = SeriesChartType.Line;
             bloodPressureSeries_sys.BorderWidth = 3;
             chart.Series.Add(bloodPressureSeries_sys);
 
             Series temperatureSeries = new Series();
-            temperatureSeries.Name = "Temperature";
+            temperatureSeries.Name = "Temperature(F)";
             temperatureSeries.ChartType = SeriesChartType.Line;
             temperatureSeries.BorderWidth = 3;
             chart2.Series.Add(temperatureSeries);
 
             Series heartRateSeries = new Series();
-            heartRateSeries.Name = "Heart Rate";
+            heartRateSeries.Name = "Heart Rate(bpm)";
             heartRateSeries.ChartType = SeriesChartType.Line;
             heartRateSeries.BorderWidth = 3;
             chart3.Series.Add(heartRateSeries);
+            // Set the range for the Y-axis (value)
 
 
             Series WeightSeries = new Series();
-            WeightSeries.Name = "Weight";
+            WeightSeries.Name = "Weight(lb)";
             WeightSeries.ChartType = SeriesChartType.Line;
             WeightSeries.BorderWidth = 3;
             chart4.Series.Add(WeightSeries);
 
             Series HeightSeries = new Series();
-            HeightSeries.Name = "Height";
+            HeightSeries.Name = "Height(in)";
             HeightSeries.ChartType = SeriesChartType.Line;
             HeightSeries.BorderWidth = 3;
             chart5.Series.Add(HeightSeries);
@@ -310,7 +311,7 @@ protected void Page_Load(object sender, EventArgs e)
                     temperatureSeries.Points.AddXY(date, temperature);
                     heartRateSeries.Points.AddXY(date, heartRate);
                     WeightSeries.Points.AddXY(date, weight);
-                    HeightSeries.Points.AddXY(date,height);
+                    HeightSeries.Points.AddXY(date, height);
                 }
             }
             //Console.WriteLine($"Blood Pressure Series: {bloodPressureSeries_dia.Points.Count} points");
@@ -333,9 +334,30 @@ protected void Page_Load(object sender, EventArgs e)
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
-            Response.Redirect("ProviderView.aspx?doctorID=" + doctorID);
+            int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
+            Response.Redirect("NurseView.aspx?nurseID=" + nurseID);
 
+        }
+
+        protected void doctorName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            patientName.Items.Clear();
+            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+            string query2 = "SELECT patients.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as fullname FROM patients WHERE patients.doctorID = @doctorID";
+            int doctorID = Convert.ToInt32(doctorName.SelectedValue);
+            MySqlCommand cmd = new MySqlCommand(query2, connection);
+            cmd.Parameters.AddWithValue("@doctorID", doctorID);
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                ListItem item = new ListItem(reader["fullname"].ToString(), reader["patientID"].ToString());
+                patientName.Items.Add(item);
+            }
+            reader.Close();
+            connection.Close();
         }
     }
 }

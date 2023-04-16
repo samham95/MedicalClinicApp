@@ -40,7 +40,7 @@
     <link href="AdminPages.css" rel="stylesheet" />
 
 
-    <title>Docotor View</title>
+    <title>Doctor Portal</title>
 </head>
 <body>
         <form id="form1" runat="server">
@@ -53,6 +53,9 @@
       <a href="HomePage.aspx">Home</a>
       <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
     </div>
+    <br />
+     <asp:Button ID="Button1" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button1_Click" Text="Patient Reports" Height="51px" Width="257px" Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" />
+
     <br />
     <br />
    <h1 id="welcomeHeader" runat="server"> </h1>

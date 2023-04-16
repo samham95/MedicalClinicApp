@@ -49,7 +49,7 @@ namespace WebApplication1
 
             // Retrieve data from database into upcoming appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND appointmentDate >= current_date() AND appointment.archive = false ORDER BY appointmentDate ASC";
+            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date FROM appointment INNER JOIN patients ON appointment.PatientID = Patients.patientID INNER JOIN office ON Appointment.OfficeID = Office.officeID WHERE appointment.doctorID = @DoctorID AND appointmentDate >= current_date() AND appointment.archive = false AND (referral = true OR referral is NULL) ORDER BY appointmentDate ASC";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -251,7 +251,7 @@ namespace WebApplication1
 
 
                     // Update approval status in database
-                    string query = "UPDATE appointment SET Approval = @Approved WHERE appointmentID = @ID";
+                    string query = "UPDATE appointment SET archive = true, cancellation_reason = 'Canceled by Doctor.', Approval = @Approved WHERE appointmentID = @ID";
                     using (MySqlConnection connection = new MySqlConnection(connString))
                     {
                         using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -367,7 +367,7 @@ namespace WebApplication1
                     // Update referral status in database
                     using (MySqlConnection connection = new MySqlConnection(connString))
                     {
-                        string query_ref = "UPDATE appointment SET appointment.Referral = @Referral WHERE appointment.appointmentID = @ID";
+                        string query_ref = "UPDATE appointment SET appointment.Referral = @Referral, Archive = true, cancellation_reason = 'Referral Denied' WHERE appointment.appointmentID = @ID";
                         using (MySqlCommand command = new MySqlCommand(query_ref, connection))
                         {
                             command.Parameters.AddWithValue("@Referral", false);
@@ -447,7 +447,11 @@ namespace WebApplication1
             }
         }
 
-
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
+            Response.Redirect("ReportGenerator.aspx?doctorID=" + doctorID);
+        }
     }
 }
 

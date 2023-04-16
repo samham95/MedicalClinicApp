@@ -17,7 +17,7 @@ namespace WebApplication1
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
 
-            string titleQuery = "SELECT CONCAT(fname,' ', lname, ' Appointment on ', AppointmentDate) FROM patients, appointment WHERE appointment.patientID = patients.patientID AND appointment.appointmentID = @appointmentID";
+            string titleQuery = "SELECT CONCAT(fname,' ', lname, ' - Appointment on ', AppointmentDate) FROM patients, appointment WHERE appointment.patientID = patients.patientID AND appointment.appointmentID = @appointmentID";
             string patientNameQuery = "SELECT CONCAT(fname, ' ', lname) FROM appointment, patients WHERE appointment.appointmentID = @appointmentID AND appointment.patientID = patients.patientID";
             string doctorNameQuery = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', Specialty) from doctor, appointment WHERE appointment.appointmentID = @appointmentID AND appointment.doctorID = doctor.doctorID ";
             string nurseNameQuery = "SELECT CONCAT('RN ', fname, ' ', lname) from nurse WHERE NID = @nurseID";
@@ -63,15 +63,18 @@ namespace WebApplication1
             decimal insuranceCoverage = decimal.Parse(insuranceCovBox.Text);
             decimal copay = decimal.Parse(copayBox.Text);
             decimal temperature = decimal.Parse(temperatureBox.Text);
-            string pressure = pressureBox.Text;
+            string pressure_sys = p_sys.Text;
+            string pressure_dia = p_dia.Text;
             int heartRate = int.Parse(heartrateBox.Text);
             string furtherEval = DropDownList1.SelectedValue;
+            string height = heightBox.Text;
+            string weight = weightBox.Text;
 
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string requiresPrescription = "UPDATE visit_details SET prescriptionRequired = true WHERE reportID = @reportID";
+            string requiresPrescription = "UPDATE visit_details SET prescriptionRequired = true, prescription = @prescription WHERE reportID = @reportID";
 
-            string insertVisit = "INSERT INTO visit_details (symptoms,diagnosis,temperature,bloodPressure,heartRate,appointmentID, nurseID) VALUES (@symptoms,@diagnosis,@temperature,@pressure,@heartRate, @appID, @nurseID)";
+            string insertVisit = "INSERT INTO visit_details (symptoms,diagnosis,temperature,bloodPressure_sys, bloodPressure_dia,heartRate,appointmentID, nurseID, height_inches, weight_lb) VALUES (@symptoms,@diagnosis,@temperature,@psys,@pdia,@heartRate, @appID, @nurseID,@height,@weight)";
             string getReportID = "Select reportID from visit_details WHERE appointmentID = @appID";
             string insertInvoice = "INSERT INTO invoice (total,claim,paid_amount,reportID) VALUES (@total,@claim,@copay,@reportID)";
             string eval = "UPDATE visit_details SET furtherEval = @furtherEval WHERE reportID = @reportID";
@@ -81,12 +84,15 @@ namespace WebApplication1
                 MySqlCommand visitCmd = new MySqlCommand(insertVisit, connection);
                 visitCmd.Parameters.AddWithValue("@symptoms", patientSymptoms);
                 visitCmd.Parameters.AddWithValue("@diagnosis", patientDiagnosis);
-                //visitCmd.Parameters.AddWithValue("@prescription", patientPrescription);
                 visitCmd.Parameters.AddWithValue("@temperature", temperature);
                 visitCmd.Parameters.AddWithValue("@heartrate", heartRate);
-                visitCmd.Parameters.AddWithValue("@pressure", pressure);
+                visitCmd.Parameters.AddWithValue("@psys", pressure_sys);
+                visitCmd.Parameters.AddWithValue("@pdia", pressure_dia);
                 visitCmd.Parameters.AddWithValue("@appID", appointmentID);
                 visitCmd.Parameters.AddWithValue("@nurseID", nurseID);
+                visitCmd.Parameters.AddWithValue("@height", height);
+                visitCmd.Parameters.AddWithValue("@weight", weight);
+
 
                 connection.Open();
 
@@ -115,6 +121,7 @@ namespace WebApplication1
                 {
                     MySqlCommand updatePrescription = new MySqlCommand(requiresPrescription, connection);
                     updatePrescription.Parameters.AddWithValue("@reportID", reportID);
+                    updatePrescription.Parameters.AddWithValue("@prescription", patientPrescription);
                     updatePrescription.ExecuteNonQuery();
                 }
 

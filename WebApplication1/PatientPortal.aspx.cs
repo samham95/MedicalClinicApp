@@ -82,13 +82,20 @@ namespace WebApplication1
                 office_cmd.Parameters.AddWithValue("@officeID", officeID);
                 try
                 {
-                    nurse_name = nurse_cmd.ExecuteScalar().ToString();
                     officeLocation = office_cmd.ExecuteScalar().ToString();
-
                 }
                 catch (Exception)
                 {
                     officeLocation = DBNull.Value.ToString();
+                }
+
+                try
+                {
+                    nurse_name = nurse_cmd.ExecuteScalar().ToString();
+
+                }
+                catch (Exception)
+                {
                     nurse_name = DBNull.Value.ToString();
 
                 }
@@ -196,7 +203,7 @@ namespace WebApplication1
 
             DataTable dt3 = new DataTable();
 
-            // Retrieve data from database into previous appointment grid
+            // Retrieve data from database into prescription grid
             string query3 = "SELECT prescriptionID as PrescriptionID, drug_name as DrugName, dosage as Dosage, refills as Refills, notes as Notes FROM prescriptions where patientID = @patientID";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -305,7 +312,7 @@ namespace WebApplication1
                     date = DateTime.ParseExact(date, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
                     time = DateTime.ParseExact(time, "h:mm:ss", CultureInfo.InvariantCulture).ToString("h:mm");
                     // Update approval status in database
-                    string query = "UPDATE appointment SET Archive = @archive WHERE appointmentID = @ID";
+                    string query = "UPDATE appointment SET cancellation_reason = 'Canceled by Patient.', Archive = @archive WHERE appointmentID = @ID";
                     using (MySqlConnection connection = new MySqlConnection(connString))
                     {
                         using (MySqlCommand command = new MySqlCommand(query, connection))

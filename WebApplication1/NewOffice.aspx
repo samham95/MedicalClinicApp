@@ -36,6 +36,14 @@
                             <label for="address"> Address <span class="required">*</span></label>&nbsp;
                             <asp:TextBox ID="address" runat="server"></asp:TextBox>
                         </div>
+                        <div class="form-group">
+                            <label for="phone"> Phone Number <span class="required">*</span></label>&nbsp;
+                            <asp:TextBox ID="phone" runat="server"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"> Email <span class="required">*</span></label>&nbsp;
+                            <asp:TextBox ID="email" runat="server"></asp:TextBox>
+                        </div>
                         <p style="font-weight: normal;"><span class="required">*</span> Required information</p>
                         <asp:Button ID="clear" runat="server" OnClick="ButtonClear_Click" Text="Clear Entries"/>
                         <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click_AddOff" />

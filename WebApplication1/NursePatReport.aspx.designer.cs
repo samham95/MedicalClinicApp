@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class ProviderView
+    public partial class NursePatReport
     {
 
         /// <summary>
@@ -33,66 +33,102 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
-        /// Button1 control.
+        /// startDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.TextBox startDate;
 
         /// <summary>
-        /// welcomeHeader control.
+        /// endDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl welcomeHeader;
+        protected global::System.Web.UI.WebControls.TextBox endDate;
 
         /// <summary>
-        /// GridView1 control.
+        /// doctorName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.DropDownList doctorName;
 
         /// <summary>
-        /// GridView2 control.
+        /// patientName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.DropDownList patientName;
 
         /// <summary>
-        /// GridView3 control.
+        /// generateReport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView3;
+        protected global::System.Web.UI.WebControls.Button generateReport;
 
         /// <summary>
-        /// prescriptionGrid control.
+        /// reportDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView prescriptionGrid;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportDiv;
 
         /// <summary>
-        /// GridView4 control.
+        /// chartPlaceholder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView4;
+        protected global::System.Web.UI.WebControls.Panel chartPlaceholder;
+
+        /// <summary>
+        /// chartPlaceholder2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel chartPlaceholder2;
+
+        /// <summary>
+        /// chartPlaceholder3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel chartPlaceholder3;
+
+        /// <summary>
+        /// chartPlaceholder4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel chartPlaceholder4;
+
+        /// <summary>
+        /// chartPlaceholder5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel chartPlaceholder5;
     }
 }

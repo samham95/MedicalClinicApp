@@ -33,6 +33,15 @@ namespace WebApplication1
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportHeader;
 
         /// <summary>
+        /// reportBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl reportBy;
+
+        /// <summary>
         /// patientNameBox control.
         /// </summary>
         /// <remarks>
@@ -69,13 +78,22 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox temperatureBox;
 
         /// <summary>
-        /// pressureBox control.
+        /// p_sys control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox pressureBox;
+        protected global::System.Web.UI.WebControls.TextBox p_sys;
+
+        /// <summary>
+        /// p_dia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox p_dia;
 
         /// <summary>
         /// heartrateBox control.
@@ -85,6 +103,24 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox heartrateBox;
+
+        /// <summary>
+        /// heightBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox heightBox;
+
+        /// <summary>
+        /// weightBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox weightBox;
 
         /// <summary>
         /// symptomsBox control.

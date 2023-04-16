@@ -25,9 +25,12 @@ namespace WebApplication1
             try
             {
                 // Insert new office
-                string sql = "INSERT INTO office (officeAddress) VALUES (@address)";
+                string sql = "INSERT INTO office (officeAddress, phone_num, email) VALUES (@address, @phone, @email)";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@address", address.Text);
+                command.Parameters.AddWithValue("@phone", phone.Text);
+                command.Parameters.AddWithValue("@email", email.Text);
+
                 command.ExecuteNonQuery();
 
             }

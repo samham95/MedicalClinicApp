@@ -54,6 +54,16 @@
 				<label for="date-of-birth">Date of Birth <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="dob" runat="server" TextMode="Date" DataFormatString="{yyyy/MM/dd}"></asp:TextBox>
 			</div>
+
+            <div class="form-group">
+				<label for="gender">Gender<span class="required">*</span></label>&nbsp;
+                <asp:DropDownList ID="gender" runat="server">
+                    <asp:ListItem></asp:ListItem>
+                    <asp:ListItem>Male</asp:ListItem>
+                    <asp:ListItem>Female</asp:ListItem>
+                    <asp:ListItem>Other</asp:ListItem>
+                </asp:DropDownList>
+			</div>
             
             <div class="form-group">
                 <label for="phone">Phone Number <span class="required">*</span></label>&nbsp;
@@ -101,6 +111,14 @@
                 ControlToValidate="ECemail" ErrorMessage="Please enter a valid email address." 
                     ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" /></span>
 			</div>
+            <div class="form-group">
+				<label for="ECRelation">Preferred Pharmacy <span class="required">*</span></label>&nbsp;
+                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+			</div>
+			<div class="form-group">
+				<label for="ECRelation">Pharmacy Location<span class="required">*</span></label>&nbsp;
+                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+			</div>
 			</fieldset>
  
             <br />
@@ -143,7 +161,10 @@
                 <br />
 			</div>
 
-
+			<div class="form-group">
+				<label for="reason">Reason for appointment <span class="required">*</span></label>&nbsp;
+                <asp:TextBox ID="reason" runat="server" TextMode="MultiLine"></asp:TextBox>
+			</div>
 			<div class="form-group">
 				<label for="pcp-or-specialist">Do you want to see a PCP or specialist?<span class="required">*</span></label>
                 <asp:CheckBox ID="pcp" runat="server" />
@@ -155,17 +176,6 @@
                 </label>
                 </div>
 
-            <div class="form-group">
-				<label for="referral">
-                <br />
-                If you&#39;re seeing a specialist, do you have a referral?</label>
-                <asp:CheckBox ID="CheckBox5" runat="server" />
-                <label for="referral">Yes</label>
-                <asp:CheckBox ID="CheckBox6" runat="server" />
-                <label for="referral">No<br />
-                <br />
-                </label>
-			</div>
 
 			<div class="form-group">
 				<label for="insurance">Do you have insurance?<span class="required">*</span></label>
@@ -181,7 +191,7 @@
 				<label for="insurance-name">Insurance Name</label>
 				<input type="text" name="insurance-name" id="insurance-name"/>
 
-				<label for="insurance-type">Insurance Type</label>
+				<label for="insurance-type">Insurance Group ID</label>
 				<input type="text" name="insurance-type" id="insurance-type"/>
 			</div>
 

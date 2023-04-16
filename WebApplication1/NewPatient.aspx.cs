@@ -134,7 +134,6 @@ namespace WebApplication1
             string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connString);
             string pcp_name = primary.SelectedValue;
-            bool hasReferral = CheckBox5.Checked;
 
             connection.Open();
 
@@ -149,7 +148,7 @@ namespace WebApplication1
             try
             {
                 // Inset new patient data
-                string sql = "INSERT INTO patients (fname, Minitial, lname, dob, phone_num, email, Address, doctorID, referral) VALUES (@fname, @Minitial, @lname, @dob, @phone_num, @email, @Address, @doctorID, @referral)";
+                string sql = "INSERT INTO patients (fname, Minitial, lname, dob, phone_num, email, Address, doctorID, gender) VALUES (@fname, @Minitial, @lname, @dob, @phone_num, @email, @Address, @doctorID, @gender)";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 command.Parameters.AddWithValue("@fname", fname.Text);
@@ -160,7 +159,7 @@ namespace WebApplication1
                 command.Parameters.AddWithValue("@email", email.Text);
                 command.Parameters.AddWithValue("@Address", address.Text);
                 command.Parameters.AddWithValue("@doctorID", doctorID);
-                command.Parameters.AddWithValue("@referral", hasReferral);
+                command.Parameters.AddWithValue("@gender", gender.SelectedValue.ToString());
 
                 command.ExecuteNonQuery();
 

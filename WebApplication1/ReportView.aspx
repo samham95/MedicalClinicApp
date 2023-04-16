@@ -28,6 +28,7 @@
         <div style="font-weight: bold">
             <!--<h1>Report for spiderman on 3/28/23</h1> --> <!-- placeholder header -->
             <h1 id="reportHeader" runat="server"> </h1>
+            <p id ="reportBy" runat="server"></p>
             <hr style="color: #000000" />
             <label for="patientName" style="font-weight: bold">
             <br />
@@ -54,13 +55,21 @@
             <label for="patientSymptoms">
             <br />
             <br />
-            Temperature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Blood Pressure:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Heart Rate:
-            <br />
+Temperature(F)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP sys(mmHg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP dia(dys mmHg)&nbsp;&nbsp;&nbsp;&nbsp;<br />
+                &nbsp;<div style="display:inline">
+                  <asp:TextBox ID="temperatureBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="p_sys" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="p_dia" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+             </div>
+                           <br />
+                    <br />
+&nbsp; Height(in)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight(lb)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Heart Rate(bpm)<br />
+&nbsp;<div style="display:inline">
+                 <asp:TextBox ID="heartrateBox" runat="server" Width="86px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <asp:TextBox ID="heightBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="weightBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
 
-             <div style="display:inline">
-                  <asp:TextBox ID="temperatureBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px" ReadOnly="True"></asp:TextBox>
-                 <asp:TextBox ID="pressureBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px" ReadOnly="True"></asp:TextBox>
-                 <asp:TextBox ID="heartrateBox" runat="server" Width="86px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px" ReadOnly="True"></asp:TextBox>
              </div>
             
             <br />

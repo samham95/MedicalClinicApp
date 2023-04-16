@@ -147,6 +147,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -224,6 +225,13 @@
       <DependentUpon>AdminView.aspx</DependentUpon>
     </Compile>
     <Compile Include="AppointmentDataAccessLayer.cs" />
+    <Compile Include="AppointmentReport.aspx.cs">
+      <DependentUpon>AppointmentReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AppointmentReport.aspx.designer.cs">
+      <DependentUpon>AppointmentReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -262,6 +270,13 @@
     </Compile>
     <Compile Include="NewPersonnel.aspx.designer.cs">
       <DependentUpon>NewPersonnel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NursePatReport.aspx.cs">
+      <DependentUpon>NursePatReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NursePatReport.aspx.designer.cs">
+      <DependentUpon>NursePatReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="nurseReport.aspx.cs">
       <DependentUpon>nurseReport.aspx</DependentUpon>
@@ -446,6 +461,7 @@
     <Content Include="AdminPages.css" />
     <Content Include="AdminReports.aspx" />
     <Content Include="AdminView.aspx" />
+    <Content Include="AppointmentReport.aspx" />
     <Content Include="ContactUs.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -472,6 +488,7 @@
     <Content Include="NewLogin.aspx" />
     <Content Include="NewOffice.aspx" />
     <Content Include="NewPersonnel.aspx" />
+    <Content Include="NursePatReport.aspx" />
     <Content Include="nurseReport.aspx" />
     <Content Include="NurseView.aspx" />
     <Content Include="OrderPrescription.aspx" />
