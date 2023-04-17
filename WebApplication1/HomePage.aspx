@@ -42,11 +42,12 @@
           font-family: monospace;
           font-size: 40px;
           font-family: fantasy;
+          margin-top: 0;
         }
 
       .header::before {
           content: "";
-          background-image: url("https://c0.wallpaperflare.com/preview/4/544/846/medical-local-doctor-medicine.jpg");
+          background-image: url("https://plus.unsplash.com/premium_photo-1661740940614-e8cac9342154?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80");
           background-size: cover;
           width: 100%;
           height: 100%;
@@ -56,6 +57,12 @@
           -webkit-filter: blur(2px);
       }
 
+     .footer-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
 
         .header img {
           width: 100%;
@@ -121,6 +128,8 @@
 
       .contact {
   color: black;
+  font-size: 14px; /* Adjust font size */
+    line-height: 1.2; /* Adjust line spacing */
 }
 
     .location-box {
@@ -129,11 +138,13 @@
       padding: 1rem;
       width: 350px;
       position: absolute;
-      bottom: 10%;
-      right: 10%;
+      bottom: 5%;
+      right: 5%;
       border-radius: 15px;
       box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     }
+  
+
 
     </style>
 </head>
@@ -147,11 +158,11 @@
       <a href="PatientLogin.aspx">Patient Login</a>
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
-      <left>Dr. Uma Medical Clinic</left>
+      <left>Coog Medical Clinic</left>
     </div>
   <div class="header">
     <div class="container">
-      <h1>Dr.Uma Clinic </h1>
+      <h1>Coog Clinic </h1>
       <p>Your Health Journey Start Here!</p>
       <a class="btn" href="NewPatient.aspx">Click Here to Schedule Your Appointment Today</a>
     </div>
@@ -161,18 +172,17 @@
 <div class="main">
  
 </div>
-<div class="footer">
-  <section class="contact">
-    <p>Email: info@umamedicalgroup.com | Phone: (713)867-5309</p>
-    <p>Dr. Uma's Clinic © Group 13 - 2023. All rights reserved.</p>
-    <p><a href="AdminLogin.aspx">Admin Login</a></p>
-  </section>
+<div class="footer-container">
+    <div class="footer">
+        <section class="contact">
+
+            <p>Email: info@umamedicalgroup.com | Phone: (713)867-5309</p>
+            <p>Coog Clinic © Group 13 - 2023. All rights reserved.</p>
+            <p><a href="AdminLogin.aspx">Admin Login</a></p>
+        </section>
+    </div>
 </div>
-      <div class="location-box">
-  <h3>Our Office Location</h3>
-  <p>Office 1: 123 Main Street, TX77070, USA</p>
-  <p>Office 2: 1 34 Baker Street, Miami, FL34532, USA</p>
-</div>
+
       
 
 
