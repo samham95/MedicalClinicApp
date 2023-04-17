@@ -54,7 +54,7 @@ namespace WebApplication1
             // Retrieve data from database into upcoming appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, doctor.Specialty as Specialty, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName FROM appointment, patients, office, nurse, doctor where appointment.patientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND nurse.NID = @NID AND appointment.doctorID = doctor.doctorID AND appointmentDate >= current_date() AND appointment.archive = false ORDER BY appointmentDate DESC";
-            string nursequery = " SELECT CONCAT(nurse.fname, ' ', nurse.lname) as Nurse FROM nurse, appointment where nurse.NID = appointment.nurseID AND appointmentID = @appID";
+            string nursequery = " SELECT CONCAT(nurse.fname, ' ', nurse.lname) as Nurse, nurse.NID as nurseID FROM nurse, appointment where nurse.NID = appointment.nurseID AND appointmentID = @appID";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -65,8 +65,10 @@ namespace WebApplication1
                     {
                         adapter.Fill(dt);
                         dt.Columns.Add("Nurse");
+                        dt.Columns.Add("nurseID");
 
                         string nurseName;
+                        string NID;
 
                         foreach (DataRow row in dt.Rows)
                         {
@@ -75,15 +77,21 @@ namespace WebApplication1
                             command2.Parameters.AddWithValue("@appID", appointmentID);
                             try
                             {
-                                nurseName = command2.ExecuteScalar().ToString();
+                                MySqlDataReader reader = command2.ExecuteReader();
+                                reader.Read();
+                                nurseName = reader["Nurse"].ToString();
+                                NID = reader["nurseID"].ToString();
                                 row["Nurse"] = nurseName;
+                                row["nurseID"] = NID;
+                                reader.Close();
                             }
                             catch (Exception)
                             {
                                 row["Nurse"] = DBNull.Value;
+                                row["nurseID"] = DBNull.Value;
                             }
                         }
-
+                        
 
                         GridView1.DataSource = dt;
                         GridView1.DataBind();
@@ -187,10 +195,12 @@ namespace WebApplication1
         {
             int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
             int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+            int NID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["nurseID"]);
+
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
 
-            if (e.CommandName == "GENERATE")
+            if (e.CommandName == "GENERATE" && NID == nurseID)
             {
                 Response.Redirect("nurseReport.aspx?appID=" + appointmentID + "&NID=" + nurseID);
             }
@@ -231,7 +241,7 @@ namespace WebApplication1
         protected void Button1_Click(object sender, EventArgs e)
         {
             int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
-            Response.Redirect("NursePatReport.aspx?nurseID=" + nurseID);
+            Response.Redirect("NursePatientReports.aspx?nurseID=" + nurseID);
         }
     }
 }

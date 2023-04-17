@@ -203,6 +203,16 @@
       <DependentUpon>AboutUs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="AboutUs.aspx.designer.cs">
+      <DependentUpon>AboutUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminInvoiceReport.aspx.cs">
+      <DependentUpon>AdminInvoiceReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminInvoiceReport.aspx.designer.cs">
+      <DependentUpon>AdminInvoiceReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminLogin.aspx.cs">
       <DependentUpon>AdminLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -216,6 +226,13 @@
     </Compile>
     <Compile Include="AdminReports.aspx.designer.cs">
       <DependentUpon>AdminReports.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminScheduleReport.aspx.cs">
+      <DependentUpon>AdminScheduleReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminScheduleReport.aspx.designer.cs">
+      <DependentUpon>AdminScheduleReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminView.aspx.cs">
       <DependentUpon>AdminView.aspx</DependentUpon>
@@ -239,7 +256,17 @@
       <DependentUpon>ContactUs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="ContactUs.aspx.designer.cs">
+      <DependentUpon>ContactUs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DoctorViewPrescriptionsReport.aspx.cs">
+      <DependentUpon>DoctorViewPrescriptionsReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DoctorViewPrescriptionsReport.aspx.designer.cs">
+      <DependentUpon>DoctorViewPrescriptionsReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -271,12 +298,26 @@
     <Compile Include="NewPersonnel.aspx.designer.cs">
       <DependentUpon>NewPersonnel.aspx</DependentUpon>
     </Compile>
+    <Compile Include="NursePatientReports.aspx.cs">
+      <DependentUpon>NursePatientReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NursePatientReports.aspx.designer.cs">
+      <DependentUpon>NursePatientReports.aspx</DependentUpon>
+    </Compile>
     <Compile Include="NursePatReport.aspx.cs">
       <DependentUpon>NursePatReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NursePatReport.aspx.designer.cs">
       <DependentUpon>NursePatReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NursePrescriptionReports.aspx.cs">
+      <DependentUpon>NursePrescriptionReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NursePrescriptionReports.aspx.designer.cs">
+      <DependentUpon>NursePrescriptionReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="nurseReport.aspx.cs">
       <DependentUpon>nurseReport.aspx</DependentUpon>
@@ -326,6 +367,13 @@
     </Compile>
     <Compile Include="PatEditApp.aspx.designer.cs">
       <DependentUpon>PatEditApp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PatientReports.aspx.cs">
+      <DependentUpon>PatientReports.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PatientReports.aspx.designer.cs">
+      <DependentUpon>PatientReports.aspx</DependentUpon>
     </Compile>
     <Compile Include="patpayment.aspx.cs">
       <DependentUpon>patpayment.aspx</DependentUpon>
@@ -457,9 +505,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AboutUs.aspx" />
+    <Content Include="AdminInvoiceReport.aspx" />
     <Content Include="AdminLogin.aspx" />
     <Content Include="AdminPages.css" />
     <Content Include="AdminReports.aspx" />
+    <Content Include="AdminScheduleReport.aspx" />
     <Content Include="AdminView.aspx" />
     <Content Include="AppointmentReport.aspx" />
     <Content Include="ContactUs.aspx" />
@@ -479,6 +529,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="DoctorViewPrescriptionsReport.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -488,7 +539,9 @@
     <Content Include="NewLogin.aspx" />
     <Content Include="NewOffice.aspx" />
     <Content Include="NewPersonnel.aspx" />
+    <Content Include="NursePatientReports.aspx" />
     <Content Include="NursePatReport.aspx" />
+    <Content Include="NursePrescriptionReports.aspx" />
     <Content Include="nurseReport.aspx" />
     <Content Include="NurseView.aspx" />
     <Content Include="OrderPrescription.aspx" />
@@ -497,6 +550,7 @@
     <Content Include="PatEdit.aspx" />
     <Content Include="DoctorLogin.aspx" />
     <Content Include="PatEditApp.aspx" />
+    <Content Include="PatientReports.aspx" />
     <Content Include="patpayment.aspx" />
     <Content Include="PCPfollowup.aspx" />
     <Content Include="ProviderLogin.aspx" />

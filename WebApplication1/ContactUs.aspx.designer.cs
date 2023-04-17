@@ -11,7 +11,7 @@ namespace WebApplication1
 {
 
 
-    public partial class AdminReportsaspx
+    public partial class ContactUs
     {
 
         /// <summary>
@@ -24,39 +24,21 @@ namespace WebApplication1
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Report1 control.
+        /// stateDropdown control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Report1;
+        protected global::System.Web.UI.WebControls.DropDownList stateDropdown;
 
         /// <summary>
-        /// Report2 control.
+        /// locationInfoDiv control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Report2;
-
-        /// <summary>
-        /// Report3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Report3;
-
-        /// <summary>
-        /// exit control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button exit;
+        protected global::System.Web.UI.WebControls.Literal locationInfoDiv;
     }
 }

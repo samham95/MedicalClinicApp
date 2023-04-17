@@ -23,17 +23,25 @@ namespace WebApplication1
 
             // Get Doctor Name for Welcome Header
             int doctorID =Convert.ToInt32 (Request.QueryString["doctorID"]);
+            DateTime currentDate = DateTime.Now;
+            DayOfWeek dayOfWeek = currentDate.DayOfWeek;
+
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
-            string query = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) from doctor WHERE doctorID = @doctorID";
+            string query = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) as DocName, officeAddress from doctor, office,schedule WHERE doctorID = @doctorID AND schedule.doctor = doctor.doctorID AND schedule."+ dayOfWeek.ToString()+"=office.officeID";
             MySqlCommand cmd = new MySqlCommand(query, connection);
             cmd.Parameters.AddWithValue("doctorID", doctorID);
             connection.Open();
-            object result = cmd.ExecuteScalar();
-            string fullname = result.ToString();
+            MySqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            string fullname = reader["DocName"].ToString();
+            string officeLoca = reader["officeAddress"].ToString();
+            reader.Close();
             welcomeHeader.InnerText = "Welcome, " + fullname;
             connection.Close();
             LinkButton1.Text = "Logged in as: " + fullname;
+            officeLocale.InnerText = dayOfWeek.ToString() + "'s office: " + officeLoca;
+            connection.Close();
 
         }
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -109,7 +117,7 @@ namespace WebApplication1
 
             //retrive data into prescriptions needed table
 
-            string prescriptionTableQuery = "SELECT appointment.appointmentID, appointment.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as PatientName, appointment.appointmentDate as Date FROM patients, appointment, visit_details WHERE prescriptionRequired = 1 AND visit_details.appointmentID = appointment.appointmentID AND appointment.patientID = patients.patientID AND appointment.doctorID = @DoctorID and visit_details.prescriptionID is NULL";
+            string prescriptionTableQuery = "SELECT appointment.appointmentID, appointment.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as PatientName, appointment.appointmentDate as Date, prescription as DrugClass FROM patients, appointment, visit_details WHERE prescriptionRequired = 1 AND visit_details.appointmentID = appointment.appointmentID AND appointment.patientID = patients.patientID AND appointment.doctorID = @DoctorID and visit_details.prescriptionID is NULL";
 
             DataTable prescriptionTable = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
@@ -122,51 +130,6 @@ namespace WebApplication1
                     adapter.Fill(prescriptionTable);
                     prescriptionGrid.DataSource = prescriptionTable;
                     prescriptionGrid.DataBind();
-                }
-                connection.Close();
-            }
-
-
-            // bind patient data to grid
-            string query4 = "SELECT DISTINCT patients.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as PatientName FROM patients, appointment WHERE patients.doctorID = @DoctorID OR (appointment.patientID=patients.patientID AND appointment.doctorID = @DoctorID)";
-            DataTable dt4 = new DataTable();
-            string app_query = "SELECT MAX(appointmentDate) FROM appointment WHERE PATIENT_CONFIRM = true AND Approval = true AND appointmentDate < CURRENT_DATE() AND patientID = @patientID";
-
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            {
-                using (MySqlCommand command = new MySqlCommand(query4, connection))
-                {
-                    command.Parameters.AddWithValue("@DoctorID", doctorID);
-                    connection.Open();
-                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
-                    {
-
-                        adapter.Fill(dt4);
-                        dt4.Columns.Add("LastVisitDate");
-                        foreach (DataRow row in dt4.Rows)
-                        {
-                            int patientID = Convert.ToInt32(row["patientID"]);
-
-                            MySqlCommand app_cmd = new MySqlCommand(app_query, connection);
-                            app_cmd.Parameters.AddWithValue("@patientID", patientID);
-                            object last_date =  app_cmd.ExecuteScalar();
-
-                            if (last_date != null && last_date != DBNull.Value)
-                            {
-                                string date = DateTime.ParseExact(last_date.ToString(), "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture).ToString("M/d/yyyy");
-
-                                row["LastVisitDate"] = date;
-                            }
-                            else
-                            {
-                                row["LastVisitDate"] = DBNull.Value;
-                            }
-                        }
-
-                        GridView4.DataSource = dt4;
-                        GridView4.DataBind();
-                    }
                 }
                 connection.Close();
             }
@@ -415,21 +378,12 @@ namespace WebApplication1
             }
         }
 
-        protected void GridView4_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "OrderPrescription" || e.CommandName == "OrderTest")
-            {
-                int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
-                int patientID = Convert.ToInt32(GridView4.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
-                string command = e.CommandName == "OrderPrescription" ? "OrderPrescription.aspx" : "OrderTest.aspx";
-                Response.Redirect(command + "?patientID=" + patientID+"&doctorID="+doctorID);
-            }
-        }
+
         protected void prescriptions_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int appointmentID = Convert.ToInt32(prescriptionGrid.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
             int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
-            int patientID = Convert.ToInt32(prescriptionGrid.Rows[Convert.ToInt32(e.CommandArgument)].Cells[1].Text);
+            int patientID = Convert.ToInt32(prescriptionGrid.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["patientID"]);
 
 
             string query = "SELECT reportID FROM appointment WHERE appointmentID = @AID";
@@ -450,7 +404,7 @@ namespace WebApplication1
         protected void Button1_Click(object sender, EventArgs e)
         {
             int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
-            Response.Redirect("ReportGenerator.aspx?doctorID=" + doctorID);
+            Response.Redirect("PatientReports.aspx?doctorID=" + doctorID);
         }
     }
 }

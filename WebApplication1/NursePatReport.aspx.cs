@@ -4,6 +4,7 @@ using System.Data;
 using System.Web.UI.DataVisualization.Charting;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
+using System.Drawing;
 
 
 namespace WebApplication1
@@ -182,7 +183,10 @@ namespace WebApplication1
             reportDiv.Controls.Add(reportTable);
 
             // Generate the chart
-            generateChart(visitDetails, start, end);
+            if (graphBox.Checked)
+            {
+                generateChart(visitDetails, start, end);
+            }
         }
 
         protected void generateChart(DataTable visitDetails, DateTime start, DateTime end)
@@ -191,67 +195,82 @@ namespace WebApplication1
             Chart chart = new Chart();
             chart.Width = 500;
             chart.Height = 300;
-            chart.Titles.Add("Vitals History - Blood Pressue");
+            chart.Titles.Add("Blood Pressure");
             ChartArea chartArea = new ChartArea();
+            chart.BackColor = Color.Transparent;
+            chartArea.BackColor = Color.Transparent;
             chartArea.AxisY.Minimum = 50; // Set the minimum value for the Y-axis
             chartArea.AxisY.Maximum = 150; // Set the maximum value for the Y-axis
             chartArea.AxisY.Interval = 20; // Set the interval for the Y-axis
             chart.ChartAreas.Add(chartArea);
 
             Legend legend = new Legend();
+            legend.BackColor = Color.Transparent;
             chart.Legends.Add(legend);
 
             // Set the chart properties
             Chart chart2 = new Chart();
             chart2.Width = 500;
             chart2.Height = 300;
-            chart2.Titles.Add("Vitals History - Temperature");
+            chart2.Titles.Add("Temperature");
             ChartArea chartArea2 = new ChartArea();
+            chart2.BackColor = Color.Transparent;
+            chartArea2.BackColor = Color.Transparent;
             chartArea2.AxisY.Minimum = 80; // Set the minimum value for the Y-axis
             chartArea2.AxisY.Maximum = 120; // Set the maximum value for the Y-axis
             chartArea2.AxisY.Interval = 10; // Set the interval for the Y-axis
             chart2.ChartAreas.Add(chartArea2);
 
             Legend legend2 = new Legend();
+            legend2.BackColor = Color.Transparent;
             chart2.Legends.Add(legend2);
 
             // Set the chart properties
             Chart chart3 = new Chart();
             chart3.Width = 500;
             chart3.Height = 300;
-            chart3.Titles.Add("Vitals History - Heart Rate");
+            chart3.Titles.Add("Heart Rate");
             ChartArea chartArea3 = new ChartArea();
+            chart3.BackColor = Color.Transparent;
+            chartArea3.BackColor = Color.Transparent;
             chartArea3.AxisY.Minimum = 60; // Set the minimum value for the Y-axis
             chartArea3.AxisY.Maximum = 120; // Set the maximum value for the Y-axis
             chartArea3.AxisY.Interval = 10; // Set the interval for the Y-axis
             chart3.ChartAreas.Add(chartArea3);
 
             Legend legend3 = new Legend();
+            legend3.BackColor = Color.Transparent;
             chart3.Legends.Add(legend3);
 
             // Set the chart properties
             Chart chart4 = new Chart();
             chart4.Width = 500;
             chart4.Height = 300;
-            chart4.Titles.Add("Vitals History - Weight");
+            chart4.Titles.Add("Weight");
             ChartArea chartArea4 = new ChartArea();
+            chart4.BackColor = Color.Transparent;
+            chartArea4.BackColor = Color.Transparent;
             chartArea4.AxisY.Minimum = 100; // Set the minimum value for the Y-axis
             chartArea4.AxisY.Maximum = 200; // Set the maximum value for the Y-axis
             chartArea4.AxisY.Interval = 20; // Set the interval for the Y-axis
             chart4.ChartAreas.Add(chartArea4);
 
             Legend legend4 = new Legend();
+            legend4.BackColor = Color.Transparent;
             chart4.Legends.Add(legend4);
 
             // Set the chart properties
             Chart chart5 = new Chart();
             chart5.Width = 500;
             chart5.Height = 300;
-            chart5.Titles.Add("Vital Stats History");
+            chart5.Titles.Add("Height");
             ChartArea chartArea5 = new ChartArea();
+            chart5.BackColor = Color.Transparent;
+            chartArea5.BackColor = Color.Transparent;
             chart5.ChartAreas.Add(chartArea5);
 
             Legend legend5 = new Legend();
+            legend5.BackColor = Color.Transparent;
             chart5.Legends.Add(legend5);
 
             // Set the chart series

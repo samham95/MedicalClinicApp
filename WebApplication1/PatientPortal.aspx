@@ -57,7 +57,7 @@
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Confirm" HeaderText="Confirmation Status" Visible ="false" />
-                    <asp:BoundField DataField="TimeToConfirm" HeaderText="Time to Confirm" NullDisplayText ="Time Elapsed" HtmlEncode="false"/>
+                    <asp:BoundField DataField="TimeToConfirm" HeaderText="Time to Confirm"/>
                     <asp:BoundField DataField="ConfirmText" HeaderText="Patient Confirmation" />
                     <asp:ButtonField ButtonType="button" Text="RESCHEDULE" CommandName="EditAppointment" HeaderText="Reschedule" />
                     <asp:ButtonField ButtonType="button" Text="CONFIRM" CommandName="ConfirmAppointment" HeaderText="Confirm" />

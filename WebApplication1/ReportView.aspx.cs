@@ -12,9 +12,41 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            int reportID = Convert.ToInt32(Request.QueryString["ReportID"]);
-
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            connection.Open();
+
+            int reportID = Convert.ToInt32(Request.QueryString["ReportID"]);
+            int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
+            string query_dr = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) from doctor WHERE doctorID = @doctorID";
+            string query_rn = "SELECT CONCAT('RN ', fname, ' ', lname) as fullname FROM doctor WHERE NID = @nurseID";
+            string query_pat = "SELECT CONCAT(fname, ' ', lname) as fullname FROM patients WHERE patientID = @patientID";
+            string fullname = "";
+            if (doctorID != 0)
+            {
+                MySqlCommand cmd = new MySqlCommand(query_dr, connection);
+                cmd.Parameters.AddWithValue("doctorID", doctorID);
+                fullname = cmd.ExecuteScalar().ToString();
+                
+            }
+                
+            else if (nurseID != 0)
+            {
+                MySqlCommand cmd = new MySqlCommand(query_rn, connection);
+                cmd.Parameters.AddWithValue("nurseID", nurseID);
+                fullname = cmd.ExecuteScalar().ToString();
+            }
+            else if (patientID != 0)
+            {
+                MySqlCommand cmd = new MySqlCommand(query_pat, connection);
+                cmd.Parameters.AddWithValue("patientID", patientID);
+                fullname = cmd.ExecuteScalar().ToString();
+            }
+            LinkButton1.Text = "Logged in as: " + fullname;
+
+
             string nurseNameQuery = "SELECT CONCAT(fname, ' ', lname) FROM nurse, visit_details WHERE visit_details.reportID = @reportID AND visit_details.nurseID = nurse.NID"; 
             string titleQuery = "SELECT CONCAT(fname,' ', lname, ' - Appointment on ', AppointmentDate) FROM patients, appointment WHERE appointment.ReportID = @reportID AND appointment.patientID = patients.patientID";
             string patientNameQuery = "SELECT CONCAT(fname, ' ', lname) FROM appointment, patients WHERE appointment.reportID = @reportID AND appointment.patientID = patients.patientID";
@@ -33,7 +65,6 @@ namespace WebApplication1
 
             string furtherEvalQuery = "SELECT test FROM evaluation WHERE code = (SELECT furtherEval FROM visit_details WHERE visit_details.ReportID = @reportID)";
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
 
             MySqlCommand titleCommand = new MySqlCommand(titleQuery, connection);
             titleCommand.Parameters.AddWithValue("@reportID", reportID);
@@ -79,7 +110,6 @@ namespace WebApplication1
             MySqlCommand checkBoxCmd = new MySqlCommand(furtherEvalQuery, connection);
             checkBoxCmd.Parameters.AddWithValue("@reportID", reportID);
 
-            connection.Open();
             MySqlDataReader reader = phwCmd.ExecuteReader();
             reader.Read();
 
@@ -134,7 +164,21 @@ namespace WebApplication1
             evalBox.Text = eval;
 
         }
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
 
+            if (nurseID != 0)
+                Response.Redirect("nurseView.aspx?nurseID=" + nurseID);
+            else if (patientID != 0)
+                Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
+            else if (doctorID != 0)
+                Response.Redirect("ProviderView.aspx?doctorID=" + doctorID);
+
+
+        }
         protected void returnBttn_Click(object sender, EventArgs e)
         {
 

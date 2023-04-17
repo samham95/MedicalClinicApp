@@ -22,6 +22,7 @@
       <a href="PatientLogin.aspx">Patient Login</a>
       <a href="ProviderLogin.aspx">Provider Login</a>
       <a href="HomePage.aspx">Home</a>
+      <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
     </div>
         <br />
         <br />

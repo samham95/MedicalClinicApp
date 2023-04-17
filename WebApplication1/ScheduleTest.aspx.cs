@@ -102,7 +102,7 @@ namespace WebApplication1
 
                     catch (Exception ex)
                     {
-                        ErrorMessage_date.Text = ex.ToString();
+                        ErrorMessage_date.Text = "Please make sure to complete all preceeding selections";
                     }
                     connection.Close();
                 }

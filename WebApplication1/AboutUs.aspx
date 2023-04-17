@@ -10,7 +10,7 @@
 
 		.btn {
 			display: inline-block;
-			padding: 10px 200px;
+			padding: 10px 200px; 
 			background-color: #117bff;
 			color: white;
 			text-decoration: none;
@@ -78,16 +78,8 @@
 		<p>Our medical clinic is dedicated to providing quality healthcare to our patients in multiple locations across the country. With a team of skilled doctors and healthcare professionals, we offer a wide range of services to help you and your family stay healthy.</p>
 		<h2>Our Doctors</h2>
 		<p>Our team of doctors includes specialists in a variety of fields, including:</p>
-		<ul>
-			<li>Cardiology</li>
-			<li>Dermatology</li>
-			<li>Endocrinology</li>
-			<li>Gastroenterology</li>
-			<li>Neurology</li>
-			<li>Orthopedics</li>
-			<li>Psychiatry</li>
-			<li>Urology</li>
-		</ul>
+		<asp:Literal ID="specialtiesList" runat="server" />
+
 		<p>Each doctor in our clinic is highly trained and experienced in their respective field. They work closely with our patients to provide personalized care and treatment plans.</p>
 		<h2>Our Patients</h2>
 		<p>At our clinic, we believe that every patient deserves the best possible care. That's why we work hard to create a welcoming and supportive environment for all of our patients. Whether you're here for a routine check-up or a more complex medical issue, we are here to help you.</p>
@@ -108,9 +100,7 @@
 		<div class="btn-container">
 			<a href="ContactUs.aspx" class="btn">Contact Us</a> <a href="PatientLogin.aspx" class="btn">Book Appointment</a>
 		</div>
-
-		
-	</div>
+        </div>
         <div>
         </div>
     </form>

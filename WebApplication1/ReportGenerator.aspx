@@ -99,6 +99,8 @@
                 </asp:DropDownList>
                 <br />
                 <br />
+                <asp:CheckBox ID="graphBox" runat="server" Text="Graph Vitals" />
+                <br />
             </div>
             <br />
             <asp:Button ID="generateReport" runat="server" Text="Generate Report" OnClick="GenerateReport_Click" />

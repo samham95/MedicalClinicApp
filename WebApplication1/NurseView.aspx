@@ -17,9 +17,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="dialog" title="Assignment Alert" style="display:none;">
-    <p>Cannot accept. A nurse is already assigned to this task.</p>
-</div>
 
     <div class="navbar">
       <a href="AboutUs.aspx">About Us</a>
@@ -40,7 +37,7 @@
 
         <div>
             <h1>Upcoming Appointments</h1>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="AppointmentID" OnRowCommand="GridView1_RowCommand"
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="nurseID" OnRowCommand="GridView1_RowCommand"
                  BackColor="White" BorderColor="#999999" BorderStyle="Solid" BorderWidth="1px" CellPadding="3" ForeColor="Black" GridLines="Vertical" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
                 <AlternatingRowStyle BackColor="#CCCCCC" />
                 <Columns>
@@ -51,10 +48,10 @@
                     <asp:BoundField DataField="Approval" HeaderText="Approval Status" />
                     <asp:BoundField DataField="Time" HeaderText="Time" />
                     <asp:BoundField DataField="Date" HeaderText="Date" DataFormatString="{0:d}"/>
-                    <asp:BoundField DataField="nurseID" HeaderText="nurseID" Visible="false" />
+                    <asp:BoundField DataField="nurseID" HeaderText="nurseID" Visible="false"/>
                     <asp:BoundField DataField="Nurse" HeaderText="Nurse" NullDisplayText="Not Assigned" />
-                    <asp:ButtonField ButtonType="button" Text="ACCEPT" CommandName="assignApp" HeaderText="Assignment" />
-                    <asp:ButtonField ButtonType="button" Text="GENERATE" CommandName="GENERATE" HeaderText="REPORT" ControlStyle-BackColor="">
+                    <asp:ButtonField ButtonType="button" Text="ACCEPT" CommandName="assignApp" HeaderText="Assignment"/>
+                    <asp:ButtonField ButtonType="button" Text="GENERATE" CommandName="GENERATE" HeaderText="REPORT" ControlStyle-BackColor="" >
 <ControlStyle BackColor=""></ControlStyle>
                     </asp:ButtonField>
 
@@ -129,12 +126,15 @@
             $(document).ready(function () {
                 $('#GridView1').on('click', 'input[type="button"]', function (e) {
                     e.preventDefault();
+                    e.stopPropagation();
+
                     var row = $(this).closest('tr');
 
                     var nurseCell = row.find('td:eq(8)'); 
 
                     if (nurseCell.text() !== 'Not Assigned') {
-                        alert("Cannot accept. A nurse is already assigned to this task.");
+                        alert("Cannot perform action. A nurse is already assigned to this task.");
+                        return false;
                     } else {
                     }
                 });

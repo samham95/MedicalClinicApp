@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
+using System.Data;
 using System.Web.UI.WebControls;
+using MySql.Data.MySqlClient;
 
 namespace WebApplication1
 {
@@ -11,6 +9,47 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+        }
+
+        protected void stateDropdown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Retrieve the selected state from the dropdown
+            string selectedState = stateDropdown.SelectedValue;
+
+            // Construct the connection string
+            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+
+            // Construct the query
+            string query = "SELECT officeAddress, phone_num, email " +
+                           "FROM office " +
+                           "WHERE officeAddress LIKE '%[State]%'";
+
+            query = query.Replace("[State]", selectedState);
+
+            // Retrieve the office data from the database
+            DataTable officeData = new DataTable();
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlCommand command = new MySqlCommand(query, connection))
+            {
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(officeData);
+            }
+
+            // Generate the location information
+            string locationInfo = "<ul>";
+            foreach (DataRow row in officeData.Rows)
+            {
+                locationInfo += "<li class='location-item'>";
+                locationInfo += "<strong>" + row["officeAddress"].ToString() + "</strong><br />";
+                locationInfo += "Phone: " + row["phone_num"].ToString() + "<br />";
+                locationInfo += "Email: <a href='mailto:" + row["email"].ToString() + "'>" + row["email"].ToString() + "</a>";
+                locationInfo += "</li>";
+            }
+            locationInfo += "</ul>";
+
+            // Add the location information to the page
+            locationInfoDiv.Text = locationInfo;
 
         }
     }

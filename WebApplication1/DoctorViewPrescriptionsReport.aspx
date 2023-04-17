@@ -1,15 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NursePatReport.aspx.cs" Inherits="WebApplication1.NursePatReport" %>
-<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
-
+﻿<%@ Page Language="C#" CodeBehind="DoctorViewPrescriptionsReport.aspx.cs" Inherits="WebApplication1.DoctorViewPrescriptionsReport" %>
 
 <!DOCTYPE html>
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta charset="utf-8" />
-    <title>Report Generator</title>
-    <style>
-                .leftPanel {
+    <title>Prescription Report</title>
+        <style>
+
+        .leftPanel {
             float: left;
             margin-right: 20px;
             margin-left: 5px;
@@ -27,6 +26,7 @@
             display: table;
             clear: both;
         }
+
             .table-class {
         border: 1px solid black;
         border-collapse: collapse;
@@ -62,7 +62,6 @@
     </style>
     	<link href="navbar.css" rel="stylesheet" />
     <link href="AdminPages.css" rel="stylesheet" />
-
 </head>
 <body>
     <form id="form1" runat="server">
@@ -74,12 +73,13 @@
       <a href="HomePage.aspx">Home</a>
       <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
     </div>
-        <div>
-            <h1>&nbsp;</h1>
-          <div class="form-container">
+             <br />
+     <br />
+ <div class="form-container">
 
-            <h1 style="text-align:center">Patient Vitals History</h1>
-            <p style="text-align:center">Please select a doctor, patient and an appointment date range</p>
+
+            <h1 style="text-align:center">Patient Prescription History</h1>
+            <p style="text-align:center">Please select a patient and an appropriate date range</p>
               <br />
             <div>
                 <label for="startDate">Start Date:</label>
@@ -87,25 +87,20 @@
 
                 <label for="endDate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End Date:</label>
                 <asp:TextBox ID="endDate" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd"></asp:TextBox>
-                <br />
             </div>
             <div>
+                <label for="patientName">
                 <br />
-                Doctor Name:
-                <asp:DropDownList ID="doctorName" runat="server" OnSelectedIndexChanged="doctorName_SelectedIndexChanged" AutoPostBack="true">
-                    <asp:ListItem Text="All" Value="All"></asp:ListItem>
-                </asp:DropDownList>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="patientName">Patient Name:</label>
+                Patient Name:</label>
                 <asp:DropDownList ID="patientName" runat="server">
                     <asp:ListItem Text="All" Value="All"></asp:ListItem>
                 </asp:DropDownList>
                 <br />
                 <br />
-                <asp:CheckBox ID="graphBox" runat="server" Text="Graph Vitals" />
                 <br />
             </div>
             <br />
-            <asp:Button ID="generateReport" runat="server" Text="Generate Report" OnClick="GenerateReport_Click" />
+            <asp:Button ID="generateReport" runat="server" Text="Generate Report" OnClick="Generate_Click" />
               </div>
 
             <br />
@@ -115,18 +110,6 @@
                 </div>
             <br />
             <br />
-            <div class="clearfix">
-                <asp:Panel ID="chartPlaceholder" runat="server" method="post"  CssClass="leftPanel"></asp:Panel>
-                <asp:Panel ID="chartPlaceholder2" runat="server" method="post"  CssClass="leftPanel"></asp:Panel>
-                <asp:Panel ID="chartPlaceholder3" runat="server" method="post" CssClass="rightPanel"></asp:Panel>
-                <asp:Panel ID="chartPlaceholder4" runat="server" method="post" CssClass="rightPanel"></asp:Panel>
-                <asp:Panel ID="chartPlaceholder5" runat="server" method="post" CssClass="rightPanel"></asp:Panel>
-            </div>
-
-
-        </div>
-    </form>
+</form>
 </body>
 </html>
-
-
