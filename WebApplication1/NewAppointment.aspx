@@ -59,7 +59,13 @@
 			    <br />
                 <br />
 			</div>
-
+                			<div class="form-group">
+				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
+                <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" OnTextChanged="date_requested_TextChanged"></asp:TextBox>
+			
+			   <span class="required"> <asp:Literal ID="ErrorMessage_date2" EnableViewState="False"  runat="server"></asp:Literal></span>
+			
+			</div>
             <div class="form-group">
 				<label for="Speclabel">
                 <br />
@@ -69,19 +75,13 @@
                 <br />
 			</div>
 
-			<div class="form-group">
-				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True"></asp:TextBox>
-			
-			   <span class="required"> <asp:Literal ID="ErrorMessage_date2" EnableViewState="False"  runat="server"></asp:Literal></span>
-			
-			</div>
+
 
 			<div class="form-group">
 				<label for="time-requested">
                 <br />
                 Time Requested <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="ddlTimeRequested" runat="server" Width="140px" OnTextChanged="date_requested_TextChanged" AutoPostBack="True"></asp:DropDownList>
+                <asp:DropDownList ID="ddlTimeRequested" runat="server" Width="140px"  AutoPostBack="True"></asp:DropDownList>
 			   <span class="required"> <asp:Literal ID="ErrorMessage_date" EnableViewState="False"  runat="server"></asp:Literal></span>
 			    <br />
                 <br />

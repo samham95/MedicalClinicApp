@@ -60,15 +60,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox dob;
 
         /// <summary>
-        /// gender control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList gender;
-
-        /// <summary>
         /// phone_num control.
         /// </summary>
         /// <remarks>
@@ -168,22 +159,22 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.RegularExpressionValidator ecemailvalidator;
 
         /// <summary>
-        /// TextBox1 control.
+        /// Date control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox Date;
 
         /// <summary>
-        /// TextBox2 control.
+        /// ErrorMessage_date2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.Literal ErrorMessage_date2;
 
         /// <summary>
         /// DropDownList1 control.
@@ -204,24 +195,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList primary;
 
         /// <summary>
-        /// date_requested control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox date_requested;
-
-        /// <summary>
-        /// ErrorMessage_date2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErrorMessage_date2;
-
-        /// <summary>
         /// ddlTimeRequested control.
         /// </summary>
         /// <remarks>
@@ -240,15 +213,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Literal ErrorMessage_date;
 
         /// <summary>
-        /// reason control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox reason;
-
-        /// <summary>
         /// pcp control.
         /// </summary>
         /// <remarks>
@@ -265,6 +229,24 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox spec;
+
+        /// <summary>
+        /// CheckBox5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBox5;
+
+        /// <summary>
+        /// CheckBox6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBox6;
 
         /// <summary>
         /// ins control.

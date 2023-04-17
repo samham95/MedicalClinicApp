@@ -21,7 +21,7 @@ namespace WebApplication1
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
             int doctorID = Convert.ToInt32(Request.QueryString["doctorID"]);
             string query_dr = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) from doctor WHERE doctorID = @doctorID";
-            string query_rn = "SELECT CONCAT('RN ', fname, ' ', lname) as fullname FROM doctor WHERE NID = @nurseID";
+            string query_rn = "SELECT CONCAT('RN ', fname, ' ', lname) as fullname FROM nurse WHERE NID = @nurseID";
             string query_pat = "SELECT CONCAT(fname, ' ', lname) as fullname FROM patients WHERE patientID = @patientID";
             string fullname = "";
             if (doctorID != 0)

@@ -188,13 +188,51 @@ namespace WebApplication1
         {
             string officeAddress = DropDownList1.SelectedValue;
             string specialty = specdept.SelectedValue;
+
+            string date = date_requested.Text;
+            DateTime yourDate = DateTime.Parse(date);
+            DayOfWeek dayOfWeek = yourDate.DayOfWeek;
+            date = dayOfWeek.ToString();
+
             // Query the database to get the physicians for the selected office
             string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT DISTINCT CONCAT(doctor.fname, ' ', doctor.lname) AS fullname FROM doctor,office,schedule WHERE doctor.doctorID=schedule.doctor AND doctor.specialty = @spec AND office.officeAddress = @OfficeAddress AND (Monday = officeID OR Tuesday = officeID OR Wednesday = officeID OR Thursday = officeID OR Friday = officeID)";
+
+            //FIND OFFICEID
+            string sqlQuery = "SELECT officeID FROM office WHERE officeAddress = @officeAddress";
+            int officeID = 0;
+
+            // create a new SqlConnection using the connectionString
+            using (MySqlConnection connection1 = new MySqlConnection(connString))
+            {
+                // create a new SqlCommand using the sqlQuery and the SqlConnection
+                using (MySqlCommand command1 = new MySqlCommand(sqlQuery, connection1))
+                {
+                    // add the officeAddress parameter to the SqlCommand
+                    command1.Parameters.AddWithValue("@officeAddress", officeAddress);
+
+                    // open the SqlConnection
+                    connection1.Open();
+
+                    // execute the SqlCommand and store the result in a SqlDataReader
+                    using (MySqlDataReader reader1 = command1.ExecuteReader())
+                    {
+                        // check if there is a row returned
+                        if (reader1.Read())
+                        {
+                            // get the officeID from the first column of the SqlDataReader and convert it to an int
+                            officeID = reader1.GetInt32(0);
+
+                        }
+                    }
+                }
+            }
+
+            string query = "SELECT DISTINCT CONCAT(doctor.fname, ' ', doctor.lname) AS fullname FROM doctor,office,schedule WHERE schedule." + date + " = @officeID AND doctor.doctorID = schedule.doctor AND doctor.specialty = @spec AND office.officeAddress = @OfficeAddress";
             MySqlConnection connection = new MySqlConnection(connString);
             MySqlCommand command = new MySqlCommand(query, connection);
             command.Parameters.AddWithValue("@officeAddress", officeAddress);
             command.Parameters.AddWithValue("@spec", specialty);
+            command.Parameters.AddWithValue("@officeID", officeID);
             connection.Open();
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -225,7 +263,86 @@ namespace WebApplication1
 
         protected void date_requested_TextChanged(object sender, EventArgs e)
         {
+            try
+            {
+                string officeAddress = DropDownList1.SelectedValue;
+                string specialty = specdept.SelectedValue;
 
+                string date = date_requested.Text;
+                DateTime yourDate = DateTime.Parse(date);
+                DayOfWeek dayOfWeek = yourDate.DayOfWeek;
+                date = dayOfWeek.ToString();
+
+                // Query the database to get the physicians for the selected office
+                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+
+                //FIND OFFICEID
+                string sqlQuery = "SELECT officeID FROM office WHERE officeAddress = @officeAddress";
+                int officeID = 0;
+
+                // create a new SqlConnection using the connectionString
+                using (MySqlConnection connection1 = new MySqlConnection(connString))
+                {
+                    // create a new SqlCommand using the sqlQuery and the SqlConnection
+                    using (MySqlCommand command1 = new MySqlCommand(sqlQuery, connection1))
+                    {
+                        // add the officeAddress parameter to the SqlCommand
+                        command1.Parameters.AddWithValue("@officeAddress", officeAddress);
+
+                        // open the SqlConnection
+                        connection1.Open();
+
+                        // execute the SqlCommand and store the result in a SqlDataReader
+                        using (MySqlDataReader reader1 = command1.ExecuteReader())
+                        {
+                            // check if there is a row returned
+                            if (reader1.Read())
+                            {
+                                // get the officeID from the first column of the SqlDataReader and convert it to an int
+                                officeID = reader1.GetInt32(0);
+
+                            }
+                        }
+                    }
+                }
+
+                string query = "SELECT DISTINCT CONCAT(doctor.fname, ' ', doctor.lname) AS fullname FROM doctor,office,schedule WHERE schedule." + date + " = @officeID AND doctor.doctorID = schedule.doctor AND doctor.specialty = @spec AND office.officeAddress = @OfficeAddress";
+                MySqlConnection connection = new MySqlConnection(connString);
+                MySqlCommand command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@officeAddress", officeAddress);
+                command.Parameters.AddWithValue("@spec", specialty);
+                command.Parameters.AddWithValue("@officeID", officeID);
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // Create a list to hold the physician names for the selected office
+                List<string> Specs = new List<string>();
+                Specs.Add("");
+                reader.Read();
+                if (reader.HasRows)
+                {
+                    Specs.Add(reader["fullname"].ToString());
+                    // Loop through the records and add the physician names to the list
+                    while (reader.Read())
+                    {
+                        string pcp_name = reader["fullname"].ToString();
+                        Specs.Add(pcp_name);
+                    }
+
+                    // Bind the specialist physician names to the dropdown list
+                    specialist.Items.Clear();
+                    specialist.DataSource = Specs;
+                    specialist.DataBind();
+                    specialist.SelectedIndex = 0;
+                }
+                else { specialist.Items.Clear(); }
+                reader.Close();
+                connection.Close();
+            }
+            catch
+            {
+                ErrorMessage_date.Text = "Please make sure to complete all preceeding selections";
+            }
         }
 
         protected void specdept_SelectedIndexChanged(object sender, EventArgs e)

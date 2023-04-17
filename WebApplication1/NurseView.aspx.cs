@@ -195,14 +195,15 @@ namespace WebApplication1
         {
             int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
             int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
-            int NID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["nurseID"]);
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
 
-            if (e.CommandName == "GENERATE" && NID == nurseID)
+            if (e.CommandName == "GENERATE")
             {
-                Response.Redirect("nurseReport.aspx?appID=" + appointmentID + "&NID=" + nurseID);
+                int NID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["nurseID"]);
+                if(NID == nurseID)
+                    Response.Redirect("nurseReport.aspx?appID=" + appointmentID + "&NID=" + nurseID);
             }
             else if(e.CommandName == "assignApp")
             {

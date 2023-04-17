@@ -122,38 +122,30 @@
                 <SortedDescendingHeaderStyle BackColor="#383838" />
             </asp:GridView>
         </div>
+
         <script>
             $(document).ready(function () {
                 $('#GridView1').on('click', 'input[type="button"]', function (e) {
                     e.preventDefault();
-                    e.stopPropagation();
-
                     var row = $(this).closest('tr');
 
-                    var nurseCell = row.find('td:eq(8)'); 
-
-                    if (nurseCell.text() !== 'Not Assigned') {
-                        alert("Cannot perform action. A nurse is already assigned to this task.");
-                        return false;
-                    } else {
+                    // Modify this line depending on the position of the Nurse column in each GridView
+                    var nurseCell = row.find('td:eq(7)'); // Assuming the nurse column is the 6th column (index starts at 0)
+                    var $button = $(this);
+                    var buttonText = $button.val();
+                    if (buttonText === 'ACCEPT') {
+                        if (nurseCell.text() !== 'Not Assigned') {
+                            alert("Cannot accept. A nurse is already assigned to this task.");
+                        } else {
+                            // Perform the 'Accept' action if the nurse is not assigned
+                        }
                     }
                 });
-            });
-
-            $(document).ready(function () {
-                $('#GridView2').on('click', 'input[type="button"]', function (e) {
-                    e.preventDefault();
-                    var row = $(this).closest('tr');
-
-                    var nurseCell = row.find('td:eq(6)');
-
-                    if (nurseCell.text() !== 'Not Assigned') {
-                        alert("Cannot accept. A nurse is already assigned to this task.");
-                    } else {
-                    }
-                });
-            });
+    });
         </script>
+
+
+
 
 
     </form>

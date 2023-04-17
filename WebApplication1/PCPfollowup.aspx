@@ -46,6 +46,10 @@
 			    <br />
                 <br />
 			</div>
+            <div class ="form-group">
+                Office Location
+                <asp:TextBox ID="officeLocation" runat="server"></asp:TextBox>
+            </div>
 			<p><span class="required">*</span> Required information</p>
              <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
 			</fieldset>

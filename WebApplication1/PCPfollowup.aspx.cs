@@ -135,7 +135,7 @@ namespace WebApplication1
 
             DateTime DateApp = DateTime.ParseExact(AppDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             string day = DateApp.DayOfWeek.ToString();
-            string doc_query = "SELECT doctorID, " + day + " as officeID FROM patients, schedule WHERE patientID = @PID AND patients.doctorID = schedule.doctor";
+            string doc_query = "SELECT doctorID, " + day + " as officeID,  FROM patients, schedule, office WHERE patientID = @PID AND patients.doctorID = schedule.doctor";
             MySqlCommand commnd = new MySqlCommand(doc_query, connection);
             commnd.Parameters.AddWithValue("@PID", patientID);
             MySqlDataReader reader =  commnd.ExecuteReader();

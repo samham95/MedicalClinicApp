@@ -19,12 +19,14 @@
 </head>
 <body>
     <div class="navbar">
-      <a href="AboutUs.aspx">About Us</a>
-      <a href="ContactUs.aspx">Contact Us</a>
-      <a href="PatientLogin.aspx">Patient Login</a>
-      <a href="ProviderLogin.aspx">Provider Login</a>
-      <a href="HomePage.aspx">Home</a>
-    </div>
+	  <div class="navbar-right">
+		<a href="HomePage.aspx" class="nav-item">Home</a>
+		<a href="#" class="nav-item">About Us</a>
+		<a href="#" class="nav-item">Contact Us</a>
+		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
+		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
+	  </div>
+	</div>
     <h1 style = "text-align: center">&nbsp;</h1>
     <h1 style = "text-align: center">Schedule your appointment today</h1>
 	<p style = "text-align: center">Please fill out where indicated</p>
@@ -53,16 +55,6 @@
 			<div class="form-group">
 				<label for="date-of-birth">Date of Birth <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="dob" runat="server" TextMode="Date" DataFormatString="{yyyy/MM/dd}"></asp:TextBox>
-			</div>
-
-            <div class="form-group">
-				<label for="gender">Gender<span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="gender" runat="server">
-                    <asp:ListItem></asp:ListItem>
-                    <asp:ListItem>Male</asp:ListItem>
-                    <asp:ListItem>Female</asp:ListItem>
-                    <asp:ListItem>Other</asp:ListItem>
-                </asp:DropDownList>
 			</div>
             
             <div class="form-group">
@@ -111,20 +103,20 @@
                 ControlToValidate="ECemail" ErrorMessage="Please enter a valid email address." 
                     ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" /></span>
 			</div>
-            <div class="form-group">
-				<label for="ECRelation">Preferred Pharmacy <span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-			</div>
-			<div class="form-group">
-				<label for="ECRelation">Pharmacy Location<span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
-			</div>
 			</fieldset>
  
             <br />
             <br />
 			<fieldset>
 			<legend>Appointment Details</legend>
+
+            <div class="form-group">
+				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
+                <asp:TextBox ID="Date" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" OnTextChanged="Date_TextChanged"></asp:TextBox>
+			
+			   <span class="required"> <asp:Literal ID="ErrorMessage_date2" EnableViewState="False"  runat="server"></asp:Literal></span>
+			
+			</div>
 
             <div class="form-group">
 				<label for="officelabel">
@@ -136,6 +128,8 @@
                 <br />
 			</div>
 
+            
+
             <div class="form-group">
 				<label for="Pcplabel">
                 <br />
@@ -145,11 +139,7 @@
                 <br />
 			</div>
 
-            <div class="form-group">
-				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" ></asp:TextBox>
-			    <span class="required"><asp:Literal ID="ErrorMessage_date2" runat="server" ></asp:Literal></span>
-			</div>
+            
 
 			<div class="form-group">
 				<label for="time-requested">
@@ -161,10 +151,7 @@
                 <br />
 			</div>
 
-			<div class="form-group">
-				<label for="reason">Reason for appointment <span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="reason" runat="server" TextMode="MultiLine"></asp:TextBox>
-			</div>
+
 			<div class="form-group">
 				<label for="pcp-or-specialist">Do you want to see a PCP or specialist?<span class="required">*</span></label>
                 <asp:CheckBox ID="pcp" runat="server" />
@@ -176,6 +163,17 @@
                 </label>
                 </div>
 
+            <div class="form-group">
+				<label for="referral">
+                <br />
+                If you&#39;re seeing a specialist, do you have a referral?</label>
+                <asp:CheckBox ID="CheckBox5" runat="server" />
+                <label for="referral">Yes</label>
+                <asp:CheckBox ID="CheckBox6" runat="server" />
+                <label for="referral">No<br />
+                <br />
+                </label>
+			</div>
 
 			<div class="form-group">
 				<label for="insurance">Do you have insurance?<span class="required">*</span></label>
@@ -187,11 +185,16 @@
                 </label>
 			</div>
 
+            <div class="form-group">
+				<label for="reason">Reason for your visit:</label>
+				<input type="text" name="reason" id="reason"/>
+			</div>
+
 			<div class="form-group">
 				<label for="insurance-name">Insurance Name</label>
 				<input type="text" name="insurance-name" id="insurance-name"/>
 
-				<label for="insurance-type">Insurance Group ID</label>
+				<label for="insurance-type">Insurance Type</label>
 				<input type="text" name="insurance-type" id="insurance-type"/>
 			</div>
 
@@ -210,7 +213,7 @@
                         // Check if required fields are filled out
                         if ($('#<%=fname.ClientID %>').val() === '' || $('#<%=lname.ClientID %>').val() === '' || $('#<%=email.ClientID %>').val() === ''
                             || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === '' || $('#<%=DropDownList1.ClientID %>').val() === ""
-                            || $('#<%=ddlTimeRequested.ClientID %>').val() === "" || $('#<%=primary.ClientID %>').val() === "" || $('#<%=date_requested.ClientID %>').val() === ""){
+                            || $('#<%=ddlTimeRequested.ClientID %>').val() === "" || $('#<%=primary.ClientID %>').val() === "" || $('#<%=Date.ClientID %>').val() === ""){
                             // Display dialog box
                             alert('Please fill out all required fields.');
                             return false; // Cancel form submission
