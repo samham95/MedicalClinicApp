@@ -102,8 +102,8 @@
         font-size: 17px;
       }
       .navbar a:hover {
-        background-color: #960C22;
-        color: #FFF9D9;
+        background-color: grey;
+        color: white;
       }
       .btn:hover {
           background-color: gray;
