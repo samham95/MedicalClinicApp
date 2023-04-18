@@ -68,10 +68,11 @@ namespace WebApplication1
                 connection.Open();
                 string selectedValue = DropDownList1.SelectedValue;
                 string query = "";
-                query = "Select I.total, I.claim, I.paid_amount From invoice as I, visit_details as V, appointment as A, office as O WHERE I.reportID = V.reportID and V.appointmentID = A.appointmentID and A.officeID = O.officeID and O.officeAddress = @officeAddress union SELECT SPACE(10) AS spaces, SPACE(10) AS spaces, SPACE(10) AS spaces union Select SUM(I.total), SUM(I.claim), SUM(I.paid_amount) From invoice as I, visit_details as V, appointment as A, office as O WHERE I.reportID = V.reportID and V.appointmentID = A.appointmentID and A.officeID = O.officeID and O.officeAddress = @officeAddress";
+                string query_sum = "";
+                query = "Select I.total, I.claim, I.paid_amount From invoice as I, visit_details as V, appointment as A, office as O WHERE I.reportID = V.reportID and V.appointmentID = A.appointmentID and A.officeID = O.officeID and O.officeID = @officeID union SELECT SPACE(10) AS spaces, SPACE(10) AS spaces, SPACE(10) AS spaces union Select SUM(I.total), SUM(I.claim), SUM(I.paid_amount) From invoice as I, visit_details as V, appointment as A, office as O WHERE I.reportID = V.reportID and V.appointmentID = A.appointmentID and A.officeID = O.officeID and O.officeID = @officeID";
 
                 MySqlCommand command = new MySqlCommand(query, connection);
-                command.Parameters.AddWithValue("@officeAddress", selectedValue);
+                command.Parameters.AddWithValue("@officeID", selectedValue);
 
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 DataTable dataTable = new DataTable();

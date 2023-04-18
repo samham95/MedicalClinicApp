@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
-using Mysqlx.Crud;
 
 namespace WebApplication1
 {
@@ -32,7 +31,8 @@ namespace WebApplication1
                 cmd.Parameters.AddWithValue("@address", Convert.ToInt32(id.Text));
                 object result = cmd.ExecuteScalar();
                 string outcome = result.ToString();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert(\"DELETED " + outcome + "\");", true);
+                
+                string script = "<scriptalert('DELETED ' + outcome)";
 
                 //  remove a office
                 string sql = "DELETE FROM office WHERE officeAddress = @address";
