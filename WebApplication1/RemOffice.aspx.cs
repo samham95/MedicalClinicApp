@@ -26,16 +26,15 @@ namespace WebApplication1
             try
             {
 
-                string query = "SELECT CONCAT(officeAddress) from office WHERE officeID = @address";
+                string query = "SELECT officeAddress from office WHERE officeID = @address";
                 MySqlCommand cmd = new MySqlCommand(query, connection);
                 cmd.Parameters.AddWithValue("@address", Convert.ToInt32(id.Text));
                 object result = cmd.ExecuteScalar();
                 string outcome = result.ToString();
-                
-                string script = "<scriptalert('DELETED ' + outcome)";
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED office located at ' + outcome);", true);
 
                 //  remove a office
-                string sql = "DELETE FROM office WHERE officeAddress = @address";
+                string sql = "DELETE FROM office WHERE officeID = @address";
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 command.Parameters.AddWithValue("@address", Convert.ToInt32(id.Text));
                 command.ExecuteNonQuery();

@@ -142,7 +142,7 @@ namespace WebApplication1
             reader.Read();
             string officeID = (reader["officeID"]).ToString();
             string doctorID = (reader["doctorID"]).ToString();
-            string officeL = reader["office"].ToString();
+            string officeL = reader["officeAddress"].ToString();
             officeLocation.Text = officeL;
             reader.Close();
 

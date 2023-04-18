@@ -507,7 +507,7 @@
     <Content Include="AboutUs.aspx" />
     <Content Include="AdminInvoiceReport.aspx" />
     <Content Include="AdminLogin.aspx" />
-    <Content Include="AdminPages.css" />
+    <Content Include="Content\AdminPages.css" />
     <Content Include="AdminReports.aspx" />
     <Content Include="AdminScheduleReport.aspx" />
     <Content Include="AdminView.aspx" />
@@ -533,8 +533,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="LoginStyle.css" />
-    <Content Include="navbar.css" />
+    <Content Include="Content\LoginStyle.css" />
+    <Content Include="Content\navbar.css" />
     <Content Include="NewAppointment.aspx" />
     <Content Include="NewLogin.aspx" />
     <Content Include="NewOffice.aspx" />

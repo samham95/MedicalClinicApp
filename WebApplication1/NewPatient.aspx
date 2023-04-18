@@ -14,8 +14,8 @@
       
 
     </style>
-	<link href="navbar.css" rel="stylesheet" />
-    <link href="AdminPages.css" rel="stylesheet" />
+	<link href="Content/navbar.css" rel="stylesheet" type="text/css" />
+    <link href="Content/AdminPages.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
     <div class="navbar">
@@ -54,7 +54,18 @@
 				<label for="date-of-birth">Date of Birth <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="dob" runat="server" TextMode="Date" DataFormatString="{yyyy/MM/dd}"></asp:TextBox>
 			</div>
-            
+           <div class="form-group">
+				<label for="officelabel">
+                <br />
+                Gender <span class="required">*</span></label>&nbsp;
+                <asp:DropDownList ID="DropDownList2" runat="server" >
+                    <asp:ListItem></asp:ListItem>
+                    <asp:ListItem>Male</asp:ListItem>
+                    <asp:ListItem>Female</asp:ListItem>
+                    <asp:ListItem>Other</asp:ListItem>
+                </asp:DropDownList>
+
+			</div>
             <div class="form-group">
                 <label for="phone">Phone Number <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="phone_num" runat="server" placeholder="1234567890" MaxLength="10" />
@@ -201,5 +212,12 @@
                     });
                 });
             </script>
+    <div class="footer">
+  <section class="contact">
+    <p>Email: info@coogmedicalgroup.com | Phone: (713)867-5309</p>
+    <p>Coog Clinic © Group 13 - 2023. All rights reserved.</p>
+    <p><a href="AdminLogin.aspx">Admin Login</a></p>
+  </section>
+</div>
 </body>
 </html>

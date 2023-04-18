@@ -7,6 +7,8 @@ using System.Net.Mail;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 using static System.Web.UI.ScriptManager;
+using System.Globalization;
+
 
 namespace WebApplication1
 {
@@ -53,7 +55,7 @@ namespace WebApplication1
 
             // Retrieve data from database into upcoming appointment grid
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, doctor.Specialty as Specialty, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName FROM appointment, patients, office, nurse, doctor where appointment.patientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND nurse.NID = @NID AND appointment.doctorID = doctor.doctorID AND appointmentDate >= current_date() AND appointment.archive = false ORDER BY appointmentDate DESC";
+            string query = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, doctor.Specialty as Specialty, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, appointment.approval as Approval, appointmentTime as Time, appointmentDate as Date, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName FROM appointment, patients, office, nurse, doctor where appointment.patientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND nurse.NID = @NID AND appointment.doctorID = doctor.doctorID AND appointmentDate >= current_date() AND appointment.archive = false AND appointment.reportID IS NULL ORDER BY appointmentDate DESC";
             string nursequery = " SELECT CONCAT(nurse.fname, ' ', nurse.lname) as Nurse, nurse.NID as nurseID FROM nurse, appointment where nurse.NID = appointment.nurseID AND appointmentID = @appID";
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
@@ -195,15 +197,23 @@ namespace WebApplication1
         {
             int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
             int appointmentID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
-
+            string date = (GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[6].Text);
+            DateTime selected_date = DateTime.Parse(date, CultureInfo.InvariantCulture);
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
+            DateTime currentDate = DateTime.Now;
 
             if (e.CommandName == "GENERATE")
             {
-                int NID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["nurseID"]);
-                if(NID == nurseID)
-                    Response.Redirect("nurseReport.aspx?appID=" + appointmentID + "&NID=" + nurseID);
+                if (GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["nurseID"] != DBNull.Value)
+                {
+                    int NID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["nurseID"]);
+                    if (!(currentDate < selected_date))
+                    {
+                        if (NID == nurseID)
+                            Response.Redirect("nurseReport.aspx?appID=" + appointmentID + "&NID=" + nurseID);
+                    }
+                }
             }
             else if(e.CommandName == "assignApp")
             {
@@ -215,7 +225,9 @@ namespace WebApplication1
                 command.ExecuteNonQuery();
                 connection.Close();
                 BindData();
+
             }
+
         }
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {

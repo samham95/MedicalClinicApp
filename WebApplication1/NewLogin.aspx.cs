@@ -26,7 +26,7 @@ namespace WebApplication1
             {
                 if (DropDownList1.SelectedValue == "Doctor")
                 {
-                    string sql = "INSERT INTO login (username, password, ID) VALUES (@username, @passwrd, @doctorID)";
+                    string sql = "INSERT INTO login (username, passwrd, doctorID) VALUES (@username, @passwrd, @doctorID)";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@username", username.Text);
                     command.Parameters.AddWithValue("@passwrd", password.Text);
@@ -36,7 +36,7 @@ namespace WebApplication1
                 }
                 if (DropDownList1.SelectedValue == "Nurse")
                 {
-                    string sql = "INSERT INTO login (username, password, ID) VALUES (@username, @passwrd, @nurseID)";
+                    string sql = "INSERT INTO login (username, passwrd, nurseID) VALUES (@username, @passwrd, @nurseID)";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@username", username.Text);
                     command.Parameters.AddWithValue("@passwrd", password.Text);
@@ -45,7 +45,7 @@ namespace WebApplication1
                 }
                 if (DropDownList1.SelectedValue == "Admin")
                 {
-                    string sql = "INSERT INTO login (username, passwrd, ID) VALUES (@username, @passwrd, @adminId)";
+                    string sql = "INSERT INTO login (username, passwrd, adminID) VALUES (@username, @passwrd, @adminId)";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@username", username.Text);
                     command.Parameters.AddWithValue("@passwrd", password.Text);
@@ -54,7 +54,7 @@ namespace WebApplication1
                 }
                 if (DropDownList1.SelectedValue == "Patient")
                 {
-                    string sql = "INSERT INTO login (username, passwrd, ID) VALUES (@username, @passwrd, @patientId)";
+                    string sql = "INSERT INTO login (username, passwrd, patientID) VALUES (@username, @passwrd, @patientId)";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@username", username.Text);
                     command.Parameters.AddWithValue("@passwrd", password.Text);

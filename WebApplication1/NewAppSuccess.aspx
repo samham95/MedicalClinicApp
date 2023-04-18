@@ -5,8 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>SUCCESS</title>
-    <link href="navbar.css" rel="stylesheet" />
-    <link href="AdminPages.css" rel="stylesheet" />
+    <link href="Content/navbar.css" rel="stylesheet" type="text/css" />
+    <link href="Content/AdminPages.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
         <!-- Define the navigation bar at the top of the page -->
@@ -29,5 +29,12 @@
             <asp:HyperLink ID="HyperLink1" runat="server">Click Here to Return to Your Patient Portal</asp:HyperLink>
         </div>
     </form>
+    <div class="footer">
+  <section class="contact">
+    <p>Email: info@coogmedicalgroup.com | Phone: (713)867-5309</p>
+    <p>Coog Clinic © Group 13 - 2023. All rights reserved.</p>
+    <p><a href="AdminLogin.aspx">Admin Login</a></p>
+  </section>
+</div>
 </body>
 </html>

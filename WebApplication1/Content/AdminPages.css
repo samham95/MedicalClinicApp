@@ -4,6 +4,7 @@
     background-size: cover;
     margin: 20px 50px;
     font-family: 'Open Sans', sans-serif;
+    color: #960C22;
 }
 
 .select-type {
@@ -18,11 +19,13 @@
     width: fit-content;
     border: 1px solid black;
     border-radius: 10px;
-    background-color: #f2f2f2;
+    background-color: #FFF9D9;
+    color: #960C22;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     padding: 10px 10px;
     align-content: center;
     margin: auto;
+    margin-bottom: 150px;
 }
 
 input[type=text] {
@@ -43,7 +46,7 @@ input[type=text] {
 /* Button styles */
 
 #SUBMIT {
-    background-color: cornflowerblue;
+    background-color: #C8102E;
     color: white;
     padding: 14px 20px;
     border: none;
@@ -53,8 +56,9 @@ input[type=text] {
 }
 
     #SUBMIT:hover {
-        background-color: dodgerblue;
+        background-color: #960C22;
     }
+
 #EDIT {
     background-color: cornflowerblue;
     color: white;
@@ -68,6 +72,7 @@ input[type=text] {
     #EDIT:hover {
         background-color: dodgerblue;
     }
+
 #clear {
     background-color: red;
     color: white;
@@ -78,6 +83,7 @@ input[type=text] {
     border: none;
     margin-right: 10px;
 }
+
     #clear:hover {
         background-color: darkred;
     }
@@ -91,8 +97,7 @@ input[type=text] {
     border-radius: 4px;
     cursor: pointer;
 }
+
     #exit:hover {
         background-color: dodgerblue;
     }
-
-    

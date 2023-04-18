@@ -29,8 +29,8 @@ protected void Page_Load(object sender, EventArgs e)
 
     if (!IsPostBack)
     {
-        string query2 = "SELECT patients.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as fullname FROM patients WHERE patients.doctorID = @doctorID";
-        MySqlCommand cmd = new MySqlCommand(query2, connection);
+        string query2 = "SELECT DISTINCT patients.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as PatientName FROM patients, appointment WHERE patients.doctorID = @DoctorID OR (appointment.patientID=patients.patientID AND appointment.doctorID = @DoctorID)";
+                MySqlCommand cmd = new MySqlCommand(query2, connection);
         cmd.Parameters.AddWithValue("@doctorID", doctorID);
         MySqlDataReader reader = cmd.ExecuteReader();
 

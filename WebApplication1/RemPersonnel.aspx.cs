@@ -27,6 +27,15 @@ namespace WebApplication1
                 //  remove a Personnel
                 if (DropDownList2.SelectedValue == "Doctor")
                 {
+
+                    string query = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) from doctor WHERE DoctorID = @ID";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@ID", perID.Text);
+                    object result = cmd.ExecuteScalar();
+                    string outcome = result.ToString();
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED ' + outcome);", true);
+
+
                     string sql = "DELETE FROM doctor WHERE DoctorID = @ID";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", perID.Text);
@@ -34,6 +43,14 @@ namespace WebApplication1
                 }
                 if (DropDownList2.SelectedValue == "Nurse")
                 {
+
+                    string query = "SELECT CONCAT( fname, ' ', lname) FROM nurse WHERE NID = @ID";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@ID", perID.Text);
+                    object result = cmd.ExecuteScalar();
+                    string outcome = result.ToString();
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED ' + outcome);", true);
+
                     string sql = "DELETE FROM nurse WHERE NID = @ID";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", perID.Text);
@@ -41,11 +58,20 @@ namespace WebApplication1
                 }
                 if (DropDownList2.SelectedValue == "Staff")
                 {
-                    string sql = "DELETE FROM office WHERE StaffID = @ID";
+
+                    string query = "SELECT CONCAT( fname, ' ', lname) FROM staff WHERE StaffID = @ID";
+                    MySqlCommand cmd = new MySqlCommand(query, connection);
+                    cmd.Parameters.AddWithValue("@ID", perID.Text);
+                    object result = cmd.ExecuteScalar();
+                    string outcome = result.ToString();
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED ' + outcome);", true);
+
+                    string sql = "DELETE FROM staff WHERE StaffID = @ID";
                     MySqlCommand command = new MySqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", perID.Text);
                     command.ExecuteNonQuery();
                 }
+
             }
             catch (Exception ex)
             {

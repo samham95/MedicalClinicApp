@@ -71,7 +71,7 @@
 		}
 	</style>
 	<!-- Add navigation bar styles -->
-	<link href="navbar.css" rel="stylesheet" />
+	<link href="Content/navbar.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body>
@@ -103,5 +103,12 @@
 				</div>
 			</a>
 		</div>
+	 <div class="footer">
+  <section class="contact">
+    <p>Email: info@coogmedicalgroup.com | Phone: (713)867-5309</p>
+    <p>Coog Clinic © Group 13 - 2023. All rights reserved.</p>
+    <p><a href="AdminLogin.aspx">Admin Login</a></p>
+  </section>
+</div>
 </body>
 </html>

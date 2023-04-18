@@ -8,8 +8,8 @@
 	<meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<link href="AdminPages.css" rel="stylesheet" />
-	<link href="navbar.css" rel="stylesheet" />
+	<link href="Content/AdminPages.css" rel="stylesheet" type ="text/css"/>
+	<link href="Content/navbar.css" rel="stylesheet" type="text/css" />
     <style>
         .my-textbox {
             background-color: #999999;
@@ -125,6 +125,13 @@
             </script>
             </div>
    </form>
+     <div class="footer">
+  <section class="contact">
+    <p>Email: info@coogmedicalgroup.com | Phone: (713)867-5309</p>
+    <p>Coog Clinic © Group 13 - 2023. All rights reserved.</p>
+    <p><a href="AdminLogin.aspx">Admin Login</a></p>
+  </section>
+</div>
  
 </body>
 </html>
