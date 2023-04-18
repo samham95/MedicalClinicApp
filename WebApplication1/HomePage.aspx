@@ -18,9 +18,10 @@
           font-weight: 100;
           background-color: white;
           letter-spacing: .5px;
-          background-image: url("https://c0.wallpaperflare.com/preview/4/544/846/medical-local-doctor-medicine.jpg");
+          background-image: url("https://plus.unsplash.com/premium_photo-1661740940614-e8cac9342154?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80");
           background-size: cover;
           background-position: center;
+
           z-index:0;
           /*filter: blur(2px);
           -webkit-filter: blur(2px);*/
@@ -33,13 +34,14 @@
           margin: 0 auto;
           max-width: 1000px;
           text-align: center;
+          margin-bottom:200px;
       }
 
       .header {
           position: relative;
           height:10%;
           text-align: center;
-          color: #960C22;
+          color: black;
           font-family: monospace;
           font-size: 40px;
           z-index: 1;
@@ -56,14 +58,14 @@
             padding:10px;
             padding-bottom:30px;
             z-index: -1;
-            background-color:#FFF9D9;
+            background-color:transparent;
             border-radius:20px;
             box-shadow:25px;
       }
 
       .btn {
-          color: #FFF9D9;
-          background: #C8102E;
+          color: white;
+          background-color:black;
           padding: 10px 40px;
           text-decoration: none;
           transition: background .5s;
@@ -79,13 +81,13 @@
       }
               /* Navigation styles */
        .navbar {
-        background-color: #C8102E;
+        background-color: black;
         overflow: hidden;
                 height: 48px;
             }
       .navbar a {
         float: right;
-        color: #FFF9D9;
+        color: white;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
@@ -93,7 +95,7 @@
       }
             .navbar left {
         float: left;
-        color: #FFF9D9;
+        color: white;
         text-align: left;
         padding: 14px 16px;
         text-decoration: none;
@@ -104,7 +106,7 @@
         color: #FFF9D9;
       }
       .btn:hover {
-          background-color: #640817;
+          background-color: gray;
           cursor: pointer;
           transition: background .5s;
       }
@@ -114,16 +116,16 @@
           transition: background .5s;
       }
       .footer{
-          position:fixed;
+          position:relative;
           left:0;
           bottom:0;
           width:100%;
-          background-color: #C8102E;
-          color: #FFF9D9;
+          background-color: black;
+          color: white;
           text-align:left;
       }
       .contact {
-  color: black;
+  color: white;
 }
     .location-box {
       background-color: #FFF9D9;

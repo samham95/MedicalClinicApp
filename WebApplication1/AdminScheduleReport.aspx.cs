@@ -63,7 +63,7 @@ namespace WebApplication1
                 string query = "";
                 if (selectedValue == "Doctor")
                 {
-                    query = "SELECT \r\n  d.DoctorID, d.Fname, d.Lname, d.Specialty, d.Phone_num,\r\n  SUBSTRING_INDEX(o1.officeAddress, ',', 1) AS Monday,\r\n  SUBSTRING_INDEX(o2.officeAddress, ',', 1) AS Tuesday,\r\n  SUBSTRING_INDEX(o3.officeAddress, ',', 1) AS Wednesday,\r\n  SUBSTRING_INDEX(o4.officeAddress, ',', 1) AS Thursday,\r\n  SUBSTRING_INDEX(o5.officeAddress, ',', 1) AS Friday\r\nFROM schedule s\r\nJOIN doctor d ON s.doctor = d.DoctorID\r\nLEFT JOIN office o1 ON s.Monday = o1.officeID\r\nLEFT JOIN office o2 ON s.Tuesday = o2.officeID\r\nLEFT JOIN office o3 ON s.Wednesday = o3.officeID\r\nLEFT JOIN office o4 ON s.Thursday = o4.officeID\r\nLEFT JOIN office o5 ON s.Friday = o5.officeID;";
+                    query = "SELECT \r\n  d.DoctorID, d.Fname, d.Lname, d.Specialty, d.Phone_num, d.Salary,\r\n  SUBSTRING_INDEX(o1.officeAddress, ',', 1) AS Monday,\r\n  SUBSTRING_INDEX(o2.officeAddress, ',', 1) AS Tuesday,\r\n  SUBSTRING_INDEX(o3.officeAddress, ',', 1) AS Wednesday,\r\n  SUBSTRING_INDEX(o4.officeAddress, ',', 1) AS Thursday,\r\n  SUBSTRING_INDEX(o5.officeAddress, ',', 1) AS Friday\r\nFROM schedule s\r\nJOIN doctor d ON s.doctor = d.DoctorID\r\nLEFT JOIN office o1 ON s.Monday = o1.officeID\r\nLEFT JOIN office o2 ON s.Tuesday = o2.officeID\r\nLEFT JOIN office o3 ON s.Wednesday = o3.officeID\r\nLEFT JOIN office o4 ON s.Thursday = o4.officeID\r\nLEFT JOIN office o5 ON s.Friday = o5.officeID;";
                 }
                 else if (selectedValue == "Nurse")
                 {
@@ -98,10 +98,19 @@ namespace WebApplication1
                     DataTable officeDataTable = new DataTable();
                     officeAdapter.Fill(officeDataTable);
                     dataTables.Add(officeDataTable);
+                    string officeQuery2 = "SELECT\r\n    AVG(Salary) AS 'Average Pay',\r\n    MAX(Salary) AS 'Highest Pay',\r\n    MIN(Salary) AS 'Lowest Pay'\r\nFROM\r\n    doctor\r\nWHERE\r\n    Salary IS NOT NULL;";
+                    // Create a new MySqlCommand object with the new query and the existing connection
+                    MySqlCommand officeCommand2 = new MySqlCommand(officeQuery2, connection);
+                    // Create a new MySqlDataAdapter object with the new command
+                    MySqlDataAdapter officeAdapter2 = new MySqlDataAdapter(officeCommand2);
+                    // Create a new DataTable object, fill it with the adapter, and add it to the dataTables list
+                    DataTable officeDataTable2 = new DataTable();
+                    officeAdapter2.Fill(officeDataTable2);
+                    dataTables.Add(officeDataTable2);
                 }
                 else if (selectedValue == "Nurse")
                 {
-                    string officeQuery = "SELECT\r\n    AVG(pay) AS average_pay,\r\n    MAX(pay) AS highest_pay,\r\n    MIN(pay) AS lowest_pay\r\nFROM\r\n    nurse;";
+                    string officeQuery = "SELECT\r\n    AVG(pay) AS 'Average Pay',\r\n    MAX(pay) AS 'Highest Pay',\r\n    MIN(pay) AS 'Lowest Pay'\r\nFROM\r\n    nurse;";
                     MySqlCommand officeCommand = new MySqlCommand(officeQuery, connection);
                     // Create a new MySqlDataAdapter object with the new command
                     MySqlDataAdapter officeAdapter = new MySqlDataAdapter(officeCommand);
@@ -112,7 +121,7 @@ namespace WebApplication1
                 }
                 else if (selectedValue == "Staff")
                 {
-                    string officeQuery = "SELECT\r\n    AVG(Pay) AS average_pay,\r\n    MAX(Pay) AS highest_pay,\r\n    MIN(Pay) AS lowest_pay\r\nFROM\r\n    staff\r\nWHERE\r\n    Pay IS NOT NULL;";
+                    string officeQuery = "SELECT\r\n    AVG(Pay) AS 'Average Pay',\r\n    MAX(Pay) AS 'Highest Pay',\r\n    MIN(Pay) AS 'Lowest Pay'\r\nFROM\r\n    staff\r\nWHERE\r\n    Pay IS NOT NULL;";
                     MySqlCommand officeCommand = new MySqlCommand(officeQuery, connection);
                     // Create a new MySqlDataAdapter object with the new command
                     MySqlDataAdapter officeAdapter = new MySqlDataAdapter(officeCommand);

@@ -54,7 +54,7 @@
                     ValidationExpression="^\d{12}$" /></span>
 			</div>
 			<div class="form-group">
-				<label for="expirationdate">Card Number <span class="required">*</span></label>&nbsp;
+				<label for="expirationdate">Expiration Date <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="exp" runat="server" placeholder="12/2032" MaxLength="7"></asp:TextBox>
                 <span class="required"><asp:RegularExpressionValidator ID="expvalid" runat="server" 
                 ControlToValidate="exp" ErrorMessage="Please enter a valid card number." 

@@ -1,12 +1,12 @@
 ﻿
 
 .navbar {
-    background-color: #C8102E;
+    background-color: black;
     height: 48px;
     position: center;
     top: 0;
     width: 100%;
-    color: #FFF9D9;
+    color: white;
     font-size: 17px;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
@@ -14,7 +14,7 @@
 
     .navbar a {
         float: right;
-        color: #FFF9D9;
+        color: white;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
@@ -23,16 +23,19 @@
 
     .navbar left {
         float: left;
-        color: #FFF9D9;
-        text-align: left;
+        color: white;
+        text-align: center;
         padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;
     }
 
     .navbar a:hover {
-        background-color: #960C22;
-        color: #FFF9D9;
+        background-color: grey;
+        color: white;
+    }
+    .navbar left:hover{
+        background-color: transparent;
     }
 
 .nav ul li:hover {
@@ -42,12 +45,12 @@
 }
 
 .footer {
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #C8102E;
-    color: #FFF9D9;
+    background-color: transparent;
+    color: black;
     text-align: left;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;

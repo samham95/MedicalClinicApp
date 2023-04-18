@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">i
+<head runat="server">
     <link href="Content/navbar.css" rel="stylesheet" type="text/css"/>
     <title>Admin View</title>
     <style>
