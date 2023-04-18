@@ -19,14 +19,12 @@
 </head>
 <body>
     <div class="navbar">
-	  <div class="navbar-right">
-		<a href="HomePage.aspx" class="nav-item">Home</a>
-		<a href="#" class="nav-item">About Us</a>
-		<a href="#" class="nav-item">Contact Us</a>
-		<a href="PatientLogin.aspx" class="nav-item">Patient Login</a>
-		<a href="ProviderLogin.aspx" class="nav-item">Provider Login</a>
-	  </div>
-	</div>
+      <a href="AboutUs.aspx">About Us</a>
+      <a href="ContactUs.aspx">Contact Us</a>
+      <a href="PatientLogin.aspx">Patient Login</a>
+      <a href="ProviderLogin.aspx">Provider Login</a>
+      <a href="HomePage.aspx">Home</a>
+    </div>
     <h1 style = "text-align: center">&nbsp;</h1>
     <h1 style = "text-align: center">Schedule your appointment today</h1>
 	<p style = "text-align: center">Please fill out where indicated</p>
@@ -109,7 +107,7 @@
             <br />
 			<fieldset>
 			<legend>Appointment Details</legend>
-
+                <br />
             <div class="form-group">
 				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
                 <asp:TextBox ID="Date" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" OnTextChanged="Date_TextChanged"></asp:TextBox>
@@ -148,32 +146,17 @@
                 <asp:DropDownList ID="ddlTimeRequested" runat="server" Width="140px" AutoPostBack="True"></asp:DropDownList>
 			    <span class="required"><asp:Literal ID="ErrorMessage_date" runat="server" ></asp:Literal></span>
 			    <br />
-                <br />
 			</div>
+                <br />
+                <br />
 
 
-			<div class="form-group">
-				<label for="pcp-or-specialist">Do you want to see a PCP or specialist?<span class="required">*</span></label>
-                <asp:CheckBox ID="pcp" runat="server" />
-                <label for="pcp-or-specialist">PCP
-                </label>
-                <asp:CheckBox ID="spec" runat="server" />
-                <label for="pcp-or-specialist">Specialist<br />
-                <br />
-                </label>
-                </div>
-
-            <div class="form-group">
-				<label for="referral">
-                <br />
-                If you&#39;re seeing a specialist, do you have a referral?</label>
-                <asp:CheckBox ID="CheckBox5" runat="server" />
-                <label for="referral">Yes</label>
-                <asp:CheckBox ID="CheckBox6" runat="server" />
-                <label for="referral">No<br />
-                <br />
-                </label>
+                            <div class="form-group">
+				<label for="reason">Reason for your visit:</label>
+                                <asp:TextBox runat="server" TextMode="MultiLine"></asp:TextBox>
 			</div>
+			<br />
+                <br />
 
 			<div class="form-group">
 				<label for="insurance">Do you have insurance?<span class="required">*</span></label>
@@ -184,11 +167,8 @@
                 <label for="insurance">No<br />
                 </label>
 			</div>
+<br />
 
-            <div class="form-group">
-				<label for="reason">Reason for your visit:</label>
-				<input type="text" name="reason" id="reason"/>
-			</div>
 
 			<div class="form-group">
 				<label for="insurance-name">Insurance Name</label>

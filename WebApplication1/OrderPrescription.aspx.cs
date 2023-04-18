@@ -28,7 +28,7 @@ namespace WebApplication1
                 MySqlCommand report_cmd = new MySqlCommand(report_query, connect);
                 report_cmd.Parameters.AddWithValue("@reportID", reportID);
                 string prescription = report_cmd.ExecuteScalar().ToString();
-                drugname.Text = prescription;
+                drugclass.Text = prescription;
             }
             string pat_query = "SELECT CONCAT(doctor.fname, ' ', doctor.lname) as dr_fn, CONCAT(patients.fname, ' ', patients.lname) as pat_fn from doctor,patients WHERE doctor.doctorID = @doctorID and patients.patientID = @patientID";
             MySqlCommand cmd = new MySqlCommand(pat_query, connect);

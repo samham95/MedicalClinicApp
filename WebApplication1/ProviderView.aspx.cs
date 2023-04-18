@@ -25,6 +25,8 @@ namespace WebApplication1
             int doctorID =Convert.ToInt32 (Request.QueryString["doctorID"]);
             DateTime currentDate = DateTime.Now;
             DayOfWeek dayOfWeek = currentDate.DayOfWeek;
+            CultureInfo culture = new CultureInfo("en-US"); 
+            string dayName = culture.DateTimeFormat.GetDayName(dayOfWeek);
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -40,7 +42,7 @@ namespace WebApplication1
             welcomeHeader.InnerText = "Welcome, " + fullname;
             connection.Close();
             LinkButton1.Text = "Logged in as: " + fullname;
-            officeLocale.InnerText = dayOfWeek.ToString() + "'s office: " + officeLoca;
+            officeLocale.InnerText = dayName + "'s office: " + officeLoca;
             connection.Close();
 
         }

@@ -40,6 +40,14 @@
 			    <br />
                 <br />
 			</div>
+                 <div class="form-group">
+				<label for="Pat">
+                Drug Class: </label>
+                <asp:TextBox ReadOnly="true" ID="drugclass" runat="server"></asp:TextBox>
+			
+			    <br />
+                <br />
+			</div>
             <div class="form-group">
                 Drug Name: <span class="required"> * </span> <asp:TextBox ID="drugname" runat="server"></asp:TextBox>
 

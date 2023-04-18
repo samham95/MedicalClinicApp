@@ -57,11 +57,6 @@
                 <asp:TextBox CssClass="my-textbox" ReadOnly ="True" ID="lname" runat="server"></asp:TextBox>
 				</div>
 
-			<div class="form-group">
-				<label for="date-of-birth">Date of Birth <span class="required">*</span></label>&nbsp;
-                <asp:TextBox CssClass="my-textbox" ReadOnly ="True" ID="dob" runat="server" TextMode="Date" DataFormatString="{yyyy/MM/dd}"></asp:TextBox>
-			</div>
-            
             <div class="form-group">
                 <label for="phone">Phone Number <span class="required">*</span></label>&nbsp;
                 <asp:TextBox CssClass="my-textbox" ReadOnly ="True" ID="phone_num" runat="server" placeholder="1234567890" MaxLength="10" />
@@ -103,7 +98,7 @@
 
 			<div class="form-group">
 				<label for="ECemail">Emergency Contact Email <span class="required">*</span></label>&nbsp;
-                <asp:TextBox CssClass="my-textbox" ReadOnly ="True" ID="ECemail" runat="server" placeholder="you@example.com"></asp:TextBox>
+                <asp:TextBox CssClass="my-textbox" ReadOnly ="true" ID="ECemail" runat="server" placeholder="you@example.com"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="ecemailvalidator" runat="server" 
                 ControlToValidate="ECemail" ErrorMessage="Please enter a valid email address." 
                     ValidationExpression="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />

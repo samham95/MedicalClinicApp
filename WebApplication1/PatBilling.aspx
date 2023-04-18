@@ -109,7 +109,7 @@
     </asp:Panel>
 
         <h1>Invoice Summary</h1>
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2" style="margin-top: 0px">
+    <asp:GridView ID="GridView1" OnRowCommand="GridView1_RowCommand" DataKeyNames= "reportID" runat="server" AutoGenerateColumns="False" CellPadding="4" ForeColor="Black" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellSpacing="2" style="margin-top: 0px">
         <Columns>
             <asp:BoundField DataField="invoiceID" HeaderText="Invoice ID" />
             <asp:BoundField DataField="total" HeaderText="Total" DataFormatString="{0:c}" />

@@ -135,13 +135,15 @@ namespace WebApplication1
 
             DateTime DateApp = DateTime.ParseExact(AppDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             string day = DateApp.DayOfWeek.ToString();
-            string doc_query = "SELECT doctorID, " + day + " as officeID,  FROM patients, schedule, office WHERE patientID = @PID AND patients.doctorID = schedule.doctor";
+            string doc_query = "SELECT doctorID, " + day + " as officeID, officeAddress FROM patients, schedule, office WHERE patientID = @PID AND patients.doctorID = schedule.doctor AND office.officeID = schedule."+ day;
             MySqlCommand commnd = new MySqlCommand(doc_query, connection);
             commnd.Parameters.AddWithValue("@PID", patientID);
             MySqlDataReader reader =  commnd.ExecuteReader();
             reader.Read();
             string officeID = (reader["officeID"]).ToString();
             string doctorID = (reader["doctorID"]).ToString();
+            string officeL = reader["office"].ToString();
+            officeLocation.Text = officeL;
             reader.Close();
 
             string update_query = "INSERT into appointment(doctorID, patientID, officeID, AppointmentDate, AppointmentTime) values (@DID, @PID, @OID, @Date, @Time)";
@@ -178,6 +180,34 @@ namespace WebApplication1
         {
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
             Response.Redirect("PatientPortal.aspx?patientID=" + patientID);
+        }
+
+        protected void officeLocation_TextChanged(object sender, EventArgs e)
+        {
+
+
+        }
+
+        protected void date_requested_TextChanged(object sender, EventArgs e)
+        {
+            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+            MySqlConnection connection = new MySqlConnection(connString);
+            connection.Open();
+            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+            string AppDate = date_requested.Text;
+            DateTime DateApp = DateTime.ParseExact(AppDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            string day = DateApp.DayOfWeek.ToString();
+            string doc_query = "SELECT doctorID, " + day + " as officeID, officeAddress FROM patients, schedule, office WHERE patientID = @PID AND patients.doctorID = schedule.doctor AND office.officeID = schedule." + day;
+            MySqlCommand commnd = new MySqlCommand(doc_query, connection);
+            commnd.Parameters.AddWithValue("@PID", patientID);
+            MySqlDataReader reader = commnd.ExecuteReader();
+            reader.Read();
+            string officeID = (reader["officeID"]).ToString();
+            string doctorID = (reader["doctorID"]).ToString();
+            string officeL = reader["officeAddress"].ToString();
+            officeLocation.Text = officeL;
+            reader.Close();
+            connection.Close();
         }
     }
 }

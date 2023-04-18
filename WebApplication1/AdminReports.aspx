@@ -64,7 +64,7 @@
                     <asp:Button ID="Report2" runat="server" Text="Invoices Summary Report" OnClick="Report2_Click" CssClass="custom-button" style="background-size: 70% 70%; padding: 10px; background-position: center 20px; background-image: url(https://cdn-icons-png.flaticon.com/512/38/38817.png?w=740&t=st=1680915029~exp=1680915629~hmac=670e5463286b79d12c9af5e1f3f83f203df3d06b45a11f0abb303a52aa1a107d);"/>
                 </div>
                 <div>
-                    <asp:Button ID="Report3" runat="server" Text="Scheduling Summary Report" OnClick="Report3_Click" CssClass="custom-button"  style="background-size: 70% 70%; padding: 10px; background-position: center 20px; background-image: url(https://cdn-icons-png.flaticon.com/512/38/38817.png?w=740&t=st=1680915029~exp=1680915629~hmac=670e5463286b79d12c9af5e1f3f83f203df3d06b45a11f0abb303a52aa1a107d)"/>
+                    <asp:Button ID="Report3" runat="server" Text="Personel Summary Report" OnClick="Report3_Click" CssClass="custom-button"  style="background-size: 70% 70%; padding: 10px; background-position: center 20px; background-image: url(https://cdn-icons-png.flaticon.com/512/38/38817.png?w=740&t=st=1680915029~exp=1680915629~hmac=670e5463286b79d12c9af5e1f3f83f203df3d06b45a11f0abb303a52aa1a107d)"/>
                 </div>
             </div>
         </div>

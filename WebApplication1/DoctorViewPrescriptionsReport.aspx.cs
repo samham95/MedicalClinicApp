@@ -91,6 +91,8 @@ namespace WebApplication1
             headerRow.Cells.Add(new TableHeaderCell() { Text = "Dosage" });
             headerRow.Cells.Add(new TableHeaderCell() { Text = "Refills" });
             headerRow.Cells.Add(new TableHeaderCell() { Text = "Notes" });
+            reportTable.Attributes.Add("class", "table-class"); // Add class attribute for styling
+
             reportTable.Rows.Add(headerRow);
 
             // Generate the data rows
@@ -104,6 +106,8 @@ namespace WebApplication1
                 dataRow.Cells.Add(new TableCell() { Text = row["dosage"].ToString() });
                 dataRow.Cells.Add(new TableCell() { Text = row["refills"].ToString() });
                 dataRow.Cells.Add(new TableCell() { Text = row["notes"].ToString() });
+                dataRow.Attributes.Add("class", "data-row-class"); // Add class attribute for styling
+
                 reportTable.Rows.Add(dataRow);
             }
 

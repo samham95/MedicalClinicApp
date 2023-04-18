@@ -244,7 +244,7 @@ namespace WebApplication1
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int reportID = Convert.ToInt32(GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[5].Text);
+            int reportID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["reportID"]);
             int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
             if (e.CommandName == "viewReport")
             {

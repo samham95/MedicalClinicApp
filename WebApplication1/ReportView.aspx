@@ -56,7 +56,7 @@
             <label for="patientSymptoms">
             <br />
             <br />
-Temperature(F)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP sys(mmHg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP dia(dys mmHg)&nbsp;&nbsp;&nbsp;&nbsp;<br />
+Temperature(F)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP sys(mmHg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP dia(mmHg)&nbsp;&nbsp;&nbsp;&nbsp;<br />
                 &nbsp;<div style="display:inline">
                   <asp:TextBox ID="temperatureBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
                  <asp:TextBox ID="p_sys" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>

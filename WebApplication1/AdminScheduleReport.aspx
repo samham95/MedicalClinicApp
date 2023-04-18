@@ -23,8 +23,8 @@
     <br />
     <form id="form1" runat="server">
         <div role="document">
-            <h1>Scheduling Reports</h1>
-            <p1 style="font-size:24px">Generate Report about Scheduling of a Certain Group</p1>
+            <h1>Personel Reports</h1>
+            <p1 style="font-size:24px">Generate Report about Personel Group</p1>
             <p>Please choose where indicated</p>
             <div class="form-container">
                 <div>
@@ -55,6 +55,9 @@
             </div>
             <asp:Button ID="exit" runat="server" OnClick="ButtonExit_Click" Text="Return to Admin Page" />
         </div>
+        <asp:HyperLink ID="btnDownloadPDF" runat="server" Text="Download PDF" Visible="false" />
+
+        <asp:Literal ID="TableLiteral" runat="server"></asp:Literal>
 
         <!-- Adding scripts to use bootstrap -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -69,6 +72,9 @@
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
                 crossorigin="anonymous">
         </script>
+
+
     </form>
+
 </body>
 </html>

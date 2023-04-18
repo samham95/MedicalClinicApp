@@ -33,7 +33,7 @@
             <br />
             <div class="form-group">
 				<label for="date-requested">Date Requested <span class="required">*</span></label>&nbsp;
-                <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" ></asp:TextBox>
+                <asp:TextBox ID="date_requested" runat="server" TextMode="Date" DataFormatString="yyyy-MM-dd" AutoPostBack="True" OnTextChanged="date_requested_TextChanged" ></asp:TextBox>
 			    <span class="required"><asp:Literal ID="ErrorMessage_date2" runat="server" ></asp:Literal></span>
 			</div>
 
@@ -46,12 +46,20 @@
 			    <br />
                 <br />
 			</div>
+                   <br />
+                               <div class="form-group">
+				<label for="date-requested">Reason for Visit <span class="required">*</span></label>&nbsp;
+                <asp:TextBox ID="TextBox1" runat="server" TextMode="MultiLine"></asp:TextBox>
+			
+			
+			</div>
+                   <br />
             <div class ="form-group">
-                Office Location
-                <asp:TextBox ID="officeLocation" runat="server"></asp:TextBox>
+                PCP's Office Location
+                <asp:TextBox ID="officeLocation" runat="server" OnTextChanged="officeLocation_TextChanged" Width="257px"></asp:TextBox>
             </div>
 			<p><span class="required">*</span> Required information</p>
-             <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
+             <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" ReadOnly="true" />
 			</fieldset>
         
             </div>

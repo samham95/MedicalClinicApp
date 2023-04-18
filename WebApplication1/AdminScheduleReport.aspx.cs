@@ -10,6 +10,8 @@ using System.IO;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.html.simpleparser;
+using System.Text;
+
 namespace WebApplication1
 {
     public partial class AdminScheduleReport : System.Web.UI.Page
@@ -28,12 +30,26 @@ namespace WebApplication1
         {
             List<DataTable> dataTables = GetDataFromMySQL();
             MemoryStream pdfStream = GeneratePDF(dataTables);
-            Response.ContentType = "application/pdf";
-            Response.AddHeader("content-disposition", "attachment;filename=Report.pdf");
-            Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
-            Response.BinaryWrite(pdfStream.ToArray());
-            Response.End();
+            GenerateHTMLTable(dataTables);
+
+            // Save the PDF file to the server
+            string reportsDirectory = Server.MapPath("~/GeneratedReports");
+
+            // Check if the directory exists, if not, create it
+            if (!Directory.Exists(reportsDirectory))
+            {
+                Directory.CreateDirectory(reportsDirectory);
+            }
+
+            string pdfFileName = Path.Combine(reportsDirectory, "SchedulingReport.pdf");
+            File.WriteAllBytes(pdfFileName, pdfStream.ToArray());
+
+            // Provide a download link to the generated PDF
+            btnDownloadPDF.NavigateUrl = "~/GeneratedReports/SchedulingReport.pdf";
+            btnDownloadPDF.Visible = true;
         }
+
+
 
         private List<DataTable> GetDataFromMySQL()
         {
@@ -107,7 +123,7 @@ namespace WebApplication1
                 }
                 else if (selectedValue == "Patient")
                 {
-                    string officeQuery = "SELECT\r\n    SUM(balance) AS payment_uncollected,\r\n    SUM(payment) AS payment_received,\r\n    COUNT(CASE WHEN balance = 0 THEN 1 ELSE NULL END) AS patients_paid_all,\r\n    COUNT(CASE WHEN balance <> 0 THEN 1 ELSE NULL END) AS patients_not_paid_all\r\nFROM\r\n    patients;";
+                    string officeQuery = "SELECT\r\n    SUM(balance) AS 'Total Balance',\r\n    SUM(payment) AS 'Total Received',\r\n    COUNT(CASE WHEN balance = 0 THEN 1 ELSE NULL END) AS 'Number of Patient Current',\r\n    COUNT(CASE WHEN balance > 0 THEN 1 ELSE NULL END) AS 'Number of Patient Past Due'\r\nFROM\r\n    patients;\r\n";
                     MySqlCommand officeCommand = new MySqlCommand(officeQuery, connection);
                     // Create a new MySqlDataAdapter object with the new command
                     MySqlDataAdapter officeAdapter = new MySqlDataAdapter(officeCommand);
@@ -147,23 +163,23 @@ namespace WebApplication1
             string title = "";
             if (selectedValue == "Doctor")
             {
-                title = "Report of Doctor Scheduling";
+                title = "Report of Doctor";
             }
             else if (selectedValue == "Nurse")
             {
-                title = "Report of Nurse Scheduling";
+                title = "Report of Nurse";
             }
             else if (selectedValue == "Staff")
             {
-                title = "Report of Staff Scheduling";
+                title = "Report of Staff";
             }
             else if (selectedValue == "Patient")
             {
-                title = "Report of Patient Appointment Scheduling";
+                title = "Report of Patient";
             }
             else // Default to doctor table
             {
-                title = "Report of Doctor Scheduling";
+                title = "Report of Doctor";
             }
             Paragraph titleParagraph = new Paragraph(title, titleFont);
             titleParagraph.Alignment = Element.ALIGN_CENTER;
@@ -184,23 +200,23 @@ namespace WebApplication1
                     Paragraph subTitleParagraph = new Paragraph("Number of Doctors Work in Certain Day", subTitleFont);
                     if (selectedValue == "Doctor")
                     {
-                        subTitleParagraph = new Paragraph("Number of Doctors Work in Certain Day", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Doctor Personel", subTitleFont);
                     }
                     else if (selectedValue == "Nurse")
                     {
-                        subTitleParagraph = new Paragraph("Nurse Pay Summary", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Nurse Personel", subTitleFont);
                     }
                     else if (selectedValue == "Staff")
                     {
-                        subTitleParagraph = new Paragraph("Staff Pay Summary", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Staff Personel", subTitleFont);
                     }
                     else if (selectedValue == "Patient")
                     {
-                        subTitleParagraph = new Paragraph("Patient Payment Summary", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Patient Personel", subTitleFont);
                     }
                     else // Default to doctor table
                     {
-                        subTitleParagraph = new Paragraph("Number of Doctors Work in Certain Day", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Doctor Personel", subTitleFont);
                     }
 
                     subTitleParagraph.Alignment = Element.ALIGN_CENTER;
@@ -235,6 +251,42 @@ namespace WebApplication1
 
             return pdfStream;
         }
+        private void GenerateHTMLTable(List<DataTable> dataTables)
+        {
+            StringBuilder htmlTables = new StringBuilder();
+
+            foreach (DataTable dataTable in dataTables)
+            {
+                htmlTables.Append("<table border='1' cellspacing='0' cellpadding='5'>");
+
+                // Add header row
+                htmlTables.Append("<tr style='background-color: #f0f0f0;'>");
+                foreach (DataColumn column in dataTable.Columns)
+                {
+                    htmlTables.AppendFormat("<th>{0}</th>", column.ColumnName);
+                }
+                htmlTables.Append("</tr>");
+
+                // Add data rows
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    htmlTables.Append("<tr>");
+                    foreach (object cellData in row.ItemArray)
+                    {
+                        htmlTables.AppendFormat("<td>{0}</td>", cellData.ToString());
+                    }
+                    htmlTables.Append("</tr>");
+                }
+
+                htmlTables.Append("</table>");
+                htmlTables.Append("<br>"); // Add a line break between tables
+            }
+
+            // Assign the generated HTML tables to the Literal control
+            TableLiteral.Text = htmlTables.ToString();
+        }
+
+
 
     }
 }
