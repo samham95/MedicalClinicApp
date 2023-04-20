@@ -120,12 +120,14 @@
           left:0;
           bottom:0;
           width:100%;
-          background-color: black;
-          color: white;
+          background-color: transparent;
+          color: black;
           text-align:left;
+          font-size: 12px;
+          padding: 10px 15px;
       }
       .contact {
-  color: white;
+  color: black;
 }
     .location-box {
       background-color: #FFF9D9;
@@ -155,7 +157,7 @@
   <div class="header">
     <div class="container">
       <h1>Coog Clinic </h1>
-      <p>Your Health Journey Start Here!</p>
+      <p>Your Health Journey Starts Here!</p>
       <a class="btn" href="NewPatient.aspx">Click Here to Schedule Your Appointment Today</a>
         <a class ="btn" href="PatientLogin.aspx"> Click Here to Make a Payment</a>
     </div>

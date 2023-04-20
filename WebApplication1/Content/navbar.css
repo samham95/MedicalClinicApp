@@ -1,15 +1,10 @@
 ﻿
 
+/* Navigation styles */
 .navbar {
     background-color: black;
+    overflow: hidden;
     height: 48px;
-    position: center;
-    top: 0;
-    width: 100%;
-    color: white;
-    font-size: 17px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
 }
 
     .navbar a {
@@ -22,27 +17,34 @@
     }
 
     .navbar left {
+        position: center ;
         float: left;
         color: white;
         text-align: center;
         padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;
+        margin-left:10px;
+        
     }
 
-    .navbar a:hover {
-        background-color: grey;
-        color: white;
-    }
-    .navbar left:hover{
-        background-color: transparent;
-    }
+        .navbar a:hover, .navbar .left:hover {
+            background-color: grey;
+            color: white;
+        }
+
+.btn:hover {
+    background-color: gray;
+    cursor: pointer;
+    transition: background .5s;
+}
 
 .nav ul li:hover {
     background: #000;
     cursor: pointer;
     transition: background .5s;
 }
+
 
 .footer {
     position: relative;
@@ -55,5 +57,7 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
-    margin-top: auto;
+    margin-top: 100px;
+    font-size: 12px;
+    padding: 10px 15px;
 }

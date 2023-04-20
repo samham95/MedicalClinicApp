@@ -36,7 +36,7 @@ protected void Page_Load(object sender, EventArgs e)
 
         while (reader.Read())
         {
-            ListItem item = new ListItem(reader["fullname"].ToString(), reader["patientID"].ToString());
+            ListItem item = new ListItem(reader["PatientName"].ToString(), reader["patientID"].ToString());
             patientName.Items.Add(item);
         }
 
@@ -56,7 +56,7 @@ protected void Page_Load(object sender, EventArgs e)
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
 
-            string query = "SELECT patientID, height_inches as height, weight_lb as weight, AppointmentDate, bloodPressure_dia, bloodPressure_sys, temperature, heartRate FROM visit_details, appointment WHERE appointment.appointmentID = visit_details.appointmentID AND appointment.patientID = @patientID AND appointmentDate >= @start AND appointmentDate <=@end";
+            string query = "SELECT patientID, height_inches as height, weight_lb as weight, AppointmentDate, bloodPressure_dia, bloodPressure_sys, temperature, heartRate FROM visit_details, appointment WHERE appointment.appointmentID = visit_details.appointmentID AND appointment.patientID = @patientID AND appointmentDate >= @start AND appointmentDate <=@end ORDER BY appointmentDate ASC";
             DataTable visitDetails = new DataTable();
             using (MySqlConnection connection = new MySqlConnection(connectionString))
             using (MySqlCommand command = new MySqlCommand(query, connection))

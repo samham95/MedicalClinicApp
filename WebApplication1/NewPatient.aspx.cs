@@ -147,8 +147,9 @@ namespace WebApplication1
 
             try
             {
+                string ins_query = "INSERT INTO insurance(patientID, Insurance_Name, group_no) values (@patientID, @Insurance_Name, @group_no)";
                 // Inset new patient data
-                string sql = "INSERT INTO patients (fname, Minitial, lname, dob, phone_num, email, Address, doctorID) VALUES (@fname, @Minitial, @lname, @dob, @phone_num, @email, @Address, @doctorID)";
+                string sql = "INSERT INTO patients (fname, Minitial, lname, dob, phone_num, email, Address, doctorID, gender, pharmacy_address, pharmacy_name) VALUES (@fname, @Minitial, @lname, @dob, @phone_num, @email, @Address, @doctorID, @gender, @pharmacy_address, @pharmacy_name)";
                 MySqlCommand command = new MySqlCommand(sql, connection);
 
                 command.Parameters.AddWithValue("@fname", fname.Text);
@@ -158,7 +159,10 @@ namespace WebApplication1
                 command.Parameters.AddWithValue("@phone_num", phone_num.Text);
                 command.Parameters.AddWithValue("@email", email.Text);
                 command.Parameters.AddWithValue("@Address", address.Text);
+                command.Parameters.AddWithValue("@gender", gender_list.Text);
                 command.Parameters.AddWithValue("@doctorID", doctorID);
+                command.Parameters.AddWithValue("@pharmacy_name", pharmacy_name.Text);
+                command.Parameters.AddWithValue("@pharmacy_address", pharmacy_address.Text);
 
                 command.ExecuteNonQuery();
 
@@ -198,9 +202,19 @@ namespace WebApplication1
 
                 cmd2.ExecuteNonQuery();
 
+                //insert into insurance
+                if (ins.Checked)
+                {
+                    MySqlCommand ins_cmd = new MySqlCommand(ins_query, connection);
+                    ins_cmd.Parameters.AddWithValue("@patientID",patientID);
+                    ins_cmd.Parameters.AddWithValue("@Insurance_Name", insurance_name.Text);
+                    ins_cmd.Parameters.AddWithValue("@group_no", insurance_group.Text);
+                    ins_cmd.ExecuteNonQuery();
+
+                }
 
                 // insert emergency contact details
-                
+
                 string insert_EC = "INSERT INTO emergency_contact_patient(fullname, Relation, phone_num, email, patientID) values (@fname, @relation, @phone, @email, @patientID)";
                 MySqlCommand cmd3 = new MySqlCommand(insert_EC, connection);
                 cmd3.Parameters.AddWithValue("@fname", emergency_contact.Text);
@@ -219,8 +233,8 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                //Response.Redirect("unsuccessful.aspx");
-                Response.Write("Error: " + ex.Message + '\n');
+                Response.Redirect("unsuccessful.aspx");
+                //Response.Write("Error: " + ex.Message + '\n');
             }
 
             connection.Close();

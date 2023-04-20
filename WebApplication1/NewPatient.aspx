@@ -58,7 +58,7 @@
 				<label for="officelabel">
                 <br />
                 Gender <span class="required">*</span></label>&nbsp;
-                <asp:DropDownList ID="DropDownList2" runat="server" >
+                <asp:DropDownList ID="gender_list" runat="server" >
                     <asp:ListItem></asp:ListItem>
                     <asp:ListItem>Male</asp:ListItem>
                     <asp:ListItem>Female</asp:ListItem>
@@ -183,12 +183,19 @@
 
 			<div class="form-group">
 				<label for="insurance-name">Insurance Name</label>
-				<input type="text" name="insurance-name" id="insurance-name"/>
+				<asp:Textbox id="insurance_name" runat="server"></asp:Textbox>
 
-				<label for="insurance-type">Insurance Type</label>
-				<input type="text" name="insurance-type" id="insurance-type"/>
+				<label for="insurance-type">Insurance Group No.</label>
+				<asp:Textbox id="insurance_group" runat="server"></asp:Textbox>
 			</div>
+                <br />
+            <div class="form-group">
+				<label for="pharmacy-name">Preferred Pharmacy</label><span class="required">*</span>
+				<asp:Textbox id="pharmacy_name" runat="server"></asp:Textbox>
 
+				<label for="pharmacy address">Pharmacy Address</label><span class="required">*</span>
+				<asp:Textbox id="pharmacy_address" runat="server"></asp:Textbox>
+			</div>
 			<p><span class="required">*</span> Required information</p>
             <p>
                 <asp:Button ID="SUBMIT" runat="server" Text="SUBMIT" OnClick="SUBMIT_Click" />
@@ -204,7 +211,7 @@
                         // Check if required fields are filled out
                         if ($('#<%=fname.ClientID %>').val() === '' || $('#<%=lname.ClientID %>').val() === '' || $('#<%=email.ClientID %>').val() === ''
                             || $('#<%=phone_num.ClientID %>').val() === '' || $('#<%=address.ClientID %>').val() === '' || $('#<%=DropDownList1.ClientID %>').val() === ""
-                            || $('#<%=ddlTimeRequested.ClientID %>').val() === "" || $('#<%=primary.ClientID %>').val() === "" || $('#<%=Date.ClientID %>').val() === ""){
+                            || $('#<%=ddlTimeRequested.ClientID %>').val() === "" || $('#<%=primary.ClientID %>').val() === "" || $('#<%=Date.ClientID %>').val() === "" || $('#<%=gender_list.ClientID %>').val() === "" || $('#<%=pharmacy_name.ClientID %>').val() === "" || $('#<%=pharmacy_address.ClientID %>').val() === ""){
                             // Display dialog box
                             alert('Please fill out all required fields.');
                             return false; // Cancel form submission

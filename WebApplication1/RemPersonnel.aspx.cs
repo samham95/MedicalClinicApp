@@ -33,7 +33,7 @@ namespace WebApplication1
                     cmd.Parameters.AddWithValue("@ID", perID.Text);
                     object result = cmd.ExecuteScalar();
                     string outcome = result.ToString();
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED ' + outcome);", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED " + outcome + "');", true);
 
 
                     string sql = "DELETE FROM doctor WHERE DoctorID = @ID";
@@ -49,7 +49,7 @@ namespace WebApplication1
                     cmd.Parameters.AddWithValue("@ID", perID.Text);
                     object result = cmd.ExecuteScalar();
                     string outcome = result.ToString();
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED ' + outcome);", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED " + outcome + "');", true);
 
                     string sql = "DELETE FROM nurse WHERE NID = @ID";
                     MySqlCommand command = new MySqlCommand(sql, connection);
@@ -64,7 +64,7 @@ namespace WebApplication1
                     cmd.Parameters.AddWithValue("@ID", perID.Text);
                     object result = cmd.ExecuteScalar();
                     string outcome = result.ToString();
-                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED ' + outcome);", true);
+                    ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED " + outcome + "');", true);
 
                     string sql = "DELETE FROM staff WHERE StaffID = @ID";
                     MySqlCommand command = new MySqlCommand(sql, connection);

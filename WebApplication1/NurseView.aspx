@@ -27,11 +27,13 @@
       <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
     </div>
     <br />
+
         <br />
-        <asp:Button ID="Button1" runat="server" Height="53px" OnClick="Button1_Click" Text="Patient Reports" Width="231px" />
+        <asp:Button ID="Button1" runat="server" BackColor="LightGray" BorderStyle="Double" Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" Height="51px" OnClick="Button1_Click" Text="Patients View" Width="169px" />
         <br />
    <h1 id="WelcomeHeader" runat="server"> </h1>
         <p1 style="font-size: 18px" id ="officeHeader" runat ="server"></p1>
+
     <br />
     <br />
 
@@ -128,9 +130,7 @@
                 $('#GridView1').on('click', 'input[type="button"]', function (e) {
                     e.preventDefault();
                     var row = $(this).closest('tr');
-
-                    // Modify this line depending on the position of the Nurse column in each GridView
-                    var nurseCell = row.find('td:eq(7)'); // Assuming the nurse column is the 6th column (index starts at 0)
+                    var nurseCell = row.find('td:eq(7)'); 
                     var $button = $(this);
                     var buttonText = $button.val();
                     if (buttonText === 'ACCEPT') {
@@ -141,7 +141,50 @@
                         }
                     }
                 });
-    });
+            });
+
+            $(document).ready(function () {
+                $('#GridView2').on('click', 'input[type="button"]', function (e) {
+                    e.preventDefault();
+                    var row = $(this).closest('tr');
+                    var nurseCell = row.find('td:eq(5)');
+                    var $button = $(this);
+                    var buttonText = $button.val();
+                    if (buttonText === 'ACCEPT') {
+                        if (nurseCell.text() !== 'Not Assigned') {
+                            alert("Cannot accept. A nurse is already assigned to this task.");
+                        } else {
+                            // Perform the 'Accept' action if the nurse is not assigned
+                        }
+                    }
+                });
+            });
+
+            $(document).ready(function () {
+                $('#GridView1').on('click', 'input[type="button"]', function (e) {
+                    e.preventDefault();
+                    var row = $(this).closest('tr');
+                    var appointmentDateCell = row.find('td:eq(6)');
+                    var appointmentDate = new Date(appointmentDateCell.text());
+                    var today = new Date();
+
+                    today.setHours(0, 0, 0, 0);
+                    appointmentDate.setHours(0, 0, 0, 0);
+
+                    var $button = $(this);
+                    var buttonText = $button.val();
+
+                    if (buttonText === 'GENERATE') {
+                        if (appointmentDate.getTime() !== today.getTime()) {
+                            alert("You can't generate a report until the appointment has happened.");
+                        } else {
+                            // Perform the 'Generate' action if the appointment date is today
+                        }
+                    }
+                });
+            });
+
+
         </script>
 
 

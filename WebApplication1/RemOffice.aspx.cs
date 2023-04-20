@@ -31,7 +31,7 @@ namespace WebApplication1
                 cmd.Parameters.AddWithValue("@address", Convert.ToInt32(id.Text));
                 object result = cmd.ExecuteScalar();
                 string outcome = result.ToString();
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED office located at ' + outcome);", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('DELETED office located at " + outcome + "');", true);
 
                 //  remove a office
                 string sql = "DELETE FROM office WHERE officeID = @address";

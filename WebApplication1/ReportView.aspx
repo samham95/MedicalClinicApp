@@ -53,29 +53,29 @@
             </label>
             <asp:TextBox ID="diagnosisBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="72px" MaxLength="200" TextMode="MultiLine" Width="428px" ReadOnly="True"></asp:TextBox>
             
-            <label for="patientSymptoms">
+            <label for="patientSymptoms"></label>
             <br />
             <br />
 Temperature(F)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP sys(mmHg)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BP dia(mmHg)&nbsp;&nbsp;&nbsp;&nbsp;<br />
                 &nbsp;<div style="display:inline">
                   <asp:TextBox ID="temperatureBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
-                 <asp:TextBox ID="p_sys" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
-                 <asp:TextBox ID="p_dia" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="p_sys" runat="server" Width="97px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="p_dia" runat="server" Width="98px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
              </div>
                            <br />
                     <br />
 &nbsp; Height(in)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Weight(lb)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Heart Rate(bpm)<br />
 &nbsp;<div style="display:inline">
-                 <asp:TextBox ID="heartrateBox" runat="server" Width="86px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="heightBox" runat="server" Width="86px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <asp:TextBox ID="heightBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
                  <asp:TextBox ID="weightBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
+                 <asp:TextBox ID="heartrateBox" runat="server" Width="86px" style="margin-right: 40px" BackColor="#CCCCCC" BorderColor="Black" BorderWidth="2px"></asp:TextBox>
 
              </div>
             
             <br />
             <br />
-            Patient Symptoms:</label><br />
+            Patient Symptoms:<br />
             <asp:TextBox ID="symptomsBox" runat="server" BackColor="#CCCCCC" BorderWidth="2px" Height="57px" MaxLength="200" TextMode="MultiLine" Width="420px" ReadOnly="True"></asp:TextBox>
 &nbsp;<br />
             Patient Prescription:<br />

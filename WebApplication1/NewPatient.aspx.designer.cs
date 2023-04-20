@@ -60,13 +60,13 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox dob;
 
         /// <summary>
-        /// DropDownList2 control.
+        /// gender_list control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList gender_list;
 
         /// <summary>
         /// phone_num control.
@@ -238,6 +238,42 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox no_ins;
+
+        /// <summary>
+        /// insurance_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox insurance_name;
+
+        /// <summary>
+        /// insurance_group control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox insurance_group;
+
+        /// <summary>
+        /// pharmacy_name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox pharmacy_name;
+
+        /// <summary>
+        /// pharmacy_address control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox pharmacy_address;
 
         /// <summary>
         /// SUBMIT control.

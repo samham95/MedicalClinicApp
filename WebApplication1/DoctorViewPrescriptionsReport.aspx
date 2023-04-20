@@ -61,7 +61,7 @@
     }
     </style>
     	<link href="Content/navbar.css" rel="stylesheet" type="text/css" />
-    <link href="AdminPages.css" rel="stylesheet" />
+    <link href="Content/AdminPages.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <form id="form1" runat="server">
