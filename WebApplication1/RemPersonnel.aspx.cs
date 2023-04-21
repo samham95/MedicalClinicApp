@@ -75,7 +75,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("Error: " + ex.Message + '\n');
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Unable to delete - staff does not exist');", true);
             }
 
             connection.Close();

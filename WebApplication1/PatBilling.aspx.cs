@@ -244,11 +244,20 @@ namespace WebApplication1
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int reportID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["reportID"]);
-            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
-            if (e.CommandName == "viewReport")
+            try
             {
-            Response.Redirect("ReportView.aspx?ReportID=" + reportID+"&patientID="+patientID);
+                int reportID = Convert.ToInt32(GridView1.DataKeys[Convert.ToInt32(e.CommandArgument)].Values["reportID"]);
+                int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+
+                if (e.CommandName == "viewReport")
+                {
+                    Response.Redirect("ReportView.aspx?ReportID=" + reportID + "&patientID=" + patientID);
+                }
+            }
+            catch(Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Report is not available yet');", true);
+
             }
 
         }

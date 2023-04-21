@@ -63,17 +63,17 @@
             </div>
             <script>
 //Client-side jQuery to cancel form submission if required fields empty
-$(function () {
-                    // Attach event handler to form submit button click
-                    $('#<%=SUBMIT.ClientID %>').on('click', function () {
-                        // Check if required fields are filled out
-                        if ($('#<%=perID.ClientID %>').val() === '') {
-                            // Display dialog box
-                            alert('Please fill out all required fields.');
-                            return false; // Cancel form submission
-                        }
-                    });
-});
+    $(function () {
+                        // Attach event handler to form submit button click
+                        $('#<%=SUBMIT.ClientID %>').on('click', function () {
+                            // Check if required fields are filled out
+                            if ($('#<%=perID.ClientID %>').val() === '') {
+                                // Display dialog box
+                                alert('Please fill out all required fields.');
+                                return false; // Cancel form submission
+                            }
+                        });
+    });
             </script>
         </div>
     </form>

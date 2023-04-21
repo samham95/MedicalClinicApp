@@ -139,7 +139,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                // do nothing
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Report is not available yet');", true);
             }
         }
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -200,8 +200,9 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
-            Response.Redirect("NursePatientReports.aspx?nurseID=" + nurseID);
+                int nurseID = Convert.ToInt32(Request.QueryString["nurseID"]);
+                Response.Redirect("NursePatientReports.aspx?nurseID=" + nurseID);
+
         }
     }
 }

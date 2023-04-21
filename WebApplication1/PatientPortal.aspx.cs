@@ -343,23 +343,32 @@ namespace WebApplication1
         }
         protected void GridView2_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
-            int appointmentID = Convert.ToInt32(GridView2.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
-            string query = "SELECT reportID FROM appointment WHERE appointmentID = @AID";
-            string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-            MySqlConnection connect = new MySqlConnection(connString);
-            connect.Open();
-            MySqlCommand cmd = new MySqlCommand(query, connect);
-            cmd.Parameters.AddWithValue("@AID", appointmentID);
-            object result = cmd.ExecuteScalar();
+            try
+            {
+                int patientID = Convert.ToInt32(Request.QueryString["patientID"]);
+                int appointmentID = Convert.ToInt32(GridView2.Rows[Convert.ToInt32(e.CommandArgument)].Cells[0].Text);
+                string query = "SELECT reportID FROM appointment WHERE appointmentID = @AID";
+                string connString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+                MySqlConnection connect = new MySqlConnection(connString);
+                connect.Open();
+                MySqlCommand cmd = new MySqlCommand(query, connect);
+                cmd.Parameters.AddWithValue("@AID", appointmentID);
+                object result = cmd.ExecuteScalar();
 
-                int ReportID = Convert.ToInt32(result);
-                connect.Close();
+                    int ReportID = Convert.ToInt32(result);
+                    connect.Close();
 
-                if (e.CommandName == "ViewReport")
-                {
-                    Response.Redirect("ReportView.aspx?ReportID=" + ReportID + "&patientID=" + patientID);
-                }
+
+                    if (e.CommandName == "ViewReport")
+                    {
+                        Response.Redirect("ReportView.aspx?ReportID=" + ReportID + "&patientID=" + patientID);
+                    }
+            }
+            catch(Exception ex)
+            {
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Report is not available yet');", true);
+
+            }
 
         }
 

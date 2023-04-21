@@ -42,7 +42,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Response.Write("Error: " + ex.Message);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Unable to delete - office does not exist');", true);
             }
 
             connection.Close();
