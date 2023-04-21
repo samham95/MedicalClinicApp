@@ -93,7 +93,6 @@
                 <br />
                 Patient Name:</label>
                 <asp:DropDownList ID="patientName" runat="server">
-                    <asp:ListItem Text="All" Value="All"></asp:ListItem>
                 </asp:DropDownList>
                 <br />
                 <br />

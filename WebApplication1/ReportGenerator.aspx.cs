@@ -29,8 +29,10 @@ protected void Page_Load(object sender, EventArgs e)
 
     if (!IsPostBack)
     {
+        startDate.Text = DateTime.Today.AddDays(-7).ToString("yyyy-MM-dd");
+        endDate.Text = DateTime.Today.ToString("yyyy-MM-dd");
         string query2 = "SELECT DISTINCT patients.patientID as patientID, CONCAT(patients.fname, ' ', patients.lname) as PatientName FROM patients, appointment WHERE patients.doctorID = @DoctorID OR (appointment.patientID=patients.patientID AND appointment.doctorID = @DoctorID)";
-                MySqlCommand cmd = new MySqlCommand(query2, connection);
+        MySqlCommand cmd = new MySqlCommand(query2, connection);
         cmd.Parameters.AddWithValue("@doctorID", doctorID);
         MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -49,144 +51,164 @@ protected void Page_Load(object sender, EventArgs e)
 
         protected void GenerateReport_Click(object sender, EventArgs e)
         {
-            // Get the selected patient name and date range
-            string selectedPatient = patientName.SelectedValue;
-            DateTime start = DateTime.Parse(startDate.Text);
-            DateTime end = DateTime.Parse(endDate.Text);
-
-            string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
-
-            string query = "SELECT patientID, height_inches as height, weight_lb as weight, AppointmentDate, bloodPressure_dia, bloodPressure_sys, temperature, heartRate FROM visit_details, appointment WHERE appointment.appointmentID = visit_details.appointmentID AND appointment.patientID = @patientID AND appointmentDate >= @start AND appointmentDate <=@end ORDER BY appointmentDate ASC";
-            DataTable visitDetails = new DataTable();
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@patientID", selectedPatient);
-                command.Parameters.AddWithValue("@start", start);
-                command.Parameters.AddWithValue("@end", end);
-
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                adapter.Fill(visitDetails);
-            }
-
-            // Generate the report table
-            Table reportTable = new Table();
-            reportTable.ID = "reportTable";
-            reportTable.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            reportTable.Attributes.Add("class", "table-class"); // Add class attribute for styling
-
-            // Generate the header row
-            TableHeaderRow headerRow = new TableHeaderRow();
-            headerRow.TableSection = TableRowSection.TableHeader;
-            headerRow.Cells.Add(new TableHeaderCell() { Text = "Date" });
-            headerRow.Cells.Add(new TableHeaderCell() { Text = "BP diastolic(mmHg)" });
-            headerRow.Cells.Add(new TableHeaderCell() { Text = "BP systolic(mmHg)" });
-            headerRow.Cells.Add(new TableHeaderCell() { Text = "Temperature(F)" });
-            headerRow.Cells.Add(new TableHeaderCell() { Text = "Heart Rate(bpm)" });
-            headerRow.Cells.Add(new TableHeaderCell() { Text = "Height(in)" });
-            headerRow.Cells.Add(new TableHeaderCell() { Text = "Weight(lb)" });
-            headerRow.Attributes.Add("class", "header-row-class"); // Add class attribute for styling
-            reportTable.Rows.Add(headerRow);
-
-            // Generate the data rows
-            foreach (DataRow row in visitDetails.Rows)
-            {
-                TableRow dataRow = new TableRow();
-                dataRow.TableSection = TableRowSection.TableBody;
-                dataRow.Cells.Add(new TableCell() { Text = ((DateTime)row["AppointmentDate"]).ToString("MM/dd/yyyy") });
-                dataRow.Cells.Add(new TableCell() { Text = row["bloodPressure_dia"].ToString() });
-                dataRow.Cells.Add(new TableCell() { Text = row["bloodPressure_sys"].ToString() });
-                dataRow.Cells.Add(new TableCell() { Text = row["temperature"].ToString() });
-                dataRow.Cells.Add(new TableCell() { Text = row["heartRate"].ToString() });
-                dataRow.Cells.Add(new TableCell() { Text = row["height"].ToString() });
-                dataRow.Cells.Add(new TableCell() { Text = row["weight"].ToString() });
-                dataRow.Attributes.Add("class", "data-row-class"); // Add class attribute for styling
-                reportTable.Rows.Add(dataRow);
-
-            }
-
-            // Generate the cumulative average row
-            TableRow avgRow = new TableRow();
-            avgRow.TableSection = TableRowSection.TableFooter;
-
-            TableCell avgLabelCell = new TableCell();
-            avgLabelCell.Text = "Average";
-            avgRow.Cells.Add(avgLabelCell);
-
-            double avgBloodPressure_dia = 0;
-            double avgBloodPressure_sys = 0;
-            double avgTemperature = 0;
-            double avgHeartRate = 0;
-            double avgWeight = 0;
-            double avgHeight = 0;
-
-            int rowCount = visitDetails.Rows.Count;
-
-            if (rowCount > 0)
-            {
-                double totalBloodPressure_dia = 0;
-                double totalBloodPressure_sys = 0;
-                double totalTemperature = 0;
-                double totalHeartRate = 0;
-                double totalWeight = 0;
-                double totalHeight = 0;
-
-
-
-                foreach (DataRow row in visitDetails.Rows)
+                // Get the selected patient name and date range
+                string selectedPatient = patientName.SelectedValue;
+                DateTime start, end;
+                try
                 {
-                    totalBloodPressure_dia += Convert.ToDouble(row["bloodPressure_dia"]);
-                    totalBloodPressure_sys += Convert.ToDouble(row["bloodPressure_sys"]);
-                    totalTemperature += Convert.ToDouble(row["temperature"]);
-                    totalHeartRate += Convert.ToDouble(row["heartRate"]);
-                    totalWeight += Convert.ToDouble(row["weight"]);
-                    totalHeight += Convert.ToDouble(row["height"]);
+                    start = DateTime.Parse(startDate.Text);
+                    end = DateTime.Parse(endDate.Text);
+                }
+                catch
+                {
+                    start = DateTime.MinValue;
+                    end = DateTime.MaxValue;
                 }
 
-                avgBloodPressure_dia = totalBloodPressure_dia / rowCount;
-                avgBloodPressure_sys = totalBloodPressure_sys / rowCount;
-                avgTemperature = totalTemperature / rowCount;
-                avgHeartRate = totalHeartRate / rowCount;
-                avgWeight = totalWeight / rowCount;
-                avgHeight = totalHeight / rowCount;
+                string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
+
+                string query = "SELECT patientID, height_inches as height, weight_lb as weight, AppointmentDate, bloodPressure_dia, bloodPressure_sys, temperature, heartRate FROM visit_details, appointment WHERE appointment.appointmentID = visit_details.appointmentID AND appointment.patientID = @patientID AND appointmentDate >= @start AND appointmentDate <=@end ORDER BY appointmentDate ASC";
+                DataTable visitDetails = new DataTable();
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@patientID", selectedPatient);
+                        command.Parameters.AddWithValue("@start", start);
+                        command.Parameters.AddWithValue("@end", end);
+
+                        MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                        adapter.Fill(visitDetails);
+                    }
+                    connection.Close();
+                }
+
+                // Generate the report table
+                Table reportTable = new Table();
+                reportTable.ID = "reportTable";
+                reportTable.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                reportTable.Attributes.Add("class", "table-class"); // Add class attribute for styling
+
+                // Generate the header row
+                TableHeaderRow headerRow = new TableHeaderRow();
+                headerRow.TableSection = TableRowSection.TableHeader;
+                headerRow.Cells.Add(new TableHeaderCell() { Text = "Date" });
+                headerRow.Cells.Add(new TableHeaderCell() { Text = "BP diastolic(mmHg)" });
+                headerRow.Cells.Add(new TableHeaderCell() { Text = "BP systolic(mmHg)" });
+                headerRow.Cells.Add(new TableHeaderCell() { Text = "Temperature(F)" });
+                headerRow.Cells.Add(new TableHeaderCell() { Text = "Heart Rate(bpm)" });
+                headerRow.Cells.Add(new TableHeaderCell() { Text = "Height(in)" });
+                headerRow.Cells.Add(new TableHeaderCell() { Text = "Weight(lb)" });
+                headerRow.Attributes.Add("class", "header-row-class"); // Add class attribute for styling
+                reportTable.Rows.Add(headerRow);
+
+                // Generate the data rows
+                foreach (DataRow row in visitDetails.Rows)
+                {
+                    TableRow dataRow = new TableRow();
+                    dataRow.TableSection = TableRowSection.TableBody;
+                    dataRow.Cells.Add(new TableCell() { Text = ((DateTime)row["AppointmentDate"]).ToString("MM/dd/yyyy") });
+                    dataRow.Cells.Add(new TableCell() { Text = row["bloodPressure_dia"].ToString() });
+                    dataRow.Cells.Add(new TableCell() { Text = row["bloodPressure_sys"].ToString() });
+                    dataRow.Cells.Add(new TableCell() { Text = row["temperature"].ToString() });
+                    dataRow.Cells.Add(new TableCell() { Text = row["heartRate"].ToString() });
+                    dataRow.Cells.Add(new TableCell() { Text = row["height"].ToString() });
+                    dataRow.Cells.Add(new TableCell() { Text = row["weight"].ToString() });
+                    dataRow.Attributes.Add("class", "data-row-class"); // Add class attribute for styling
+                    reportTable.Rows.Add(dataRow);
+
+                }
+
+                // Generate the cumulative average row
+                TableRow avgRow = new TableRow();
+                avgRow.TableSection = TableRowSection.TableFooter;
+
+                TableCell avgLabelCell = new TableCell();
+                avgLabelCell.Text = "Average";
+                avgRow.Cells.Add(avgLabelCell);
+
+                double avgBloodPressure_dia = 0;
+                double avgBloodPressure_sys = 0;
+                double avgTemperature = 0;
+                double avgHeartRate = 0;
+                double avgWeight = 0;
+                double avgHeight = 0;
+
+                int rowCount = visitDetails.Rows.Count;
+
+                if (rowCount > 0)
+                {
+                    double totalBloodPressure_dia = 0;
+                    double totalBloodPressure_sys = 0;
+                    double totalTemperature = 0;
+                    double totalHeartRate = 0;
+                    double totalWeight = 0;
+                    double totalHeight = 0;
+
+
+
+                    foreach (DataRow row in visitDetails.Rows)
+                    {
+                        totalBloodPressure_dia += Convert.ToDouble(row["bloodPressure_dia"]);
+                        totalBloodPressure_sys += Convert.ToDouble(row["bloodPressure_sys"]);
+                        totalTemperature += Convert.ToDouble(row["temperature"]);
+                        totalHeartRate += Convert.ToDouble(row["heartRate"]);
+                        totalWeight += Convert.ToDouble(row["weight"]);
+                        totalHeight += Convert.ToDouble(row["height"]);
+                    }
+
+                    avgBloodPressure_dia = totalBloodPressure_dia / rowCount;
+                    avgBloodPressure_sys = totalBloodPressure_sys / rowCount;
+                    avgTemperature = totalTemperature / rowCount;
+                    avgHeartRate = totalHeartRate / rowCount;
+                    avgWeight = totalWeight / rowCount;
+                    avgHeight = totalHeight / rowCount;
+                }
+
+                TableCell avgBloodPressurediaCell = new TableCell();
+                avgBloodPressurediaCell.Text = avgBloodPressure_dia.ToString("F1");
+                avgRow.Cells.Add(avgBloodPressurediaCell);
+
+                TableCell avgBloodPressuresysCell = new TableCell();
+                avgBloodPressuresysCell.Text = avgBloodPressure_sys.ToString("F1");
+                avgRow.Cells.Add(avgBloodPressuresysCell);
+
+                TableCell avgTemperatureCell = new TableCell();
+                avgTemperatureCell.Text = avgTemperature.ToString("F1");
+                avgRow.Cells.Add(avgTemperatureCell);
+
+                TableCell avgHeartRateCell = new TableCell();
+                avgHeartRateCell.Text = avgHeartRate.ToString("F1");
+                avgRow.Cells.Add(avgHeartRateCell);
+
+                TableCell avgHeightCell = new TableCell();
+                avgHeightCell.Text = avgHeight.ToString("F1");
+                avgRow.Cells.Add(avgHeightCell);
+
+                TableCell avgWeightCell = new TableCell();
+                avgWeightCell.Text = avgWeight.ToString("F1");
+                avgRow.Cells.Add(avgWeightCell);
+
+                avgRow.Attributes.Add("class", "average-row-class"); // Add class attribute for styling
+                reportTable.Rows.Add(avgRow);
+
+
+                // Add the report table to the page
+
+                reportDiv.Controls.Add(reportTable);
+
+                if (graphBox.Checked)
+                {
+                    // Generate the chart
+                    generateChart(visitDetails, start, end);
+                }
             }
-
-            TableCell avgBloodPressurediaCell = new TableCell();
-            avgBloodPressurediaCell.Text = avgBloodPressure_dia.ToString("F1");
-            avgRow.Cells.Add(avgBloodPressurediaCell);
-
-            TableCell avgBloodPressuresysCell = new TableCell();
-            avgBloodPressuresysCell.Text = avgBloodPressure_sys.ToString("F1");
-            avgRow.Cells.Add(avgBloodPressuresysCell);
-
-            TableCell avgTemperatureCell = new TableCell();
-            avgTemperatureCell.Text = avgTemperature.ToString("F1");
-            avgRow.Cells.Add(avgTemperatureCell);
-
-            TableCell avgHeartRateCell = new TableCell();
-            avgHeartRateCell.Text = avgHeartRate.ToString("F1");
-            avgRow.Cells.Add(avgHeartRateCell);
-
-            TableCell avgHeightCell = new TableCell();
-            avgHeightCell.Text = avgHeight.ToString("F1");
-            avgRow.Cells.Add(avgHeightCell);
-
-            TableCell avgWeightCell = new TableCell();
-            avgWeightCell.Text = avgWeight.ToString("F1");
-            avgRow.Cells.Add(avgWeightCell);
-
-            avgRow.Attributes.Add("class", "average-row-class"); // Add class attribute for styling
-            reportTable.Rows.Add(avgRow);
-
-
-            // Add the report table to the page
-            
-            reportDiv.Controls.Add(reportTable);
-
-            if (graphBox.Checked)
+            catch
             {
-                // Generate the chart
-                generateChart(visitDetails, start, end);
+                //
             }
 
         }

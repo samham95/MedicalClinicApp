@@ -93,11 +93,9 @@
                 <br />
                 Doctor Name:
                 <asp:DropDownList ID="doctorName" runat="server" OnSelectedIndexChanged="doctorName_SelectedIndexChanged" AutoPostBack="true">
-                    <asp:ListItem Text="All" Value="All"></asp:ListItem>
                 </asp:DropDownList>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="patientName">Patient Name:</label>
                 <asp:DropDownList ID="patientName" runat="server">
-                    <asp:ListItem Text="All" Value="All"></asp:ListItem>
                 </asp:DropDownList>
                 <br />
                 <br />
