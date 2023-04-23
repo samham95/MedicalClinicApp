@@ -75,7 +75,7 @@ namespace WebApplication1
                 }
                 else if (selectedValue == "Patient")
                 {
-                    query = "SELECT\r\n    p.PatientID,\r\n    p.fName AS patient_first_name,\r\n    p.lName AS patient_last_name,\r\n    p.DOB,\r\n    p.Phone_num,\r\n    d.DoctorID,\r\n    CONCAT(d.Fname, ' ', d.Lname) AS doctor_full_name,\r\n    p.balance,\r\n    p.payment\r\nFROM\r\n    patients AS p\r\nJOIN\r\n    doctor AS d ON p.doctorID = d.DoctorID;";
+                    query = "SELECT\r\n    p.PatientID,\r\n    p.fName AS Name,\r\n    p.lName AS Surname,\r\n    p.DOB,\r\n    p.Phone_num as Phone,\r\n    d.DoctorID,\r\n    CONCAT(d.Fname, ' ', d.Lname) AS Doctor,\r\n    p.Balance,\r\n    p.Payment\r\nFROM\r\n    patients AS p\r\nJOIN\r\n    doctor AS d ON p.doctorID = d.DoctorID;";
                 }
                 else // Default to login table
                 {
@@ -132,7 +132,7 @@ namespace WebApplication1
                 }
                 else if (selectedValue == "Patient")
                 {
-                    string officeQuery = "SELECT\r\n    SUM(balance) AS 'Total Balance',\r\n    SUM(payment) AS 'Total Received',\r\n    COUNT(CASE WHEN balance = 0 THEN 1 ELSE NULL END) AS 'Number of Patient Current',\r\n    COUNT(CASE WHEN balance > 0 THEN 1 ELSE NULL END) AS 'Number of Patient Past Due'\r\nFROM\r\n    patients;\r\n";
+                    string officeQuery = "SELECT\r\n    SUM(balance) AS 'Total Invoiced',\r\n    SUM(payment) AS 'Total Payments',\r\n    COUNT(CASE WHEN balance = 0 THEN 1 ELSE NULL END) AS 'Number of Patient Current',\r\n    COUNT(CASE WHEN balance > 0 THEN 1 ELSE NULL END) AS 'Number of Patient Past Due'\r\nFROM\r\n    patients;\r\n";
                     MySqlCommand officeCommand = new MySqlCommand(officeQuery, connection);
                     // Create a new MySqlDataAdapter object with the new command
                     MySqlDataAdapter officeAdapter = new MySqlDataAdapter(officeCommand);
@@ -172,11 +172,11 @@ namespace WebApplication1
             string title = "";
             if (selectedValue == "Doctor")
             {
-                title = "Report of Doctor";
+                title = "Report of Doctors";
             }
             else if (selectedValue == "Nurse")
             {
-                title = "Report of Nurse";
+                title = "Report of Nurses";
             }
             else if (selectedValue == "Staff")
             {
@@ -184,11 +184,11 @@ namespace WebApplication1
             }
             else if (selectedValue == "Patient")
             {
-                title = "Report of Patient";
+                title = "Report of Patients";
             }
             else // Default to doctor table
             {
-                title = "Report of Doctor";
+                title = "Report of Doctors";
             }
             Paragraph titleParagraph = new Paragraph(title, titleFont);
             titleParagraph.Alignment = Element.ALIGN_CENTER;
@@ -206,14 +206,14 @@ namespace WebApplication1
                 if (tableIndex == 2)
                 {
                     Font subTitleFont = FontFactory.GetFont("Arial", 14, Font.BOLD);
-                    Paragraph subTitleParagraph = new Paragraph("Number of Doctors Work in Certain Day", subTitleFont);
+                    Paragraph subTitleParagraph = new Paragraph("Number of Doctors Working on Certain Day", subTitleFont);
                     if (selectedValue == "Doctor")
                     {
-                        subTitleParagraph = new Paragraph("Summary of Doctor Personel", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Doctor Personnel", subTitleFont);
                     }
                     else if (selectedValue == "Nurse")
                     {
-                        subTitleParagraph = new Paragraph("Summary of Nurse Personel", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Nurse Personnel", subTitleFont);
                     }
                     else if (selectedValue == "Staff")
                     {
@@ -221,11 +221,11 @@ namespace WebApplication1
                     }
                     else if (selectedValue == "Patient")
                     {
-                        subTitleParagraph = new Paragraph("Summary of Patient Personel", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Patient Personnel", subTitleFont);
                     }
                     else // Default to doctor table
                     {
-                        subTitleParagraph = new Paragraph("Summary of Doctor Personel", subTitleFont);
+                        subTitleParagraph = new Paragraph("Summary of Doctor Personnel", subTitleFont);
                     }
 
                     subTitleParagraph.Alignment = Element.ALIGN_CENTER;

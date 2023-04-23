@@ -24,26 +24,38 @@ namespace WebApplication1
             // Get Doctor Name for Welcome Header
             int doctorID =Convert.ToInt32 (Request.QueryString["doctorID"]);
             DateTime currentDate = DateTime.Now;
-            DayOfWeek dayOfWeek = currentDate.DayOfWeek;
-            CultureInfo culture = new CultureInfo("en-US"); 
-            string dayName = culture.DateTimeFormat.GetDayName(dayOfWeek);
+            CultureInfo culture = new CultureInfo("en-US");
+            string dayName = currentDate.ToString("dddd", culture);
 
             string connectionString = "Server=medicaldatabase3380.mysql.database.azure.com;Database=medicalclinicdb2;Uid=dbadmin;Pwd=Medical123!;";
             MySqlConnection connection = new MySqlConnection(connectionString);
-            string query = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) as DocName, officeAddress from doctor, office,schedule WHERE doctorID = @doctorID AND schedule.doctor = doctor.doctorID AND schedule."+ dayOfWeek.ToString()+"=office.officeID";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-            cmd.Parameters.AddWithValue("doctorID", doctorID);
+            string query = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) as DocName, officeAddress from doctor, office,schedule WHERE doctorID = @doctorID AND schedule.doctor = doctor.doctorID AND schedule."+ dayName+"=office.officeID";
+            string query2 = "SELECT CONCAT('Dr. ', fname, ' ', lname, ' - ', specialty) as DocName from doctor WHERE doctorID = @doctorID";
+            string fullname;
+            string officeLoca = "Not Scheduled";
             connection.Open();
-            MySqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            string fullname = reader["DocName"].ToString();
-            string officeLoca = reader["officeAddress"].ToString();
-            reader.Close();
+            try
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("doctorID", doctorID);
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                reader.Read();
+                fullname = reader["DocName"].ToString();
+                officeLoca = reader["officeAddress"].ToString();
+                reader.Close();
+                connection.Close();
+                connection.Close();
+            }
+            catch
+            {
+                MySqlCommand cmd = new MySqlCommand(query2, connection);
+                cmd.Parameters.AddWithValue("@doctorID", doctorID);
+                fullname = cmd.ExecuteScalar().ToString();
+            }
             welcomeHeader.InnerText = "Welcome, " + fullname;
-            connection.Close();
             LinkButton1.Text = "Logged in as: " + fullname;
             officeLocale.InnerText = dayName + "'s office: " + officeLoca;
-            connection.Close();
 
         }
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -175,18 +187,25 @@ namespace WebApplication1
 
                             if (rowsAffected > 0)
                             {
-                                // Send confirmation email to patient
-                                MailMessage mail = new MailMessage();
-                                mail.To.Add(email);
-                                mail.Subject = "Appointment Approved";
-                                mail.Body = "Your appointment on " + date + " at " + time + " with " + doctorName + " has been confirmed by your doctor. Please log on to your patient portal to confirm your appointment at least 24 hours until before the scheduled time";
-                                SmtpClient smtp = new SmtpClient();
+                                try
+                                {
+                                    // Send confirmation email to patient
+                                    MailMessage mail = new MailMessage();
+                                    mail.To.Add(email);
+                                    mail.Subject = "Appointment Approved";
+                                    mail.Body = "Your appointment on " + date + " at " + time + " with " + doctorName + " has been confirmed by your doctor. Please log on to your patient portal to confirm your appointment at least 24 hours until before the scheduled time";
+                                    SmtpClient smtp = new SmtpClient();
 
-                                smtp.Send(mail);
+                                    smtp.Send(mail);
 
+
+                                }
+                                catch
+                                {
+                                    // unable to send email due to unforeseen circumstances
+                                }
                                 // Refresh data grid
                                 BindData();
-
                             }
                         }
                     }
@@ -229,15 +248,23 @@ namespace WebApplication1
 
                             if (rowsAffected > 0)
                             {
-                                // Send confirmation email to patient
-                                MailMessage mail = new MailMessage();
-                                mail.To.Add(email);
-                                mail.Subject = "Appointment Denied";
-                                mail.Body = "Your appointment on " + date + " at " + time + " with " + doctorName + " has been denied by your doctor. Please log on to your patient portal to schedule an appointment again";
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Send(mail);
-                                // Refresh data grid
+                                try
+                                {
+                                    // Send confirmation email to patient
+                                    MailMessage mail = new MailMessage();
+                                    mail.To.Add(email);
+                                    mail.Subject = "Appointment Denied";
+                                    mail.Body = "Your appointment on " + date + " at " + time + " with " + doctorName + " has been denied by your doctor. Please log on to your patient portal to schedule an appointment again";
+                                    SmtpClient smtp = new SmtpClient();
+                                    smtp.Send(mail);
+                                    // Refresh data grid
+                                }
+                                catch
+                                {
+                                    // unable to send
+                                }
                                 BindData();
+
                             }
                         }
                     }
@@ -289,14 +316,20 @@ namespace WebApplication1
 
                             if (rowsAffected > 0)
                             {
-                                // Send confirmation email to patient
-                                MailMessage mail = new MailMessage();
-                                mail.To.Add(email);
-                                mail.Subject = "Referral Approved";
-                                mail.Body = "The referral for your " + specialty + " appointment on" + date + " at " + time + " with " + doctorName + " has been approved by your primary care physician. To avoid cancellation, please log on to your account to confirm at least 24 hours before your scheduled date. We look forward to seeing you!";
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Send(mail);
-
+                                try
+                                {
+                                    // Send confirmation email to patient
+                                    MailMessage mail = new MailMessage();
+                                    mail.To.Add(email);
+                                    mail.Subject = "Referral Approved";
+                                    mail.Body = "The referral for your " + specialty + " appointment on" + date + " at " + time + " with " + doctorName + " has been approved by your primary care physician. To avoid cancellation, please log on to your account to confirm at least 24 hours before your scheduled date. We look forward to seeing you!";
+                                    SmtpClient smtp = new SmtpClient();
+                                    smtp.Send(mail);
+                                }
+                                catch
+                                {
+                                    //unable to send
+                                }
                                 // Refresh data grid
                                 BindData();
                             }
@@ -343,14 +376,20 @@ namespace WebApplication1
 
                             if (rowsAffected > 0)
                             {
-                                // Send confirmation email to patient
-                                MailMessage mail = new MailMessage();
-                                mail.To.Add(email);
-                                mail.Subject = "Referral Denied";
-                                mail.Body = "The referral for your " + specialty + " appointment on" + date + " at " + time + " with " + doctorName + " has been denied by your primary care physician. Please consult with your primary care physician as to the reason why.";
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Send(mail);
-
+                                try
+                                {
+                                    // Send confirmation email to patient
+                                    MailMessage mail = new MailMessage();
+                                    mail.To.Add(email);
+                                    mail.Subject = "Referral Denied";
+                                    mail.Body = "The referral for your " + specialty + " appointment on" + date + " at " + time + " with " + doctorName + " has been denied by your primary care physician. Please consult with your primary care physician as to the reason why.";
+                                    SmtpClient smtp = new SmtpClient();
+                                    smtp.Send(mail);
+                                }
+                                catch
+                                {
+                                    //unable to send
+                                }
                                 // Refresh data grid
                                 BindData();
                             }

@@ -269,14 +269,20 @@ namespace WebApplication1
                                     string confirmed = GridView1.Rows[Convert.ToInt32(e.CommandArgument)].Cells[9].Text;
                                     if (confirmed == "Patient Confirmed")
                                     {
-                                        // Send confirmation email to patient
-                                        MailMessage mail = new MailMessage();
-                                        mail.To.Add(email);
-                                        mail.Subject = "Appointment Confirmed";
-                                        mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please arrive to your appointment at least 15 minutes before the scheduled time";
-                                        SmtpClient smtp = new SmtpClient();
-                                        smtp.Send(mail);
-
+                                        try
+                                        {
+                                            // Send confirmation email to patient
+                                            MailMessage mail = new MailMessage();
+                                            mail.To.Add(email);
+                                            mail.Subject = "Appointment Confirmed";
+                                            mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please arrive to your appointment at least 15 minutes before the scheduled time";
+                                            SmtpClient smtp = new SmtpClient();
+                                            smtp.Send(mail);
+                                        }
+                                        catch
+                                        {
+                                            //unable to send
+                                        }
                                         // Refresh data grid
                                         BindData();
                                     }
@@ -325,14 +331,20 @@ namespace WebApplication1
 
                             if (rowsAffected > 0)
                             {
-                                // Send confirmation email to patient
-                                MailMessage mail = new MailMessage();
-                                mail.To.Add(email);
-                                mail.Subject = "Appointment Cancelled";
-                                mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please schedule a new appointment if you wish to see us again.";
-                                SmtpClient smtp = new SmtpClient();
-                                smtp.Send(mail);
-
+                                try
+                                {
+                                    // Send confirmation email to patient
+                                    MailMessage mail = new MailMessage();
+                                    mail.To.Add(email);
+                                    mail.Subject = "Appointment Cancelled";
+                                    mail.Body = "You have successfully confirmed your appointment on " + date + " at " + time + " with " + doctorName + ". Please schedule a new appointment if you wish to see us again.";
+                                    SmtpClient smtp = new SmtpClient();
+                                    smtp.Send(mail);
+                                }
+                                catch
+                                {
+                                    //unable to send
+                                }
                                 // Refresh data grid
                                 BindData();
                             }

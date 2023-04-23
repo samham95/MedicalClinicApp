@@ -8,6 +8,60 @@
     <link href="Content/navbar.css" rel="stylesheet" type="text/css" />
     <link href="Content/AdminPages.css" rel="stylesheet" type="text/css" />
     <title>Admin Reports</title>
+    <style>
+
+        .leftPanel {
+            float: left;
+            margin-right: 20px;
+            margin-left: 5px;
+        }
+
+        .rightPanel {
+            margin-left: 5px;
+            margin-right: 20px;
+            float: left;
+        }
+
+        /* Clear floats after the panels */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+            .table-class {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    .header-row-class {
+        background-color: lightblue;
+    }
+
+    .data-row-class:nth-child(even) {
+        background-color: lightblue;
+    }
+
+    .average-row-class {
+        font-weight: bold;
+
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+    td:not(:last-child) {
+        border-right: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    </style>
 </head>
 <body>
     <!-- Define the navigation bar at the top of the page -->
@@ -23,8 +77,8 @@
     <br />
     <form id="form1" runat="server">
         <div role="document">
-            <h1>Personel Reports</h1>
-            <p1 style="font-size:24px">Generate Report about Personel Group</p1>
+            <h1>Personnel Reports</h1>
+            <p1 style="font-size:24px">Generate Report about a Personnel Group</p1>
             <p>Please choose where indicated</p>
             <div class="form-container">
                 <div>
@@ -58,20 +112,6 @@
         <asp:HyperLink ID="btnDownloadPDF" runat="server" Text="Download PDF" Visible="false" />
 
         <asp:Literal ID="TableLiteral" runat="server"></asp:Literal>
-
-        <!-- Adding scripts to use bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                crossorigin="anonymous">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous">
-        </script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous">
-        </script>
 
 
     </form>

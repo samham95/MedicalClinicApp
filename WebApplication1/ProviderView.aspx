@@ -14,31 +14,6 @@
             justify-content: space-between;
             align-items: center;
         }
-        .approve-button {
-          background-color: mediumseagreen;
-          color: white;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-        .deny-button {
-          background-color: red;
-          color: white;
-          padding: 10px 20px;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-
-      .green-button {
-        background-color: lightgreen;
-       }
-      .red-button{
-          background-color: indianred;
-      }
-
-
 
     </style>
 	<link href="Content/navbar.css" rel="stylesheet" type="text/css" />
@@ -58,8 +33,6 @@
       <a href="HomePage.aspx">Home</a>
       <left><asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click"></asp:LinkButton></left>
     </div>
-    <br />
-            <br />
     <br />
     <br />
   <div class="header-container">

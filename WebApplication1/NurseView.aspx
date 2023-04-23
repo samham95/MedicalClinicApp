@@ -7,7 +7,14 @@
     <head runat="server">
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>   
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
+    </style>
 
 	<link href="Content/navbar.css" rel="stylesheet" type="text/css" />
     <link href="Content/AdminPages.css" rel="stylesheet" type="text/css" />
@@ -29,9 +36,12 @@
     <br />
 
         <br />
-        <asp:Button ID="Button1" runat="server" BackColor="LightGray" BorderStyle="Double" Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" Height="51px" OnClick="Button1_Click" Text="Patients View" Width="169px" />
-        <br />
-   <h1 id="WelcomeHeader" runat="server"> </h1>
+  <div class="header-container">
+
+   <h1 id="welcomeHeader" runat="server"> </h1>
+    <asp:Button ID="Button1" BorderStyle="Double" BackColor="LightGray" runat="server" OnClick="Button1_Click" Text="Patients View" Height="51px" Width="169px" Font-Bold="True" Font-Size="Medium" Font-Strikeout="False" />
+
+   </div>
         <p1 style="font-size: 18px" id ="officeHeader" runat ="server"></p1>
 
     <br />

@@ -35,7 +35,7 @@ namespace WebApplication1
             object result = cmd.ExecuteScalar();
             string officeloc = cmd2.ExecuteScalar().ToString();
             string fullname = result.ToString();
-            WelcomeHeader.InnerText = "Welcome, " + fullname;
+            welcomeHeader.InnerText = "Welcome, " + fullname;
             officeHeader.InnerText = "Office Location: " + officeloc;
             connection.Close();
             LinkButton1.Text = "Logged in as: " + fullname;
@@ -75,7 +75,7 @@ namespace WebApplication1
 
 
             // Retrieve data from database into past appointments 
-            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, Specialty, appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, doctor, nurse WHERE NID = @NID AND appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointment.doctorID = doctor.doctorID AND (appointmentDate < current_date() OR (appointmentDate = current_date() AND appointment.reportID IS NOT NULL)) AND PATIENT_CONFIRM = true ORDER BY appointmentDate DESC";
+            string query3 = "SELECT CONCAT(patients.fname, ' ', patients.lname) as PatientName, CONCAT('Dr. ', doctor.fname, ' ', doctor.lname) as docName, office.officeAddress as OfficeLocation, appointment.appointmentID as appointmentID, Specialty, appointmentTime as Time, appointmentDate as Date FROM appointment, patients, office, doctor, nurse WHERE NID = @NID AND appointment.PatientID = Patients.patientID AND Appointment.OfficeID = Office.officeID AND nurse.officeID = Office.officeID AND appointment.doctorID = doctor.doctorID AND (appointmentDate < current_date() OR (appointmentDate = current_date() AND appointment.reportID IS NOT NULL)) AND PATIENT_CONFIRM = true ORDER BY appointmentDate ASC";
             DataTable dt3 = new DataTable();
 
             using (MySqlConnection connection = new MySqlConnection(connectionString))
