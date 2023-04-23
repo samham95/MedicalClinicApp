@@ -41,6 +41,6 @@ Once the application is running, you can access it using a web browser. The appl
 * Valerio Diaz, https://github.com/vbdiaz
 * Jaelyn Rogers, https://github.com/jaerenee2707
 * Sammy Hamdi, https://github.com/samham95
-* Khanh Nguyen, 
+* Khanh Nguyen, https://github.com/khanhn2611
 * William Portillo, https://github.com/williamjportillo
 * Benjamin Mogeni
