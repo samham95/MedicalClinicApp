@@ -1,5 +1,5 @@
 # CoogClinic
-![medDBscreenshot](https://user-images.githubusercontent.com/110939781/233807737-fb6a4302-8611-41b2-ba4e-da457af7d62b.jpg)
+![coog2](https://user-images.githubusercontent.com/105072684/233820114-74bece3b-0055-442f-ae18-7b5651e1dd64.jpg)
 
 ## About the Project
   This web application is designed to provide an efficient and user-friendly way for a health provider company to manage their clinics. With this application, patients can easily schedule appointments with their primary care physicians or specialists. Patients can view available time slots and schedule appointments at their convenience. The web application also provides reminders via email to help patients keep track of their upcoming appointments.
